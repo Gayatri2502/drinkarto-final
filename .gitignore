@@ -1,0 +1,16 @@
+node_modules/
+.next/
+.env*
+!.env.example
+src/generated/
+coverage/
+
+*.tsbuildinfo
+
+# Local scratch files and captured workspace state
+/work/
+/ai-check.ts
+/tsconfig.verify*.json
+__pycache__/
+*.py[cod]
+.DS_Store

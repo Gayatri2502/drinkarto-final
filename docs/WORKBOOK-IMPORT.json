@@ -1,0 +1,25 @@
+{
+  "products": 1738,
+  "variantRowsMerged": 745,
+  "nonAlcoholicReferences": 84,
+  "sizeUnknown": 1460,
+  "categories": {
+    "Non-alcoholic": 84,
+    "Wine": 826,
+    "Whisky": 220,
+    "Tequila": 51,
+    "Brandy": 22,
+    "Vodka": 51,
+    "Gin": 125,
+    "Rum": 78,
+    "Beer": 45
+  },
+  "excludedFields": [
+    "undated prices",
+    "InStock claims",
+    "promotional descriptions",
+    "remote images",
+    "blank filler columns"
+  ],
+  "rule": "Product names reconciled against des sheet; duplicate variants merged by source handle; no prices used."
+}

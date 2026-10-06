@@ -1,0 +1,39 @@
+name: checks
+on: [push, pull_request]
+jobs:
+ verify:
+  runs-on: ubuntu-latest
+  services:
+   postgres:
+    image: postgres:17-alpine
+    env:
+     POSTGRES_USER: drinkarto
+     POSTGRES_PASSWORD: drinkarto_local
+     POSTGRES_DB: drinkarto
+    ports: [5432:5432]
+    options: >-
+     --health-cmd "pg_isready -U drinkarto"
+     --health-interval 5s
+     --health-retries 10
+  env:
+   DATABASE_URL: postgresql://drinkarto:drinkarto_local@localhost:5432/drinkarto
+   APP_ORIGIN: http://localhost:3000
+  steps:
+   - uses: actions/checkout@v4
+   - uses: actions/setup-node@v4
+     with:
+      node-version: 24
+      cache: npm
+   - run: npm ci
+   - run: npm run db:generate
+   - run: npm run db:migrate
+   - run: npm run typecheck
+   - run: npm test
+   - run: npm run build
+   - run: |
+      npm start > /tmp/drinkarto.log 2>&1 &
+      for i in $(seq 1 30); do
+        if curl -fsS http://localhost:3000 > /dev/null; then break; fi
+        sleep 1
+      done
+      npm run test:integration

@@ -1,0 +1,252 @@
+generator client {
+ provider = "prisma-client"
+ output = "../src/generated/prisma"
+}
+datasource db {
+ provider = "postgresql"
+}
+model Organization {
+ id String @id @default(uuid())
+ name String
+ currency String @default("INR")
+ jurisdiction String
+ createdAt DateTime @default(now())
+ members Member[]
+ retailers Retailer[]
+ products Product[]
+ orders Order[]
+ movements InventoryMovement[]
+ audits AuditLog[]
+}
+model User {
+ id String @id @default(uuid())
+ email String @unique
+ passwordHash String
+ name String
+ members Member[]
+ sessions Session[]
+}
+model Member {
+ id String @id @default(uuid())
+ organizationId String
+ userId String
+ role String
+ organization Organization @relation(fields:[organizationId],references:[id])
+ user User @relation(fields:[userId],references:[id])
+ aiConversations AiConversation[]
+ @@unique([organizationId,userId])
+}
+model Session {
+ id String @id
+ userId String
+ organizationId String
+ expiresAt DateTime
+ user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+ @@index([expiresAt])
+}
+model Retailer {
+ id String @default(uuid())
+ organizationId String
+ name String
+ email String?
+ licenceNumber String?
+ licenceExpiry DateTime?
+ creditLimit Decimal @default(0) @db.Decimal(14,2)
+ outstanding Decimal @default(0) @db.Decimal(14,2)
+ organization Organization @relation(fields:[organizationId],references:[id])
+ orders Order[]
+ @@id([organizationId,id])
+ @@index([organizationId,name])
+}
+model Product {
+ id String @default(uuid())
+ organizationId String
+ name String
+ sku String
+ brand String
+ category String
+ unitPrice Decimal @db.Decimal(14,2)
+ physical Int @default(0)
+ reserved Int @default(0)
+ damaged Int @default(0)
+ minimumStock Int @default(10)
+ organization Organization @relation(fields:[organizationId],references:[id])
+ items OrderItem[]
+ movements InventoryMovement[]
+ @@id([organizationId,id])
+ @@unique([organizationId,sku])
+}
+model Order {
+ id String @default(uuid())
+ organizationId String
+ retailerId String
+ status String @default("SUBMITTED")
+ total Decimal @db.Decimal(14,2)
+ createdAt DateTime @default(now())
+ organization Organization @relation(fields:[organizationId],references:[id])
+ retailer Retailer @relation(fields:[organizationId,retailerId],references:[organizationId,id])
+ items OrderItem[]
+ invoice Invoice?
+ @@id([organizationId,id])
+ @@index([organizationId,createdAt])
+}
+model OrderItem {
+ id String @id @default(uuid())
+ organizationId String
+ orderId String
+ productId String
+ quantity Int
+ returned Int @default(0)
+ unitPrice Decimal @db.Decimal(14,2)
+ order Order @relation(fields:[organizationId,orderId],references:[organizationId,id])
+ product Product @relation(fields:[organizationId,productId],references:[organizationId,id])
+ @@index([organizationId,orderId])
+}
+model InventoryMovement {
+ id String @id @default(uuid())
+ organizationId String
+ productId String
+ actorId String
+ kind String
+ quantity Int
+ previousPhysical Int
+ newPhysical Int
+ previousReserved Int
+ newReserved Int
+ reason String
+ orderId String?
+ createdAt DateTime @default(now())
+ organization Organization @relation(fields:[organizationId],references:[id])
+ product Product @relation(fields:[organizationId,productId],references:[organizationId,id])
+ @@index([organizationId,productId,createdAt])
+}
+model AuditLog {
+ id String @id @default(uuid())
+ organizationId String
+ actorId String
+ action String
+ entity String
+ entityId String
+ data Json
+ createdAt DateTime @default(now())
+ organization Organization @relation(fields:[organizationId],references:[id])
+ @@index([organizationId,createdAt])
+}
+model LoginAttempt {
+ key String @id
+ count Int @default(1)
+ windowStart DateTime @default(now())
+}
+
+model PublicProduct {
+ id String @id
+ name String
+ category String
+ reference Json
+ updatedAt DateTime @updatedAt
+ @@index([category,name])
+}
+model PublicPriceSnapshot {
+ authority String @id
+ state String
+ rows Json
+ sourceUrl String
+ published String?
+ effective String?
+ checkedAt DateTime
+ updatedAt DateTime @updatedAt
+}
+model PriceRefreshRun {
+ id String @id @default(uuid())
+ authority String
+ status String
+ count Int @default(0)
+ changed Int @default(0)
+ message String?
+ startedAt DateTime @default(now())
+ finishedAt DateTime?
+ @@index([startedAt])
+}
+model PublicPriceChange {
+ id String @id @default(uuid())
+ authority String
+ sourceCode String
+ previousPrice Decimal? @db.Decimal(14,2)
+ price Decimal @db.Decimal(14,2)
+ changedAt DateTime @default(now())
+ @@index([authority,changedAt])
+}
+
+model Invoice {
+ id String @id @default(uuid())
+ organizationId String
+ orderId String
+ number String
+ total Decimal @db.Decimal(14,2)
+ credited Decimal @default(0) @db.Decimal(14,2)
+ paid Decimal @default(0) @db.Decimal(14,2)
+ refunded Decimal @default(0) @db.Decimal(14,2)
+ createdAt DateTime @default(now())
+ order Order @relation(fields:[organizationId,orderId],references:[organizationId,id])
+ entries FinanceEntry[]
+ @@unique([organizationId,orderId])
+ @@unique([organizationId,number])
+ @@unique([organizationId,id])
+}
+model FinanceEntry {
+ id String @id @default(uuid())
+ organizationId String
+ invoiceId String
+ actorId String
+ kind String
+ amount Decimal @db.Decimal(14,2)
+ reference String
+ requestKey String
+ createdAt DateTime @default(now())
+ invoice Invoice @relation(fields:[organizationId,invoiceId],references:[organizationId,id])
+ @@unique([organizationId,requestKey])
+ @@index([organizationId,createdAt])
+}
+model PriceReview {
+ id String @id @default(uuid())
+ authority String
+ status String @default("PENDING")
+ payload Json
+ reason String
+ reviewedBy String?
+ reviewedAt DateTime?
+ createdAt DateTime @default(now())
+}
+model PriceAlert {
+ authority String @id
+ status String
+ message String
+ firstSeenAt DateTime @default(now())
+ lastSeenAt DateTime @default(now())
+ acknowledgedBy String?
+ acknowledgedAt DateTime?
+}
+
+model AiConversation {
+ id String @default(uuid())
+ organizationId String
+ userId String
+ title String
+ createdAt DateTime @default(now())
+ updatedAt DateTime @updatedAt
+ member Member @relation(fields:[organizationId,userId],references:[organizationId,userId],onDelete:Cascade)
+ messages AiMessage[]
+ @@id([organizationId,id])
+ @@index([organizationId,userId,updatedAt])
+}
+model AiMessage {
+ id String @id @default(uuid())
+ organizationId String
+ conversationId String
+ role String
+ content String @db.Text
+ sources Json?
+ createdAt DateTime @default(now())
+ conversation AiConversation @relation(fields:[organizationId,conversationId],references:[organizationId,id],onDelete:Cascade)
+ @@index([organizationId,conversationId,createdAt])
+}
