@@ -129,7 +129,7 @@ export default function KnowledgeHub({ legacyGuides }: { legacyGuides: Knowledge
             </label>
             <div className="knowledge-dashboard-stats" aria-label="Library details">
               <span><BookOpen size={15} /><strong>{allItems.length}</strong> field notes</span>
-              <span><MapPin size={15} /><strong>8</strong> learning topics</span>
+              <span><MapPin size={15} /><strong>{knowledgeCategories.length - 1}</strong> learning topics</span>
               <span><ShieldCheck size={15} /><strong>18+</strong> adult reference</span>
             </div>
           </div>
