@@ -292,3 +292,81 @@
 .age-overlay{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:18px;background:rgba(45,65,89,.34);backdrop-filter:blur(9px)}
 .age-overlay .age-dialog{position:relative;inset:auto;margin:0;max-height:calc(100vh - 36px);overflow:auto}
 .age-overlay .age-dialog::backdrop{background:transparent;backdrop-filter:none}
+
+/* Real, credited bottle references across public product and style pages. */
+.bottle-reference-photo{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:5px;margin:0;min-width:0;overflow:hidden;border:1px solid #e2e8eb;border-radius:6px;background:linear-gradient(180deg,#fff 0%,#f7f9f8 100%);color:#52636e}
+.bottle-reference-photo img{display:block;max-width:100%;height:auto;max-height:100%;object-fit:contain;object-position:center top}
+.bottle-reference-photo figcaption{display:grid;gap:3px;width:100%;padding:5px 6px 6px;text-align:center;background:rgba(255,255,255,.94);font:500 11px/1.35 Arial,sans-serif;color:#52636e}
+.bottle-reference-photo figcaption small{font:400 11px/1.35 Arial,sans-serif;color:#62727d}
+.bottle-reference-photo figcaption a{text-decoration:underline;text-underline-offset:2px}
+.catalogue-card{display:flex;flex-direction:column;gap:13px;padding:18px!important}
+.catalogue-cover-shelf{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:24px 0 30px}
+.catalogue-cover-shelf>div{display:grid;gap:8px;min-width:0}
+.catalogue-cover-shelf .bottle-reference-photo{height:190px}
+.catalogue-cover-shelf .bottle-reference-photo img{height:138px;width:auto;object-fit:contain}
+.catalogue-cover-shelf>div>strong{text-align:center;font-size:13px;color:#435967;font-weight:600}
+.catalogue-product-visual{display:grid;place-items:center;min-height:195px;width:100%;overflow:hidden;border-radius:5px;background:linear-gradient(180deg,#f7f9fa,#edf2f4)}
+.catalogue-product-visual>.bottle-reference-photo{width:100%;height:100%;min-height:195px;border:0;border-radius:5px;background:transparent}
+.catalogue-product-visual>.bottle-reference-photo img{height:145px;width:auto;object-fit:contain;object-position:center}
+.catalogue-product-visual>.catalogue-category-visual{min-height:195px}
+.catalogue-card>div:last-child{display:flex;flex:1;flex-direction:column;align-items:flex-start}
+.catalogue-card>div:last-child .public-button{margin-top:auto}
+.catalogue-card h2{margin:11px 0!important;overflow-wrap:anywhere}
+.catalogue-card .public-small-note{font-size:12px!important}
+.liquor-card-heading{grid-template-columns:100px minmax(0,1fr) auto}
+.liquor-card-bottle-photo{width:98px;height:126px;align-self:stretch}
+.liquor-card-bottle-photo img{height:82px;width:auto;object-fit:contain;object-position:center}
+.liquor-card-bottle-photo figcaption{font-size:11px;padding:4px 5px}
+.liquor-card-bottle-photo figcaption small{font-size:11px}
+.liquor-card-category-fallback{display:grid;place-items:center;width:90px;height:112px;border:1px solid #e5eaed;border-radius:5px;background:#f7f9fa;color:#496b70}
+.profile-art{position:relative;overflow:hidden}
+.profile-art>.profile-bottle-photo{position:absolute;inset:0;display:flex;width:100%;height:100%;min-height:145px;border:0;border-radius:0;background:rgba(255,255,255,.68)}
+.profile-bottle-photo img{height:110px;width:auto;object-fit:contain;object-position:center}
+.profile-bottle-photo figcaption{font-size:11px;padding:3px 5px}
+.profile-bottle-photo figcaption small{font-size:11px}
+.compare-head article{position:relative;overflow:hidden}
+.compare-bottle-photo{width:100%;height:176px;margin:-21px 0 17px;border-radius:5px;background:linear-gradient(180deg,#f7f9fa,#eef3f5)}
+.compare-bottle-photo img{height:127px;width:auto;object-fit:contain;object-position:center}
+.compare-bottle-photo figcaption{font-size:11px}
+.home-hero-side{display:grid;gap:12px;align-content:center}
+.home-hero-bottle{width:100%;height:170px;border-radius:7px;background:linear-gradient(100deg,#f7f9fa,#e8eff2)}
+.home-hero-bottle img{height:118px;width:auto;object-fit:contain;object-position:center}
+.home-hero-bottle figcaption{font-size:11px}
+.dictionary-photo-feature,.recipe-photo-feature,.business-photo-feature,.pricing-photo-feature{display:grid;grid-template-columns:minmax(200px,.8fr) minmax(0,1.2fr);align-items:center;gap:24px;margin:28px 0 36px;padding:18px;border:1px solid #dce5e9;border-radius:8px;background:rgba(255,255,255,.72)}
+.dictionary-context-photo,.recipe-context-photo,.business-context-photo,.pricing-context-photo{width:100%;height:220px;aspect-ratio:1.5;border-radius:5px}
+.dictionary-photo-feature h2,.recipe-photo-feature h2,.business-photo-feature h2,.pricing-photo-feature h2{margin:0 0 10px!important;font-size:25px!important;line-height:1.25!important}
+.dictionary-photo-feature>div:last-child>p:last-child,.recipe-photo-feature>div:last-child>p:last-child,.business-photo-feature>div:last-child>p:last-child,.pricing-photo-feature>div:last-child>p:last-child{margin:0;font-size:13px!important}
+.recipe-context-photo .knowledge-photo-caption,.business-context-photo .knowledge-photo-caption,.pricing-context-photo .knowledge-photo-caption,.dictionary-context-photo .knowledge-photo-caption{font-size:11px}
+@media(max-width:900px){.liquor-card-heading{grid-template-columns:92px minmax(0,1fr) auto;gap:11px}.liquor-card-bottle-photo{width:90px}.home-hero-side{gap:10px}.home-hero-bottle{height:145px}.home-hero-bottle img{height:95px}}
+@media(max-width:700px){
+  .catalogue-card{display:grid!important;grid-template-columns:112px minmax(0,1fr);gap:12px;padding:13px!important}
+  .catalogue-cover-shelf{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:18px 0 22px}
+  .catalogue-cover-shelf .bottle-reference-photo{height:170px}
+  .catalogue-cover-shelf .bottle-reference-photo img{height:110px}
+  .catalogue-product-visual{min-height:180px;align-self:start}
+  .catalogue-product-visual>.bottle-reference-photo{min-height:180px}
+  .catalogue-product-visual>.bottle-reference-photo img{height:120px}
+  .catalogue-product-visual>.catalogue-category-visual{min-height:180px}
+  .catalogue-card>div:last-child{min-width:0}
+  .catalogue-card h2{font-size:18px!important;line-height:1.3!important}
+  .catalogue-card .public-small-note{font-size:12px!important;line-height:1.5!important}
+  .catalogue-card .public-button{white-space:normal;width:100%;min-height:44px}
+  .liquor-card-heading{grid-template-columns:77px minmax(0,1fr);gap:9px;padding:11px}
+  .liquor-card-bottle-photo{width:77px;height:126px}
+  .liquor-card-bottle-photo img{height:74px}
+  .liquor-card-bottle-photo figcaption,.liquor-card-bottle-photo figcaption small{font-size:11px;line-height:1.2}
+  .liquor-card-name h2{font-size:14px!important}
+  .liquor-card-name .price-size-coverage{font-size:12px!important;line-height:1.4}
+  .bottle-size-select{grid-column:2;grid-template-columns:auto minmax(0,1fr);align-items:center;min-width:0;gap:8px}
+  .bottle-size-select select{width:100%}
+  .liquor-card-category-fallback{grid-row:span 2;width:70px;height:112px}
+  .profile-art>.profile-bottle-photo{min-height:125px}
+  .profile-bottle-photo img{height:90px}
+  .compare-bottle-photo{height:154px;margin:-12px 0 14px}
+  .compare-bottle-photo img{height:105px}
+  .home-hero-bottle{height:128px}
+  .home-hero-bottle img{height:78px}
+  .dictionary-photo-feature,.recipe-photo-feature,.business-photo-feature,.pricing-photo-feature{grid-template-columns:1fr;gap:14px;margin:22px 0 28px;padding:13px}
+  .dictionary-context-photo,.recipe-context-photo,.business-context-photo,.pricing-context-photo{height:200px}
+  .dictionary-photo-feature h2,.recipe-photo-feature h2,.business-photo-feature h2,.pricing-photo-feature h2{font-size:22px!important}
+}

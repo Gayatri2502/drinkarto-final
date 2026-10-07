@@ -144,6 +144,8 @@ The public `/api/public/prices` endpoint reads official snapshots from PostgreSQ
 
 The public knowledge hub at `/guides` groups source-linked field notes by styles and production, brand stories, places and heritage, responsible-use information, tours and workshops, and business setup. It includes interactive topic filters and search, plus article pages with primary references. `/dictionary` remains the A–Z companion. Business and licensing content is educational guidance, not legal advice; current state rules and approvals must be checked with the relevant authority.
 
+Public pages use attributed, descriptive photography for product categories, taste, heritage, recipes and distribution context. Bottle photographs are clearly labelled category examples, not SKU-verified product packshots. See [image sources and attribution](docs/IMAGE-ATTRIBUTION.md).
+
 Run migrations, then `npm run catalogue:import` to initialize public database records without overwriting subsequent official price snapshots. Start `npm run prices:worker` separately for three-hour checks. See [job operation and deployment](docs/PRICE-JOB.md). Public rates now come from PostgreSQL; `prices.json` is the initial bootstrap/test fixture. Admin Reports use complete tenant-scoped data rather than the first 100 management rows. They distinguish order value, operational invoiced amounts, payments, refunds, return credits and current stock. Full accounting and statutory tax-invoice configuration are not implemented.
 
 ## Operations milestone

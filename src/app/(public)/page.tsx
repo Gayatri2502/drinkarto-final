@@ -5,6 +5,7 @@ import { profiles } from '@/content/public';
 import {db} from '@/lib/db';
 import { KnowledgeImage } from '@/components/knowledge-image';
 import { knowledgePhotos } from '@/content/knowledge-media';
+import { BottleReferenceImage } from '@/components/bottle-reference-image';
 
 export const dynamic = 'force-dynamic';
 export const metadata = {
@@ -32,7 +33,7 @@ export default async function Home() {
         </div>
         <p className="professional-hero-note"><ShieldCheck size={16} /> Source-linked information. Educational reference for adults.</p>
       </div>
-      <aside className="reference-brief" aria-label="Reference coverage">
+      <div className="home-hero-side"><BottleReferenceImage category="Gin" className="home-hero-bottle" priority/><aside className="reference-brief" aria-label="Reference coverage">
         <div className="brief-heading"><span className="brief-mark">D</span><span>DRINKARTO REFERENCE DESK</span></div>
         <h2>Information with<br />a traceable source.</h2>
         <dl>
@@ -42,7 +43,7 @@ export default async function Home() {
           <div><dt>Knowledge library</dt><dd>Categories, styles & terminology</dd></div>
         </dl>
         <Link href="/guides/price-sources">Read our sourcing methodology <ArrowUpRight size={15} /></Link>
-      </aside>
+      </aside></div>
     </section>
     <section className="public-container public-section" id="prices">
       <div className="public-section-heading"><div><p className="public-eyebrow">PRICE DIRECTORY</p><h2>State liquor price references</h2><p>Search by product, state and bottle size. Verify the exact variant against the published source.</p></div><Link href="/prices" className="public-text-link">Full directory <ArrowUpRight size={16} /></Link></div>
