@@ -4,8 +4,10 @@ import {
   ArrowLeft, ArrowRight, ArrowUpRight, BookOpen, Building2, Clock3,
   Compass, Factory, Grape, List, Map, MapPin, Search, ShieldCheck, Sparkles, Wine,
 } from 'lucide-react';
+import { KnowledgeImage } from '@/components/knowledge-image';
 import { guides, educationSources } from '@/content/public';
 import { knowledgeArticles } from '@/content/knowledge';
+import { knowledgePhotoFor } from '@/content/knowledge-media';
 
 export function generateStaticParams() {
   return [...guides.map((guide) => ({ slug: guide.slug })), ...knowledgeArticles.map((article) => ({ slug: article.slug }))];
@@ -50,6 +52,7 @@ export default async function Guide({ params }: { params: Promise<{ slug: string
   const sources = article?.sources ?? (guide!.slug === 'price-sources'
     ? [{ label: 'Drinkarto · State price source directory', url: '/prices' }]
     : [{ label: 'WSET · Educational resources', url: educationSources[guide!.source] }]);
+  const photo = knowledgePhotoFor(slug);
   const related = article
     ? knowledgeArticles.filter((item) => item.category === article.category && item.slug !== article.slug).slice(0, 3)
     : knowledgeArticles.slice(0, 3);
@@ -102,15 +105,17 @@ export default async function Guide({ params }: { params: Promise<{ slug: string
               <span><ShieldCheck size={15} /> Source-linked</span>
             </div>
           </div>
-          <div className={`knowledge-reader-art knowledge-reader-art-${article?.category === 'Start a business' ? 'business' : article?.category === 'Places & heritage' ? 'place' : article?.category === 'Taste & responsible use' ? 'taste' : 'craft'}`} aria-hidden="true">
-            <span className="knowledge-reader-orbit knowledge-reader-orbit-one" />
-            <span className="knowledge-reader-orbit knowledge-reader-orbit-two" />
-            <span className="knowledge-reader-art-dot knowledge-reader-art-dot-one" />
-            <span className="knowledge-reader-art-dot knowledge-reader-art-dot-two" />
-            <span className="knowledge-reader-art-icon"><Icon size={43} strokeWidth={1.25} /></span>
-            <span className="knowledge-reader-art-index">FIELD GUIDE<br />NO. {String(Math.max(1, knowledgeArticles.findIndex((item) => item.slug === slug) + 1)).padStart(2, '0')}</span>
-            <span className="knowledge-reader-art-caption">DRINKARTO<br />REFERENCE ATLAS</span>
-          </div>
+          {photo ? <KnowledgeImage photo={photo} className="knowledge-reader-photo" sizes="(max-width: 820px) 180px, 214px" priority /> : (
+            <div className="knowledge-reader-art" aria-hidden="true">
+              <span className="knowledge-reader-orbit knowledge-reader-orbit-one" />
+              <span className="knowledge-reader-orbit knowledge-reader-orbit-two" />
+              <span className="knowledge-reader-art-dot knowledge-reader-art-dot-one" />
+              <span className="knowledge-reader-art-dot knowledge-reader-art-dot-two" />
+              <span className="knowledge-reader-art-icon"><Icon size={43} strokeWidth={1.25} /></span>
+              <span className="knowledge-reader-art-index">FIELD GUIDE<br />NO. {String(Math.max(1, knowledgeArticles.findIndex((item) => item.slug === slug) + 1)).padStart(2, '0')}</span>
+              <span className="knowledge-reader-art-caption">DRINKARTO<br />REFERENCE ATLAS</span>
+            </div>
+          )}
           <div className="knowledge-reader-hero-foot"><span><MapPin size={14} /> KNOWLEDGE FOR CURIOUS ADULTS</span><span>READ · REFLECT · VERIFY</span></div>
         </header>
 

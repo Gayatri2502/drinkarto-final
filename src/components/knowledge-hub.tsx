@@ -2,12 +2,14 @@
 
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
+import { KnowledgeImage } from '@/components/knowledge-image';
 import {
   ArrowRight, ArrowUpRight, BookOpen, Building2, Clock3, Compass,
   Factory, Grape, LayoutDashboard, Map, MapPin, Search, ShieldCheck,
   Sparkles, Wine,
 } from 'lucide-react';
 import { knowledgeArticles, knowledgeCategories } from '@/content/knowledge';
+import { knowledgePhotoFor, knowledgePhotos } from '@/content/knowledge-media';
 
 type KnowledgeItem = {
   slug: string;
@@ -134,19 +136,11 @@ export default function KnowledgeHub({ legacyGuides }: { legacyGuides: Knowledge
             </div>
           </div>
 
-          <Link href="/guides/tequila-origin" className="knowledge-atlas-card">
+          <div className="knowledge-atlas-card">
             <span className="knowledge-atlas-kicker"><Compass size={14} /> THE ATLAS · START HERE</span>
-            <span className="knowledge-atlas-art" aria-hidden="true">
-              <span className="knowledge-atlas-ring atlas-ring-one" />
-              <span className="knowledge-atlas-ring atlas-ring-two" />
-              <span className="knowledge-atlas-land" />
-              <span className="knowledge-atlas-pin atlas-pin-mexico"><i />MEXICO</span>
-              <span className="knowledge-atlas-pin atlas-pin-india"><i />INDIA</span>
-              <span className="knowledge-atlas-pin atlas-pin-france"><i />FRANCE</span>
-              <span className="knowledge-atlas-wordmark">ORIGIN<br />MATTERS</span>
-            </span>
-            <span className="knowledge-atlas-copy"><small>PLACE & PROVENANCE</small><strong>Discover how a place<br />shapes what’s in the glass.</strong><span>Explore the world atlas <ArrowRight size={15} /></span></span>
-          </Link>
+            <KnowledgeImage photo={knowledgePhotos.agave} className="knowledge-atlas-photo" sizes="(max-width: 620px) 80vw, 260px" priority />
+            <Link href="/guides/tequila-origin" className="knowledge-atlas-copy"><small>PLACE & PROVENANCE</small><strong>Discover how a place<br />shapes what’s in the glass.</strong><span>Explore the world atlas <ArrowRight size={15} /></span></Link>
+          </div>
         </section>
 
         <section className="knowledge-topic-section" aria-labelledby="topic-title">
@@ -175,12 +169,16 @@ export default function KnowledgeHub({ legacyGuides }: { legacyGuides: Knowledge
             {featuredItems.map((item, index) => {
               const Icon = iconByCategory[item.category] ?? BookOpen;
               const labels = ['START WITH THE BASICS', 'A STORY FROM INDIA', 'FOR FUTURE FOUNDERS'];
-              return <Link className={`knowledge-pick-card knowledge-pick-card-${index + 1}`} key={item.slug} href={`/guides/${item.slug}`}>
-                <span className="knowledge-pick-top"><span className="knowledge-pick-icon"><Icon size={18} /></span><span>{labels[index] ?? 'FIELD NOTE'}</span><ArrowUpRight size={16} /></span>
-                <span className="knowledge-pick-title">{item.title}</span>
-                <span className="knowledge-pick-description">{item.description}</span>
-                <span className="knowledge-pick-bottom"><span><Clock3 size={13} /> {item.readingTime}</span><span>Read note <ArrowRight size={14} /></span></span>
-              </Link>;
+              const photo = knowledgePhotoFor(item.slug);
+              return <article className={`knowledge-pick-card knowledge-pick-card-${index + 1}`} key={item.slug}>
+                {photo && <KnowledgeImage photo={photo} className="knowledge-pick-photo" sizes="(max-width: 700px) 100vw, (max-width: 1100px) 80vw, 30vw" />}
+                <Link className="knowledge-pick-link" href={`/guides/${item.slug}`}>
+                  <span className="knowledge-pick-top"><span className="knowledge-pick-icon"><Icon size={18} /></span><span>{labels[index] ?? 'FIELD NOTE'}</span><ArrowUpRight size={16} /></span>
+                  <span className="knowledge-pick-title">{item.title}</span>
+                  <span className="knowledge-pick-description">{item.description}</span>
+                  <span className="knowledge-pick-bottom"><span><Clock3 size={13} /> {item.readingTime}</span><span>Read note <ArrowRight size={14} /></span></span>
+                </Link>
+              </article>;
             })}
           </div>
         </section>
