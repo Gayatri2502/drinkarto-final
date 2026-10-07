@@ -17,7 +17,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const article = knowledgeArticles.find((item) => item.slug === slug);
   const guide = guides.find((item) => item.slug === slug);
-  return { title: article?.title ?? guide?.title ?? 'Guide not found' };
+  const title = article?.title ?? guide?.title ?? 'Guide not found';
+  const description = article?.summary ?? guide?.description ?? 'Read source-linked Drinkarto educational guides for adults.';
+  return { title, description };
 }
 
 const categoryIcon: Record<string, typeof BookOpen> = {

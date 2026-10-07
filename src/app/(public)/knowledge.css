@@ -108,3 +108,6 @@
 @media(max-width:880px){.knowledge-atlas-photo{min-height:185px;aspect-ratio:1.6}.knowledge-pick-card{min-height:286px}.knowledge-pick-photo{height:145px}.knowledge-reader-photo{min-height:175px}}
 @media(max-width:620px){.knowledge-atlas-photo{min-height:190px;aspect-ratio:1.55}.knowledge-pick-card{min-height:285px}.knowledge-pick-photo{height:158px}.knowledge-pick-link{padding:12px}.knowledge-reader-photo{width:100%;height:auto;min-height:0;aspect-ratio:1.9;margin:0;border-radius:11px}.knowledge-reader-photo .knowledge-photo-caption{padding:32px 9px 8px}.knowledge-reader-photo .knowledge-photo-caption>span{font-size:10px}.knowledge-reader-photo .knowledge-photo-caption small{font-size:8px}}
 @media(prefers-reduced-motion:reduce){.knowledge-photo>img{transition:none!important}}
+
+/* Preserve readable photo credit text on compact cards and recipe previews. */
+.knowledge-photo-caption small,.knowledge-atlas-photo .knowledge-photo-caption small,.knowledge-pick-photo .knowledge-photo-caption small,.knowledge-reader-photo .knowledge-photo-caption small,.editorial-gallery-photo .knowledge-photo-caption small,.wine-context-photo .knowledge-photo-caption small,.taste-context-photo .knowledge-photo-caption small,.finished-recipe-art .knowledge-photo-caption small{font-size:11px!important;line-height:1.45!important}

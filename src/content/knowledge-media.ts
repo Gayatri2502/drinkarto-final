@@ -10,6 +10,46 @@ export type KnowledgePhoto = {
 };
 
 export const knowledgePhotos = {
+  ginTonic: {
+    src: '/images/editorial/gin-tonic.jpg',
+    title: 'Gin and tonic with ingredients',
+    alt: 'A glass of gin and tonic with a lime wedge, with citrus and bottles softly out of focus behind it.',
+    caption: 'Gin and tonic · serving example',
+    author: 'NotFromUtrecht',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Gin_and_Tonic_with_ingredients.jpg',
+    license: 'CC BY-SA 3.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/',
+  },
+  whiskyHighball: {
+    src: '/images/editorial/whisky-highball.jpg',
+    title: 'Whisky soda highball',
+    alt: 'A whisky soda highball served over ice with a lemon wedge.',
+    caption: 'Whisky soda · serving example',
+    author: 'uka0310',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Whisky_soda_high_ball_by_uca0310_2013.jpg',
+    license: 'CC BY 2.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/2.0/',
+  },
+  wineGrapes: {
+    src: '/images/editorial/wine-grapes-baja.jpg',
+    title: 'Wine grapes in Guadalupe Valley, Baja California',
+    alt: 'Green and purple wine grapes growing among leaves in Guadalupe Valley, Baja California.',
+    caption: 'Wine grapes in Guadalupe Valley, Baja California',
+    author: 'Tomás Castelazo',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Wine_grapes_baja.jpg',
+    license: 'CC BY-SA 2.5',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.5/',
+  },
+  wineBottling: {
+    src: '/images/editorial/wine-bottling-line.jpg',
+    title: 'Wine bottles on a winery bottling line',
+    alt: 'Wine bottles moving along a bottling line inside a winery.',
+    caption: 'Wine bottling line · production context',
+    author: 'David Herrera',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Wine_bottling_line_at_Chateau_Ste._Michelle_Winery.jpg',
+    license: 'CC BY 2.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/2.0/',
+  },
   agave: {
     src: '/images/knowledge/agave-fields.jpg',
     title: 'Agave fields in Tequila, Jalisco',
@@ -23,8 +63,8 @@ export const knowledgePhotos = {
   casks: {
     src: '/images/knowledge/whisky-casks.jpg',
     title: 'Casks maturing at The Glenmorangie Distillery',
-    alt: 'Rows of wooden casks resting in a whisky maturation warehouse.',
-    caption: 'Time and oak in a maturation warehouse',
+    alt: 'Rows of wooden casks maturing at The Glenmorangie Distillery in Scotland.',
+    caption: 'Casks maturing at The Glenmorangie Distillery',
     author: 'Glenmorangie',
     sourceUrl: 'https://commons.wikimedia.org/wiki/File:Casks_maturing_at_The_Glenmorangie_Distillery.jpg',
     license: 'Public domain',
@@ -54,7 +94,7 @@ export const knowledgePhotos = {
     src: '/images/knowledge/copper-stills.jpg',
     title: 'Copper pot stills at ASW Distillery',
     alt: 'Copper pot stills used for spirit production inside a distillery.',
-    caption: 'Copper stills used in spirit production',
+    caption: 'Copper pot stills at ASW Distillery',
     author: 'Thechadwix',
     sourceUrl: 'https://commons.wikimedia.org/wiki/File:ASW_Distillery%27s_copper_pot_stills,_manufactured_by_Vendome_Copper_%26_Brass_Works.jpg',
     license: 'CC BY-SA 4.0',
@@ -63,24 +103,11 @@ export const knowledgePhotos = {
 } satisfies Record<string, KnowledgePhoto>;
 
 const photoBySlug: Record<string, keyof typeof knowledgePhotos> = {
-  'spirit-families': 'casks',
-  'wine-styles-map': 'grapes',
-  'premium-bottle': 'casks',
+  'spirit-families': 'stills',
+  'wine-styles-map': 'wineGrapes',
   'scotch-heritage': 'casks',
-  'japanese-whisky-heritage': 'casks',
   'tequila-origin': 'agave',
-  'france-cognac-champagne': 'grapes',
-  'port-douro': 'grapes',
   'goa-feni-heritage': 'feni',
-  'sula-nashik-brand-story': 'grapes',
-  'sensory-tasting-framework': 'grapes',
-  'visits-and-workshops': 'stills',
-  'business-from-scratch': 'stills',
-  'license-pathways-india': 'stills',
-  'become-distributor-partner': 'stills',
-  'fssai-and-product-labels': 'stills',
-  'taste-language': 'grapes',
-  storage: 'casks',
 };
 
 export function knowledgePhotoFor(slug: string): KnowledgePhoto | undefined {

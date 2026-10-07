@@ -1,8 +1,8 @@
 import RecipeGame from '@/components/recipe-game';
 
 export const metadata = {
-  title: 'Interactive cocktail & zero-proof recipes',
-  description: 'Follow a step-by-step mixing game with adult cocktail and alcohol-free recipe ideas.',
+  title: 'Interactive cocktail and zero-proof recipes',
+  description: 'Follow measured adult cocktail and alcohol-free recipe examples one step at a time, with matching serving photographs where available.',
 };
 
 export default function RecipesPage() {

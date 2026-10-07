@@ -14,13 +14,13 @@ export function KnowledgeImage({
 }) {
   return (
     <figure className={`knowledge-photo ${className}`}>
-      <Image src={photo.src} alt={photo.alt} fill sizes={sizes} priority={priority} />
+      <Image src={photo.src} alt={photo.alt} title={photo.title} fill sizes={sizes} priority={priority} />
       <figcaption className="knowledge-photo-caption">
         <span>{photo.caption}</span>
         <small>
-          Photo by <a href={photo.sourceUrl} target="_blank" rel="noreferrer">{photo.author}</a>
+          Photo by <a href={photo.sourceUrl} target="_blank" rel="noreferrer">{photo.author} · source</a>
           {' · '}<a href={photo.licenseUrl} target="_blank" rel="noreferrer">{photo.license}</a>
-          {' · unchanged'}
+          {' · web-optimized display'}
         </small>
       </figcaption>
     </figure>

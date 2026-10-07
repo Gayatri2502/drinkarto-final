@@ -168,13 +168,13 @@
 .finished-recipe-art svg{width:min(100%,205px);height:155px;overflow:visible;animation:preview-glass-arrive .45s cubic-bezier(.2,.8,.2,1) both}
 .preview-stamp{position:absolute;top:9px;left:9px;display:inline-flex;align-items:center;gap:4px;padding:4px 6px;border-radius:4px;background:#e4efe5;color:#54735c;font-size:8px;font-weight:700;letter-spacing:.06em}
 .preview-art-label{position:absolute;right:9px;bottom:8px;color:#91a096;font-size:7px;letter-spacing:.1em}
-.finished-recipe-preview figcaption{display:grid;gap:6px;align-content:center}
-.finished-recipe-preview figcaption strong{color:#324d3c;font:600 13px/1.35 Arial,sans-serif}
-.finished-recipe-preview figcaption>span:last-child{color:#7b887e;font-size:9px;line-height:1.55}
+.finished-recipe-caption{display:grid;gap:6px;align-content:center}
+.finished-recipe-caption strong{color:#324d3c;font:600 13px/1.35 Arial,sans-serif}
+.finished-recipe-caption>span:last-child{color:#7b887e;font-size:9px;line-height:1.55}
 @keyframes preview-arrive{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
 @keyframes preview-glass-arrive{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
 @media(max-width:900px){.recipe-library-toolbar{align-items:flex-start;flex-direction:column}.recipe-library-search{width:100%}.recipe-kind-filters{width:max-content}.recipe-library .recipe-selector{grid-template-columns:1fr}.finished-recipe-preview{grid-template-columns:1fr .8fr}}
-@media(max-width:600px){.recipe-library{padding:12px 11px}.recipe-library-toolbar{gap:9px}.recipe-kind-filters{display:grid;grid-template-columns:repeat(3,1fr);width:100%}.recipe-kind-filters button{padding:5px 6px!important;font-size:9px!important}.recipe-library .recipe-selector{gap:6px}.recipe-library .recipe-choice{min-height:48px}.recipe-search-empty{flex-wrap:wrap}.recipe-search-empty button{margin-left:0}.finished-recipe-preview{grid-template-columns:1fr;gap:5px;padding:9px}.finished-recipe-art{min-height:145px}.finished-recipe-art svg{height:144px}.finished-recipe-preview figcaption{padding:7px 4px 4px}}
+@media(max-width:600px){.recipe-library{padding:12px 11px}.recipe-library-toolbar{gap:9px}.recipe-kind-filters{display:grid;grid-template-columns:repeat(3,1fr);width:100%}.recipe-kind-filters button{padding:5px 6px!important;font-size:9px!important}.recipe-library .recipe-selector{gap:6px}.recipe-library .recipe-choice{min-height:48px}.recipe-search-empty{flex-wrap:wrap}.recipe-search-empty button{margin-left:0}.finished-recipe-preview{grid-template-columns:1fr;gap:5px;padding:9px}.finished-recipe-art{min-height:145px}.finished-recipe-art svg{height:144px}.finished-recipe-caption{padding:7px 4px 4px}}
 @media(prefers-reduced-motion:reduce){.finished-recipe-preview,.finished-recipe-art svg{animation:none!important}}
 .recipe-library-title{display:flex;align-items:baseline;gap:9px;margin-bottom:10px}
 .recipe-library-title>span:first-child{color:#718579;font-size:8px;font-weight:700;letter-spacing:.1em}
@@ -221,8 +221,8 @@
 .recipe-game .instruction-label,.recipe-game .preview-stamp,.recipe-game .preview-art-label{font-size:10px!important}
 .recipe-game .revealed-instruction>p{font-size:14px!important;line-height:1.65}
 .recipe-game .recipe-game-footer,.recipe-game .recipe-game-footer>span{font-size:12px!important;line-height:1.5}
-.finished-recipe-preview figcaption strong{font-size:15px!important}
-.finished-recipe-preview figcaption>span:last-child,.recipes-disclaimer{font-size:12px!important;line-height:1.65!important}
+.finished-recipe-caption strong{font-size:15px!important}
+.finished-recipe-caption>span:last-child,.recipes-disclaimer{font-size:12px!important;line-height:1.65!important}
 
 /* State price cards also need readable source and coverage notes on small screens. */
 .public-site .category-tile,.public-site .state-chip,.public-site .state-count,.public-site .state-picker>p{font-size:12px!important}
@@ -252,3 +252,43 @@
   .public-site .public-topline,.public-site .public-topline span,.public-site .public-ticker,.public-site .public-ticker>span{font-size:12px!important}
   .public-site .state-price-title,.public-site .state-price-entry small,.public-site .state-price-entry>a,.public-site .lowest-tag{font-size:11px!important}
 }
+
+/* Real, licensed editorial context; reference rows keep neutral category marks. */
+.editorial-gallery-section{padding:38px 0 52px}
+.editorial-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.editorial-gallery-item{overflow:hidden;border:1px solid #dfe7e8;border-radius:12px;background:rgba(255,255,255,.76)}
+.editorial-gallery-photo{width:100%;height:220px;aspect-ratio:1.5;border:0;border-radius:0}
+.editorial-gallery-photo .knowledge-photo-caption{padding:38px 13px 11px}
+.editorial-gallery-photo .knowledge-photo-caption>span{font-size:12px}
+.editorial-gallery-photo .knowledge-photo-caption small{font-size:10px;line-height:1.45}
+.editorial-gallery-item>div:last-child{padding:14px 16px 16px}
+.editorial-gallery-item h3{margin:0 0 9px;color:#203d49;font-size:16px}
+.editorial-gallery-item>div:last-child a{display:inline-flex;align-items:center;gap:5px;color:#315f68;font-size:12px;font-weight:600}
+.wine-photo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:28px 0 36px}
+.wine-context-photo{width:100%;height:280px;aspect-ratio:1.55;border-radius:14px}
+.wine-context-photo .knowledge-photo-caption>span{font-size:13px}
+.wine-context-photo .knowledge-photo-caption small{font-size:10px}
+.wine-photo-grid>div>p{margin:9px 2px 0;color:#62757d;font-size:12px;line-height:1.6}
+.profile-category-visual,.catalogue-category-visual{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;width:100%;height:100%;min-height:135px;color:#496b70}
+.profile-category-visual small,.catalogue-category-visual small{color:#61757c;font-size:10px;font-weight:650;letter-spacing:.06em;text-transform:uppercase}
+.catalogue-card>.catalogue-category-visual{height:125px;min-height:125px;width:100%;opacity:1}
+.finished-recipe-art .knowledge-photo{position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:5px}
+.finished-recipe-art .knowledge-photo-caption{padding:33px 9px 8px}
+.finished-recipe-art .knowledge-photo-caption>span{font-size:10px}
+.finished-recipe-art .knowledge-photo-caption small{font-size:8px}
+@media(max-width:900px){.editorial-gallery{grid-template-columns:1fr 1fr}.editorial-gallery-item:last-child{grid-column:1/-1}.editorial-gallery-photo{height:230px}}
+@media(max-width:600px){.editorial-gallery{grid-template-columns:1fr;gap:12px}.editorial-gallery-item:last-child{grid-column:auto}.editorial-gallery-photo{height:210px}.wine-photo-grid{grid-template-columns:1fr;gap:14px;margin:22px 0 30px}.wine-context-photo{height:230px}}
+.profile-art>.profile-category-visual{position:relative;top:auto;left:auto;width:100%;height:100%;font-size:inherit;letter-spacing:normal;text-transform:none}
+.profile-category-visual>svg{position:static!important;width:35px;height:35px!important}
+.taste-context{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);align-items:center;gap:28px;margin:26px 0 34px;padding:22px;border:1px solid #dce6e6;border-radius:12px;background:rgba(255,255,255,.64)}
+.taste-context h2{margin:0 0 11px!important;font-size:25px!important;line-height:1.22!important}
+.taste-context>div:first-child>p:last-child{margin:0;font-size:13px!important}
+.taste-context-photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.taste-context-photo{width:100%;height:190px;aspect-ratio:1.4}
+.taste-context-photo .knowledge-photo-caption>span{font-size:11px}
+.taste-context-photo .knowledge-photo-caption small{font-size:9px}
+@media(max-width:700px){.taste-context{grid-template-columns:1fr;gap:16px;padding:16px}.taste-context h2{font-size:22px!important}.taste-context-photo{height:150px}.taste-context-photos{gap:8px}}
+.age-gated-content{filter:blur(5px);pointer-events:none;user-select:none}
+.age-overlay{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:18px;background:rgba(45,65,89,.34);backdrop-filter:blur(9px)}
+.age-overlay .age-dialog{position:relative;inset:auto;margin:0;max-height:calc(100vh - 36px);overflow:auto}
+.age-overlay .age-dialog::backdrop{background:transparent;backdrop-filter:none}

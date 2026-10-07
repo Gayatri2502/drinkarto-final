@@ -1,11 +1,84 @@
 'use client';
-import {useEffect,useRef,useState} from 'react';
-import {usePathname} from 'next/navigation';
+
+import { useEffect, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-const KEY='drinkarto-adult-confirmation-v1';
-export default function AgeGate({children}:{children:React.ReactNode}){const path=usePathname();const exempt=['/privacy','/terms','/responsible-use','/pricing'].includes(path);const [accepted,setAccepted]=useState(false),[ready,setReady]=useState(false),[blocked,setBlocked]=useState(false),[confirm,setConfirm]=useState(false);const ref=useRef<HTMLDialogElement>(null);
-useEffect(()=>{try{const value=Number(localStorage.getItem(KEY));setAccepted(value>Date.now())}catch{}setReady(true)},[]);
-useEffect(()=>{if(ready&&!accepted&&!exempt&&!ref.current?.open)ref.current?.showModal()},[ready,accepted,exempt]);
-function accept(){try{localStorage.setItem(KEY,String(Date.now()+7*86400000))}catch{}ref.current?.close();setAccepted(true)}
-if(exempt||accepted)return <>{children}<button className="age-reset" onClick={()=>{try{localStorage.removeItem(KEY)}catch{}setAccepted(false);setConfirm(false);setBlocked(false)}}>Age & access settings</button></>;
-return <div className="age-screen"><div className="age-placeholder"><span>d.</span><h1>Knowledge, for adults.</h1></div>{ready&&<dialog ref={ref} className="age-dialog" aria-labelledby="age-title" onCancel={e=>e.preventDefault()}><p className="public-eyebrow">WELCOME TO DRINKARTO</p><h1 id="age-title">Adult access confirmation</h1>{blocked?<><p role="status">The liquor library is for people aged 18 and over. You can still read our privacy notice and terms.</p><button className="public-button secondary" onClick={()=>setBlocked(false)}>Return to age check</button></>:<><p>Confirm you are at least 18 to explore this educational library. Drinking and purchase laws vary by state; this check does not grant permission to buy or consume alcohol.</p><label className="age-confirm"><input type="checkbox" checked={confirm} onChange={e=>setConfirm(e.target.checked)}/> I am 18 or older.</label><button className="public-button" disabled={!confirm} onClick={accept}>Enter the library ↗</button><button className="public-text-button" onClick={()=>setBlocked(true)}>I am under 18</button></>}<p className="public-small-note">Self-declaration, not identity verification. No date of birth or ID is collected. Your choice stays in this browser for 7 days.</p><div className="age-policy-links"><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link><Link href="/responsible-use">State rules & responsible use</Link><Link href="/pricing">Business software</Link></div></dialog>}</div>}
+
+const KEY = 'drinkarto-adult-confirmation-v1';
+const EXEMPT_PATHS = ['/privacy', '/terms', '/responsible-use', '/pricing'];
+
+export default function AgeGate({ children }: { children: React.ReactNode }) {
+  const path = usePathname();
+  const exempt = EXEMPT_PATHS.includes(path);
+  const [accepted, setAccepted] = useState(false);
+  const [blocked, setBlocked] = useState(false);
+  const [confirm, setConfirm] = useState(false);
+  const ref = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    try {
+      const expiry = Number(localStorage.getItem(KEY));
+      setAccepted(expiry > Date.now());
+    } catch {
+      setAccepted(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const dialog = ref.current;
+    if (exempt || accepted || !dialog || dialog.matches(':modal')) return;
+    if (dialog.open) dialog.close();
+    dialog.showModal();
+  }, [accepted, exempt]);
+
+  function accept() {
+    try {
+      localStorage.setItem(KEY, String(Date.now() + 7 * 86400000));
+    } catch {
+      // The confirmation still applies for this page view when storage is unavailable.
+    }
+    ref.current?.close();
+    setAccepted(true);
+  }
+
+  function reset() {
+    try {
+      localStorage.removeItem(KEY);
+    } catch {
+      // Reset the in-memory state even when browser storage is unavailable.
+    }
+    setAccepted(false);
+    setConfirm(false);
+    setBlocked(false);
+  }
+
+  if (exempt || accepted) {
+    return <>{children}<button className="age-reset" onClick={reset}>Age & access settings</button></>;
+  }
+
+  return <>
+    <div className="age-gated-content" inert>{children}</div>
+    <div className="age-overlay">
+      <dialog ref={ref} open className="age-dialog" aria-labelledby="age-title" aria-modal="true" onCancel={(event) => event.preventDefault()}>
+        <p className="public-eyebrow">WELCOME TO DRINKARTO</p>
+        <h1 id="age-title">Adult access confirmation</h1>
+        {blocked ? <>
+          <p role="status">The liquor library is for people aged 18 and over. You can still read our privacy notice and terms.</p>
+          <button className="public-button secondary" onClick={() => setBlocked(false)}>Return to age check</button>
+        </> : <>
+          <p>Confirm you are at least 18 to explore this educational library. Drinking and purchase laws vary by state; this check does not grant permission to buy or consume alcohol.</p>
+          <label className="age-confirm"><input type="checkbox" checked={confirm} onChange={(event) => setConfirm(event.target.checked)} /> I am 18 or older.</label>
+          <button className="public-button" disabled={!confirm} onClick={accept}>Enter the library ↗</button>
+          <button className="public-text-button" onClick={() => setBlocked(true)}>I am under 18</button>
+        </>}
+        <p className="public-small-note">Self-declaration, not identity verification. No date of birth or ID is collected. Your choice stays in this browser for 7 days.</p>
+        <div className="age-policy-links">
+          <Link href="/privacy">Privacy</Link>
+          <Link href="/terms">Terms</Link>
+          <Link href="/responsible-use">State rules & responsible use</Link>
+          <Link href="/pricing">Business software</Link>
+        </div>
+      </dialog>
+    </div>
+  </>;
+}

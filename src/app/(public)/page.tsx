@@ -3,11 +3,20 @@ import { ArrowUpRight, BookOpen, GitCompare, Layers, ShieldCheck } from 'lucide-
 import PriceBrowser from '@/components/price-browser';
 import { profiles } from '@/content/public';
 import {db} from '@/lib/db';
+import { KnowledgeImage } from '@/components/knowledge-image';
+import { knowledgePhotos } from '@/content/knowledge-media';
 
 export const dynamic = 'force-dynamic';
+export const metadata = {
+  title: 'Indian liquor price references, wine and spirit guides',
+  description: 'Compare dated state liquor price references by brand and bottle size, and explore source-linked wine, spirit and responsible-use guides.',
+};
 
 export default async function Home() {
-  const snapshots=await db.publicPriceSnapshot.findMany();
+  const [snapshots, productCount]=await Promise.all([
+    db.publicPriceSnapshot.findMany(),
+    db.publicProduct.count(),
+  ]);
   const coverage=[...new Set(snapshots.map(s=>s.state))].sort();
   const countries=coverage.join(' · ');
   const listedAuthorities=[...new Set(snapshots.map(s=>({'bevco-2026-09':'BEVCO','tasmac-2026-10':'TASMAC','osbc-2026-27':'OSBC','ksbcl-2026-08':'KSBCL','csmcl-public':'CSMCL','assam-2026-27':'Assam Excise'} as Record<string,string>)[s.authority]??s.state))].sort();
@@ -29,7 +38,7 @@ export default async function Home() {
         <dl>
           <div><dt>Price coverage</dt><dd>{countries||'Official sources are being initialized'}</dd></div>
           <div><dt>Published authorities</dt><dd>{listedAuthorities.join(' · ')}</dd></div>
-          <div><dt>Product identities</dt><dd>1,738 workbook references</dd></div>
+          <div><dt>Reference identities</dt><dd>{productCount.toLocaleString('en-IN')} records</dd></div>
           <div><dt>Knowledge library</dt><dd>Categories, styles & terminology</dd></div>
         </dl>
         <Link href="/guides/price-sources">Read our sourcing methodology <ArrowUpRight size={15} /></Link>
@@ -46,6 +55,14 @@ export default async function Home() {
         {[{Icon:BookOpen,title:'Terminology & categories',text:'A concise alphabetical reference to production, ingredients and the terms found on a bottle label.',href:'/dictionary',cta:'Open the dictionary'}, {Icon:Layers,title:'Style & taste profiles',text:'Understand body, sweetness, acidity and common flavour descriptions across wine and spirit styles.',href:'/taste',cta:'Explore taste profiles'}, {Icon:GitCompare,title:'Side-by-side comparisons',text:'Compare characteristics across two styles, with clear descriptions and educational source references.',href:'/compare',cta:'Compare styles'}].map(({Icon,title,text,href,cta})=><Link key={href} href={href} className="professional-resource"><Icon size={22}/><h3>{title}</h3><p>{text}</p><span>{cta}<ArrowUpRight size={15}/></span></Link>)}
       </div>
     </div></section>
+    <section className="public-container editorial-gallery-section" aria-labelledby="editorial-gallery-heading">
+      <div className="public-section-heading"><div><p className="public-eyebrow">PHOTOGRAPHED CONTEXT</p><h2 id="editorial-gallery-heading">Places, ingredients and production</h2><p>Each photograph identifies its own source and depicts the named place or process—not every brand or bottle in a category.</p></div><Link href="/guides" className="public-text-link">Explore the knowledge library <ArrowUpRight size={16}/></Link></div>
+      <div className="editorial-gallery">
+        <article className="editorial-gallery-item"><KnowledgeImage photo={knowledgePhotos.wineGrapes} className="editorial-gallery-photo" sizes="(max-width: 700px) 100vw, 33vw"/><div><h3>Wine grapes in Baja California</h3><Link href="/guides/wine-styles-map">Explore wine styles <ArrowUpRight size={14}/></Link></div></article>
+        <article className="editorial-gallery-item"><KnowledgeImage photo={knowledgePhotos.casks} className="editorial-gallery-photo" sizes="(max-width: 700px) 100vw, 33vw"/><div><h3>The Glenmorangie Distillery maturation warehouse</h3><Link href="/guides/scotch-heritage">Read the Scotch heritage guide <ArrowUpRight size={14}/></Link></div></article>
+        <article className="editorial-gallery-item"><KnowledgeImage photo={knowledgePhotos.feni} className="editorial-gallery-photo" sizes="(max-width: 700px) 100vw, 33vw"/><div><h3>Traditional cashew feni distillation in Goa</h3><Link href="/guides/goa-feni-heritage">Learn about Goa Feni <ArrowUpRight size={14}/></Link></div></article>
+      </div>
+    </section>
     <section className="public-container public-section"><div className="public-section-heading"><div><p className="public-eyebrow">WINE REFERENCE</p><h2>Wine styles at a glance</h2><p>Descriptive style references. Individual bottles vary by producer, region and vintage.</p></div><Link href="/wines" className="public-text-link">Wine library <ArrowUpRight size={16}/></Link></div>
       <div className="professional-wines">{profiles.filter(p=>['cabernet','sauvignon','rose'].includes(p.id)).map(p=><Link key={p.id} href={'/wines#'+p.id}><span className="wine-category">{p.family}</span><h3>{p.name}</h3><p>{p.notes.slice(0,2).join(' · ')}</p><div><span>Body: {p.body}</span><ArrowUpRight size={17}/></div></Link>)}</div>
     </section>

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import {ArrowRight, ArrowUpRight, BarChart3, Boxes, ClipboardList, Users} from 'lucide-react';
 
-export const metadata={title:'Drinkarto for Business',description:'A business workspace for beverage distribution, inventory, orders and reporting.'};
+export const metadata={title:'Drinkarto ERP for beverage distribution businesses',description:'Explore inventory, order, retailer, invoice and reporting tools for beverage distribution teams, plus clearly labelled proposed monthly plans.'};
 
 const capabilities=[
   {Icon:Boxes,title:'Inventory control',text:'Track products, stock movements and availability from one workspace.'},
