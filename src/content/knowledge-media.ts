@@ -106,7 +106,7 @@ type BottleReferencePhoto = KnowledgePhoto & { width: number; height: number };
 
 export const bottleReferencePhotos: Record<string, BottleReferencePhoto> = {
   Whisky: {
-    src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Royal_Challenge_whisky_bottle.jpg/172px-Royal_Challenge_whisky_bottle.jpg',
+    src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Royal_Challenge_whisky_bottle.jpg/500px-Royal_Challenge_whisky_bottle.jpg',
     title: 'A 750 ml bottle of Royal Challenge whisky',
     alt: 'A Royal Challenge whisky bottle photographed as an illustrative whisky-category reference; it is not the product named in the card.',
     caption: 'Royal Challenge whisky · category example only',
@@ -114,11 +114,11 @@ export const bottleReferencePhotos: Record<string, BottleReferencePhoto> = {
     sourceUrl: 'https://commons.wikimedia.org/wiki/File:Royal_Challenge_whisky_bottle.jpg',
     license: 'CC BY-SA 3.0',
     licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/',
-    width: 172,
-    height: 480,
+    width: 400,
+    height: 1116,
   },
   Rum: {
-    src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Bundaberg_Rum_Bottle.jpg/230px-Bundaberg_Rum_Bottle.jpg',
+    src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Bundaberg_Rum_Bottle.jpg/500px-Bundaberg_Rum_Bottle.jpg',
     title: 'A bottle of Bundaberg Rum',
     alt: 'A Bundaberg Rum bottle used as an illustrative rum-category reference; it is not the product named in the card.',
     caption: 'Bundaberg Rum · category example only',
@@ -126,8 +126,8 @@ export const bottleReferencePhotos: Record<string, BottleReferencePhoto> = {
     sourceUrl: 'https://commons.wikimedia.org/wiki/File:Bundaberg_Rum_Bottle.jpg',
     license: 'CC BY-SA 3.0',
     licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/',
-    width: 230,
-    height: 480,
+    width: 400,
+    height: 835,
   },
   Vodka: {
     src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Vodka_bottle.jpg/500px-Vodka_bottle.jpg',
@@ -154,7 +154,7 @@ export const bottleReferencePhotos: Record<string, BottleReferencePhoto> = {
     height: 667,
   },
   Brandy: {
-    src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/The_Bottle_of_Pierre_Vallet_Cognac.jpg/320px-The_Bottle_of_Pierre_Vallet_Cognac.jpg',
+    src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/The_Bottle_of_Pierre_Vallet_Cognac.jpg/500px-The_Bottle_of_Pierre_Vallet_Cognac.jpg',
     title: 'A bottle of Pierre Vallet Cognac',
     alt: 'A Pierre Vallet Cognac bottle shown as an illustrative brandy-category reference; it is not the product named in the card.',
     caption: 'Pierre Vallet Cognac · category example only',
@@ -162,8 +162,8 @@ export const bottleReferencePhotos: Record<string, BottleReferencePhoto> = {
     sourceUrl: 'https://commons.wikimedia.org/wiki/File:The_Bottle_of_Pierre_Vallet_Cognac.jpg',
     license: 'CC BY-SA 4.0',
     licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
-    width: 320,
-    height: 480,
+    width: 400,
+    height: 600,
   },
   Beer: {
     src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7a/Beer_bottle.JPG/500px-Beer_bottle.JPG',
