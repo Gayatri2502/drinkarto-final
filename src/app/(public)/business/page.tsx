@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import {ArrowRight, ArrowUpRight, BarChart3, Boxes, ClipboardList, Users} from 'lucide-react';
+import { KnowledgeImage } from '@/components/knowledge-image';
+import { knowledgePhotos } from '@/content/knowledge-media';
 
-export const metadata={title:'Drinkarto for Business',description:'A business workspace for beverage distribution, inventory, orders and reporting.'};
+export const metadata={title:'Drinkarto ERP for beverage distribution businesses',description:'Explore inventory, order, retailer, invoice and reporting tools for beverage distribution teams, plus clearly labelled proposed monthly plans.'};
 
 const capabilities=[
   {Icon:Boxes,title:'Inventory control',text:'Track products, stock movements and availability from one workspace.'},
@@ -18,6 +20,7 @@ export default function BusinessPage(){return <section className="public-contain
     </div>
     <aside className="business-route-card"><span className="business-route-kicker">YOUR OPERATIONS, CONNECTED</span><strong>Products <i>→</i> Inventory <i>→</i> Orders <i>→</i> Reports</strong><p>Sign in to open your workspace, or review the proposed monthly plans before you begin.</p><Link href="/pricing">See features and pricing <ArrowUpRight size={15}/></Link></aside>
   </div>
+  <section className="business-photo-feature" aria-label="Beverage production photograph"><KnowledgeImage photo={knowledgePhotos.wineBottling} className="business-context-photo" sizes="(max-width: 700px) 100vw, 38vw"/><div><p className="public-eyebrow">BUILT FOR THE OPERATIONS BEHIND THE SHELF</p><h2>Keep stock and fulfilment in view.</h2><p>A winery bottling line is shown as production context. The workspace helps teams coordinate their own stock, orders and reports.</p></div></section>
   <div className="business-capabilities">{capabilities.map(({Icon,title,text})=><article key={title}><Icon size={21}/><h2>{title}</h2><p>{text}</p></article>)}</div>
   <p className="public-notice">Drinkarto ERP is business software. It does not sell, deliver or process payments for liquor. Any regulated activity remains subject to the business’s licences and local laws.</p>
 </section>}

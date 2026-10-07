@@ -1,3 +1,3 @@
 import Comparison from '@/components/comparison';
-export const metadata={title:'Compare liquor and wine styles'};
+export const metadata={title:'Compare wine and spirit styles side by side',description:'Compare typical aroma, body, sweetness, acidity and tannin descriptions across wine and spirit styles, with educational source links.'};
 export default async function Compare({searchParams}:{searchParams:Promise<Record<string,string|undefined>>}){const p=await searchParams;return <div className="public-container public-page"><p className="public-eyebrow">SIDE BY SIDE</p><h1>Two styles.<br/><em>A clearer difference.</em></h1><p className="public-intro">Compare wine or spirit categories on flavour and texture. This explains styles rather than declaring a winner.</p><Comparison initialLeft={p.left} initialRight={p.right}/></div>}

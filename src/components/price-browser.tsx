@@ -7,6 +7,7 @@ import {
   ChevronRight, CircleHelp, Droplets, Grape, GlassWater, Martini, Search, SlidersHorizontal,
 } from 'lucide-react';
 import { categories, sources, type PriceRow } from '@/content/public';
+import { BottleReferenceImage, hasBottleReferenceImage } from '@/components/bottle-reference-image';
 
 type Product = { key: string; name: string; category: string; sizes: Record<string, Record<string, PriceRow[]>> };
 type Result = { rows: Product[]; total: number; page: number; pages: number; states: string[]; checked: string };
@@ -22,11 +23,6 @@ const categoryColours: Record<string, string> = {
 };
 const sizeChoices = (product: Product) => Object.keys(product.sizes).sort((a, b) => Number(a) - Number(b));
 const defaultSize = (sizes: string[]) => sizes.includes('750') ? '750' : sizes[0] ?? '';
-
-function Bottle({ category }: { category: string }) {
-  const colour = categoryColours[category] ?? '#657487';
-  return <span className="comparison-bottle" aria-hidden="true"><svg viewBox="0 0 64 92"><rect width="64" height="92" rx="5" fill="#fff"/><ellipse cx="32" cy="84" rx="16" ry="2.5" fill="#243d3112"/><path d="M26 9h12v19c0 5 9 8 9 15v34c0 3-3 4-15 4s-15-1-15-4V43c0-7 9-10 9-15Z" fill={colour}/><path d="M28 18v15c0 5-7 8-7 14v27" fill="none" stroke="#fff8" strokeWidth="2"/><rect x="26" y="6" width="12" height="11" rx="1" fill="#35473b"/><rect x="20" y="45" width="24" height="21" rx="1" fill="#f8f5ec"/><path d="M24 51h16M24 55h12M24 59h15" stroke="#b8b2a3" strokeWidth="1"/></svg></span>;
-}
 
 export default function PriceBrowser({ compact = false, initialState = '', initialSize = '', initialQuery = '' }: { compact?: boolean; initialState?: string; initialSize?: string; initialQuery?: string }) {
   const [query, setQuery] = useState(initialQuery);
@@ -103,7 +99,7 @@ export default function PriceBrowser({ compact = false, initialState = '', initi
         const lowest = availablePrices.length ? Math.min(...availablePrices) : null;
         const Icon = categoryIcons[product.category] ?? CircleHelp;
         return <article className="liquor-price-card" key={product.key}>
-          <div className="liquor-card-heading"><Bottle category={product.category}/><div className="liquor-card-name"><span className="category-label" style={{ '--category-colour': categoryColours[product.category] } as React.CSSProperties}><Icon size={13}/>{product.category}</span><h2>{product.name}</h2><span className="price-size-coverage">Published rates shown only where a matching listing exists</span></div><label className="bottle-size-select"><span>Bottle size</span><select aria-label={`Bottle size for ${product.name}`} value={activeSize} onChange={(event) => setSelectedSizes((current) => ({ ...current, [product.key]: event.target.value }))}>{sizes.map((size) => <option key={size} value={size}>{Number(size).toLocaleString('en-IN')} ml</option>)}</select></label></div>
+          <div className="liquor-card-heading">{hasBottleReferenceImage(product.category)?<BottleReferenceImage category={product.category} className="liquor-card-bottle-photo"/>:<span className="liquor-card-category-fallback" aria-hidden="true"><Icon size={24}/></span>}<div className="liquor-card-name"><span className="category-label" style={{ '--category-colour': categoryColours[product.category] } as React.CSSProperties}><Icon size={13}/>{product.category}</span><h2>{product.name}</h2><span className="price-size-coverage">Published rates shown only where a matching listing exists</span></div><label className="bottle-size-select"><span>Bottle size</span><select aria-label={`Bottle size for ${product.name}`} value={activeSize} onChange={(event) => setSelectedSizes((current) => ({ ...current, [product.key]: event.target.value }))}>{sizes.map((size) => <option key={size} value={size}>{Number(size).toLocaleString('en-IN')} ml</option>)}</select></label></div>
           {shownStates.length ? <div className="state-price-grid">{statePrices.map(({ state, rows }) => {
             const distinct = [...new Map(rows.map((row) => [`${row.price}|${row.sourceId}|${row.market ?? ''}`, row])).values()];
             return <section className={`state-price-tile ${distinct.some((row) => row.price === lowest) ? 'lowest' : ''} ${distinct.length ? '' : 'missing'}`} key={state} aria-label={`${state} price reference`}><div className="state-price-title"><span>{state}</span>{distinct.some((row) => row.price === lowest) && <span className="lowest-tag">Lowest listed</span>}</div>{distinct.length ? distinct.map((row) => <div className="state-price-entry" key={`${row.id}-${row.price}`}><strong>₹{row.price.toLocaleString('en-IN')}</strong>{availablePrices.length > 1 && row.price > lowest! && <span className="price-delta"><ArrowDownUp size={11}/> ₹{(row.price - lowest!).toLocaleString('en-IN')} above lowest</span>}<small>{row.sizeMl.toLocaleString('en-IN')} ml{row.market ? ` · ${row.market}` : ''}</small>{row.effective && <small>Valid from {new Date(row.effective).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata', day: '2-digit', month: 'short', year: 'numeric' })}{row.effectiveTo ? ` to ${new Date(row.effectiveTo).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata', day: '2-digit', month: 'short', year: 'numeric' })}` : ''}</small>}<a href={row.sourceUrl ?? sources[row.sourceId]?.document ?? '#'} target="_blank" rel="noreferrer">{sources[row.sourceId]?.name.split(' · ')[0] ?? 'Official source'} <ArrowUpRight size={11}/></a></div>) : <p>No matching rate listed</p>}</section>;

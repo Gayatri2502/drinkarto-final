@@ -201,4 +201,5 @@ export const knowledgeCategories = [
   'Taste & responsible use',
   'Visits & workshops',
   'Start a business',
+  'Bottle & price guides',
 ] as const;

@@ -2,6 +2,8 @@
 
 import { useState, type DragEvent } from 'react';
 import { Check, Citrus, GlassWater, Martini, RotateCcw, Search, Sparkles, X } from 'lucide-react';
+import { knowledgePhotos } from '@/content/knowledge-media';
+import { KnowledgeImage } from '@/components/knowledge-image';
 
 type Ingredient = { id: string; name: string; amount: string; note: string };
 type Step = { ingredientId: string; instruction: string };
@@ -26,21 +28,21 @@ const recipes: Recipe[] = [
     finish: 'Citrus garden & tonic is ready. Sip slowly, keep water nearby, and never drink and drive.',
   },
   {
-    id: 'whisky-highball', name: 'Ginger whisky highball', kind: 'Cocktail', icon: GlassWater, colour: '#a7773d', time: '4 steps',
-    summary: 'A light, sparkling serve with ginger and lemon.',
+    id: 'whisky-highball', name: 'Whisky soda highball', kind: 'Cocktail', icon: GlassWater, colour: '#a7773d', time: '4 steps',
+    summary: 'A light, sparkling serve with soda water and lemon.',
     ingredients: [
       { id: 'ice', name: 'Ice', amount: 'A few cubes', note: 'Fill the glass' },
       { id: 'whisky', name: 'Whisky', amount: '30 ml', note: 'Measure carefully' },
-      { id: 'ginger', name: 'Ginger ale', amount: '90 ml', note: 'Pour gently' },
+      { id: 'soda', name: 'Soda water', amount: '90 ml', note: 'Pour gently' },
       { id: 'lemon', name: 'Lemon peel', amount: '1 strip', note: 'Express over the glass' },
     ],
     steps: [
       { ingredientId: 'ice', instruction: 'Fill a highball glass with a few ice cubes.' },
       { ingredientId: 'whisky', instruction: 'Measure 30 ml of whisky with a jigger and pour it over the ice.' },
-      { ingredientId: 'ginger', instruction: 'Top with 90 ml of ginger ale.' },
+      { ingredientId: 'soda', instruction: 'Top with 90 ml of soda water.' },
       { ingredientId: 'lemon', instruction: 'Twist a strip of lemon peel over the glass, then add it as garnish.' },
     ],
-    finish: 'Ginger whisky highball is ready. This recipe is an adult educational reference, not a recommendation to drink.',
+    finish: 'Whisky soda highball is ready. This recipe is an adult educational reference, not a recommendation to drink.',
   },
   {
     id: 'garden-fizz', name: 'Garden citrus fizz', kind: 'Zero-proof', icon: Citrus, colour: '#6b8d59', time: '4 steps',
@@ -143,17 +145,18 @@ export default function RecipeGame() {
 function RecipePreview({ recipe }: { recipe: Recipe }) {
   const lime = recipe.id === 'citrus-gin';
   const amber = recipe.id === 'whisky-highball';
+  const photograph = lime ? knowledgePhotos.ginTonic : amber ? knowledgePhotos.whiskyHighball : undefined;
   const liquid = lime ? ['#d7e3a1', '#a4bc65'] : amber ? ['#e5bd70', '#b97635'] : ['#edaa62', '#bb5b59'];
   const garnish = lime ? '#85a958' : amber ? '#e3ae48' : '#df8640';
   const gradientId = `drink-liquid-${recipe.id}`;
-  return <figure className="finished-recipe-preview">
-    <div className="finished-recipe-art"><span className="preview-stamp"><Check size={12}/> SERVE</span><svg viewBox="0 0 250 225" role="img" aria-label={`Illustration of finished ${recipe.name}: a chilled, garnished highball with ${lime ? 'lime' : amber ? 'lemon' : 'orange'} and ice.`}>
+  return <div className="finished-recipe-preview" role="group" aria-label={`Finished drink preview for ${recipe.name}`}>
+    <div className="finished-recipe-art">{photograph ? <KnowledgeImage photo={photograph} className="finished-recipe-photo" sizes="(max-width: 700px) 100vw, 360px" /> : <><span className="preview-stamp"><Check size={12}/> SERVE</span><svg viewBox="0 0 250 225" role="img" aria-label={`Illustration of finished ${recipe.name}: a chilled, garnished highball with orange and ice.`}>
       <defs><linearGradient id={gradientId} x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor={liquid[0]} stopOpacity=".7"/><stop offset="1" stopColor={liquid[1]} stopOpacity=".95"/></linearGradient><clipPath id={`glass-clip-${recipe.id}`}><path d="M77 47h96l-12 118q-36 19-72 0Z"/></clipPath></defs>
       <ellipse cx="125" cy="193" rx="48" ry="7" fill="#365642" opacity=".08"/>
       <path d="M74 43h102l-13 126q-38 22-76 0Z" fill="#fff" fillOpacity=".34" stroke="#718d7b" strokeWidth="3" strokeLinejoin="round"/>
       <g clipPath={`url(#glass-clip-${recipe.id})`}><path d="M78 87h96l-9 88q-39 18-78 0Z" fill={`url(#${gradientId})`}/><path d="m94 76 28-7 18 27-26 9Zm41 4 27 6-5 26-30-7Z" fill="#fff" fillOpacity=".67" stroke="#fff" strokeOpacity=".6" strokeWidth="2"/><path d="M83 119q42 7 87-1" fill="none" stroke="#fff" strokeOpacity=".3" strokeWidth="3"/><circle cx="103" cy="145" r="3" fill="#fff" opacity=".55"/><circle cx="145" cy="128" r="2.5" fill="#fff" opacity=".6"/><circle cx="133" cy="158" r="2" fill="#fff" opacity=".55"/></g>
       <path d="M84 60 72 43m93 17 13-17" stroke="#718d7b" strokeWidth="3" strokeLinecap="round"/><circle cx="174" cy="42" r="24" fill={garnish} stroke="#fff" strokeWidth="4"/><circle cx="174" cy="42" r="16" fill="#fff" fillOpacity=".22" stroke="#fff" strokeOpacity=".8" strokeWidth="2"/><path d="M174 27v30m-13-15h26m-22-11 18 22m0-22-18 22" stroke="#fff" strokeOpacity=".78" strokeWidth="1.4"/><path d="M142 22q21-12 34-4" fill="none" stroke="#65845d" strokeWidth="4" strokeLinecap="round"/><path d="M67 86q-10 28 2 48" fill="none" stroke="#fff" strokeWidth="5" strokeLinecap="round" opacity=".65"/>
-    </svg><span className="preview-art-label">ILLUSTRATIVE SERVE</span></div>
-    <figcaption><span className="instruction-label">YOUR FINISHED MIX</span><strong>{recipe.name}</strong><span>Illustration of the finished drink. Glassware and garnish may vary.</span></figcaption>
-  </figure>;
+    </svg><span className="preview-art-label">ILLUSTRATIVE SERVE</span></>}</div>
+    <div className="finished-recipe-caption"><span className="instruction-label">YOUR FINISHED MIX</span><strong>{recipe.name}</strong><span>{photograph ? 'Photograph of a matching serving style. Your pour and garnish may look different.' : 'Illustration of the finished drink. Glassware and garnish may vary.'}</span></div>
+  </div>;
 }
