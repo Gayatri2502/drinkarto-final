@@ -1,5 +1,6 @@
 node_modules/
 .next/
+.vercel/
 .env*
 !.env.example
 src/generated/
@@ -14,3 +15,4 @@ coverage/
 __pycache__/
 *.py[cod]
 .DS_Store
+.vercel

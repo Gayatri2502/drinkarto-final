@@ -105,6 +105,12 @@ Dockerfile            application container
 
 The application’s persistence layer uses Prisma 7 with the `@prisma/adapter-pg` PostgreSQL driver. To use Supabase, set `DATABASE_URL` to the connection string from the Supabase project’s database connection panel; the current code does not use the Supabase JavaScript client or require a browser anon key. Keep the URL and its password in `.env` locally or in the deployment platform’s encrypted environment variables. Use the provider-recommended pooled URL for app traffic and a direct URL for schema migrations when required by the project configuration. The committed `.env.example` contains only local placeholders.
 
+### Vercel database settings
+
+In the Vercel project, open **Settings → Environment Variables**. Add `DATABASE_URL` using the Supabase transaction-pooler connection string from **Supabase → Connect**, including the URL-encoded database password. Select the Preview and Production environments you intend to use, save, and redeploy. Changing the local `.env` does not update Vercel.
+
+Set `APP_ORIGIN` to the website’s public HTTPS origin. Keep both variables server-side; the database URL must never use a `NEXT_PUBLIC_` prefix. `npm run build` generates the Prisma client before building Next.js. `.vercelignore` excludes local secrets and build artifacts from source uploads.
+
 The database schema, SQL migrations and optional fictional development seed live in `prisma/`. Apply them with `npm run db:migrate`; never point the development seed or integration tests at production.
 
 ## Database changes
