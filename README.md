@@ -45,14 +45,16 @@ Order entry supports multiple distinct product lines; the backend accepts up to 
 
 ## Environment variables
 
-| Variable        | Purpose                                                                        |
-| --------------- | ------------------------------------------------------------------------------ |
-| DATABASE_URL    | PostgreSQL connection string                                                   |
-| APP_ORIGIN      | Exact browser origin used for write-request CSRF checks                        |
-| OPENAI_API_KEY  | Server-only OpenAI credential                                                  |
-| OPENAI_ENV_FILE | Optional path to a separately managed env file for server-side AI configuration |
-| AI_MODEL        | OpenAI model ID; defaults to gpt-6-luna                                        |
-| SEED_PASSWORD   | Development-only owner password for fictional seed data                        |
+| Variable                | Purpose                                                                         |
+| ----------------------- | ------------------------------------------------------------------------------- |
+| DATABASE_URL            | PostgreSQL connection string                                                    |
+| APP_ORIGIN              | Exact browser origin used for write-request CSRF checks                         |
+| OPENAI_API_KEY          | Server-only OpenAI credential                                                   |
+| OPENAI_ENV_FILE         | Optional path to a separately managed env file for server-side AI configuration |
+| AI_MODEL                | OpenAI model ID; defaults to gpt-6-luna                                         |
+| SEED_PASSWORD           | Development-only owner password for fictional seed data                         |
+| PRICE_REVIEWER_USER_IDS | Platform user IDs allowed to approve quarantined official price imports         |
+| DB_POOL_MAX             | Optional PostgreSQL connection-pool limit; defaults to `5`                      |
 
 The app works without an OpenAI key; AI requests report a configuration/provider error until `OPENAI_API_KEY` is provided. Put credentials in an ignored local `.env` file or your hosting provider’s secret manager. Never commit live keys, passwords, or connection strings.
 
@@ -132,7 +134,7 @@ Build with `npm ci`, `npm run db:generate` and `npm run build`. Run migrations o
 - Sessions last one day; email verification, password reset, OTP, 2FA and device/session management are pending.
 - Lists are bounded to 100 results; pagination and report exports are pending.
 - Transitive dependency overrides pin patched deepmerge-ts and mysql2 versions. The current npm audit reports zero known vulnerabilities; review these overrides when upgrading Prisma.
-- Production hosting, production backups and monitoring are not configured in this repository. This codebase is ready for local evaluation and requires a deployment review before serving real customers.
+- Vercel hosting and a database-aware `/api/health` endpoint are configured. Automated backup retention, uptime alerts, production migrations, reviewer access and legal launch inputs must be completed as described in [production operations](docs/PRODUCTION.md) before serving real customers.
 
 Drinkarto's future compliance module will support records and reminders. Jurisdiction-specific regulatory requirements must be verified with the applicable authority.
 
@@ -152,7 +154,7 @@ The public knowledge hub at `/guides` groups source-linked field notes by styles
 
 Public pages use attributed, descriptive photography for product categories, taste, heritage, recipes and distribution context. Bottle photographs are clearly labelled category examples, not SKU-verified product packshots. See [image sources and attribution](docs/IMAGE-ATTRIBUTION.md).
 
-Run migrations, then `npm run catalogue:import` to initialize public database records without overwriting subsequent official price snapshots. Start `npm run prices:worker` separately for three-hour checks. See [job operation and deployment](docs/PRICE-JOB.md). Public rates now come from PostgreSQL; `prices.json` is the initial bootstrap/test fixture. Admin Reports use complete tenant-scoped data rather than the first 100 management rows. They distinguish order value, operational invoiced amounts, payments, refunds, return credits and current stock. Full accounting and statutory tax-invoice configuration are not implemented.
+Run migrations, then `npm run catalogue:import` to initialize public database records without overwriting subsequent official price snapshots. The scheduled GitHub Actions worker runs `npm run prices:refresh` every three hours after its `DATABASE_URL` secret has been configured; a dedicated worker service remains an alternative. See [job operation and deployment](docs/PRICE-JOB.md) and [production operations](docs/PRODUCTION.md). Public rates now come from PostgreSQL; `prices.json` is the initial bootstrap/test fixture. Admin Reports use complete tenant-scoped data rather than the first 100 management rows. They distinguish order value, operational invoiced amounts, payments, refunds, return credits and current stock. Full accounting and statutory tax-invoice configuration are not implemented.
 
 ## Operations milestone
 

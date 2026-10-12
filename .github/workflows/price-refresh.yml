@@ -1,0 +1,40 @@
+name: refresh official liquor prices
+
+on:
+  schedule:
+    - cron: "17 */3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: official-price-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      PRICE_PYTHON: python3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check production connection secret
+        run: |
+          if [ -z "$DATABASE_URL" ]; then
+            echo "::error::DATABASE_URL GitHub Actions secret is required before the scheduled price refresh can run."
+            exit 1
+          fi
+      - run: npm ci
+      - run: python -m pip install --disable-pip-version-check -r scripts/requirements-price-job.txt
+      - run: npm run db:generate
+      - run: npm run prices:refresh

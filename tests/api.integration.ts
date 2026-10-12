@@ -7,6 +7,10 @@ type Client = { cookie: string };
 const a: Client = { cookie: "" },
   b: Client = { cookie: "" };
 let checks = 0;
+const health = await fetch(base + "/api/health");
+assert.equal(health.status, 200);
+assert.equal((await health.json()).status, "ok");
+checks++;
 async function request(
   client: Client,
   path: string,
@@ -77,10 +81,21 @@ const r = await request(
 const p2 = await request(
   a,
   "products",
-  { name: "Test companion", sku: "TEST-2", brand: "Brand", category: "Category", unitPrice: 100, minimumStock: 5 },
+  {
+    name: "Test companion",
+    sku: "TEST-2",
+    brand: "Brand",
+    category: "Category",
+    unitPrice: 100,
+    minimumStock: 5,
+  },
   201,
 );
-await request(a, "inventory/adjust", { productId: p2.id, quantity: 20, reason: "Companion test receipt" });
+await request(a, "inventory/adjust", {
+  productId: p2.id,
+  quantity: 20,
+  reason: "Companion test receipt",
+});
 await request(a, "inventory/adjust", {
   productId: p.id,
   quantity: 20,
@@ -124,7 +139,13 @@ await request(
 const order = await request(
   a,
   "orders",
-  { retailerId: r.id, items: [{ productId: p.id, quantity: 5 }, { productId: p2.id, quantity: 2 }] },
+  {
+    retailerId: r.id,
+    items: [
+      { productId: p.id, quantity: 5 },
+      { productId: p2.id, quantity: 2 },
+    ],
+  },
   201,
 );
 assert.equal(order.total, "950");
@@ -139,7 +160,11 @@ await request(
 await request(b, "orders/" + order.id + "/cancel", {}, 404);
 await request(a, "orders/" + order.id + "/cancel", {});
 assert.equal((await request(a, "products"))[0].reserved, 0);
-assert.equal((await request(a, "products")).find((product: any) => product.id === p2.id).reserved, 0);
+assert.equal(
+  (await request(a, "products")).find((product: any) => product.id === p2.id)
+    .reserved,
+  0,
+);
 await request(a, "orders/" + order.id + "/cancel", {}, 409);
 const limited = await request(
   a,
@@ -177,12 +202,35 @@ assert.ok(
   (await request(a, "audit")).some((x: any) => x.action === "stock.adjust"),
 );
 const actor = await request(a, "me");
-const conversation = await db.aiConversation.create({ data: { organizationId: actor.organizationId, userId: actor.userId, title: "Storage check" } });
-await db.aiMessage.create({ data: { organizationId: actor.organizationId, conversationId: conversation.id, role: "user", content: "Show the stock summary" } });
-assert.ok((await request(a, "ai/conversations")).some((item: any) => item.id === conversation.id));
-assert.equal((await request(a, "ai/conversations/" + conversation.id)).messages[0].content, "Show the stock summary");
+const conversation = await db.aiConversation.create({
+  data: {
+    organizationId: actor.organizationId,
+    userId: actor.userId,
+    title: "Storage check",
+  },
+});
+await db.aiMessage.create({
+  data: {
+    organizationId: actor.organizationId,
+    conversationId: conversation.id,
+    role: "user",
+    content: "Show the stock summary",
+  },
+});
+assert.ok(
+  (await request(a, "ai/conversations")).some(
+    (item: any) => item.id === conversation.id,
+  ),
+);
+assert.equal(
+  (await request(a, "ai/conversations/" + conversation.id)).messages[0].content,
+  "Show the stock summary",
+);
 await request(b, "ai/conversations/" + conversation.id, undefined, 404);
-const deletedConversation = await fetch(base + "/api/v1/ai/conversations/" + conversation.id, { method: "DELETE", headers: { origin: base, cookie: a.cookie } });
+const deletedConversation = await fetch(
+  base + "/api/v1/ai/conversations/" + conversation.id,
+  { method: "DELETE", headers: { origin: base, cookie: a.cookie } },
+);
 assert.equal(deletedConversation.status, 200);
 checks++;
 await db.member.update({
@@ -263,10 +311,10 @@ assert.deepEqual(results.map((r) => r.status).sort(), [201, 409]);
 checks += 2;
 const stock = (await request(a, "products"))[0];
 assert.ok(stock.reserved <= stock.physical);
-assert.equal(Number((await request(a,"analytics")).orderValue),2400);
+assert.equal(Number((await request(a, "analytics")).orderValue), 2400);
 const reportA = await request(a, "reports?days=30");
 assert.equal(reportA.summary.orderValue, 2400);
-assert.ok(reportA.lowStock.every((x: {sku: string})=>x.sku===p.sku));
+assert.ok(reportA.lowStock.every((x: { sku: string }) => x.sku === p.sku));
 const reportB = await request(b, "reports?days=30");
 assert.equal(reportB.summary.orderValue, 0);
 assert.equal(reportB.categories.length, 0);
