@@ -56,7 +56,7 @@ const CARD_RATIO = 0.7; // card width / height
 const STEP = 40; // degrees between cards on the drum
 const DRUM = 2.22; // drum radius, in card heights - and everything below likewise
 const LENS = 2.7; // perspective distance
-const RING_R = 1.14; // ring radius
+const RING_R = 0.9; // ring radius
 /* The drum alone hangs the work on a plumb line. It isn't one: the strip curves
    away round an arc whose centre sits off to the LEFT, so the piece at the front
    is at the arc's near point - dead centre - and its neighbours have already
