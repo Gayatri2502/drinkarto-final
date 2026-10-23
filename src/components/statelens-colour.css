@@ -1,0 +1,449 @@
+/* Scoped StateLens palette: dark anchors, readable light surfaces, semantic colour. */
+.public-site .statelens-page {
+  --sl-ink: #162d40;
+  --sl-muted: #435b70;
+  --sl-line: #c9d6e2;
+  color: var(--sl-ink);
+}
+.public-site .statelens-page .lens-page-heading {
+  padding: 24px 28px;
+  background: #142d40;
+  border-radius: 20px;
+  align-items: center;
+  border-bottom: 4px solid #46c4af;
+}
+.public-site .statelens-page .lens-page-heading h1 {
+  color: #fff !important;
+}
+.public-site .statelens-page .lens-page-heading h1 span {
+  color: #60dbc1;
+}
+.public-site .statelens-page .lens-page-heading p {
+  color: #d4e3ee;
+}
+.public-site .statelens-page .lens-page-heading .public-eyebrow {
+  color: #8ee7d5;
+}
+.public-site .statelens-page .lens-coverage-pill {
+  background: #23475d;
+  border-color: #55758a;
+  color: #fff;
+}
+.public-site .statelens-page .lens-coverage-pill:before {
+  background: #65e1b7;
+}
+.public-site .statelens-page .india-atlas {
+  background: #f0f4f9;
+  border-color: var(--sl-line);
+  color: var(--sl-ink);
+  box-shadow: 0 8px 28px #142d4008;
+}
+.public-site .statelens-page .atlas-heading h2 {
+  color: var(--sl-ink) !important;
+}
+.public-site .statelens-page .atlas-eyebrow {
+  color: #245f85;
+  font-size: 12px;
+  font-weight: 700;
+}
+.public-site .statelens-page .atlas-heading p,
+.public-site .statelens-page .atlas-stat > span {
+  color: var(--sl-muted);
+}
+.public-site .statelens-page .atlas-stat {
+  background: #e0eafa;
+  border-radius: 12px;
+  padding: 14px 18px;
+  border: 0;
+  color: #224a80;
+}
+.public-site .statelens-page .atlas-stat strong small {
+  color: #486387;
+}
+.public-site .statelens-page .atlas-update {
+  background: #e3f4ef;
+  color: #205f50;
+  padding: 12px 14px;
+  border: 1px solid #b9dcd1;
+  border-radius: 10px;
+}
+.public-site .statelens-page .atlas-state-label {
+  font-weight: 650;
+  color: var(--sl-ink);
+}
+.public-site .statelens-page .atlas-state-label select {
+  color: var(--sl-ink);
+  border-color: #a6bbd0;
+  min-height: 46px;
+  font-size: 16px;
+}
+.public-site .statelens-page .atlas-profile {
+  background: #fff;
+  border-color: #b6c8d8;
+  border-top: 4px solid #326fa4;
+}
+.public-site .statelens-page .atlas-profile-title h3 {
+  color: #163d61 !important;
+  font-weight: 700;
+}
+.public-site .statelens-page .atlas-profile-title small {
+  font-size: 12px;
+  color: #4c6479;
+  font-weight: 650;
+}
+.public-site .statelens-page .atlas-profile > p {
+  color: var(--sl-muted);
+  font-size: 15px;
+}
+.public-site .statelens-page .atlas-badge {
+  background: #e7edff;
+  border-color: #c1cdec;
+  color: #354b84;
+  font-size: 13px;
+  font-weight: 650;
+}
+.public-site .statelens-page .atlas-badge.prohibition,
+.public-site .statelens-page .atlas-badge.restricted {
+  background: #fff0e5;
+  color: #8c3c16;
+  border-color: #e7ba9f;
+}
+.public-site .statelens-page .atlas-availability {
+  background: #edf5ff;
+  border: 1px solid #c4d8ef;
+  color: #164777;
+}
+.public-site .statelens-page .atlas-availability strong {
+  font-size: 16px;
+}
+.public-site .statelens-page .atlas-availability span {
+  color: #435c77;
+}
+.public-site .statelens-page .atlas-tax summary,
+.public-site .statelens-page .atlas-import summary,
+.public-site .statelens-page .atlas-directory > summary {
+  color: #183e60;
+  font-size: 15px;
+  font-weight: 650;
+  min-height: 40px;
+  line-height: 1.6;
+}
+.public-site .statelens-page .atlas-tax-status {
+  color: #584695;
+  font-size: 12px;
+  font-weight: 700;
+}
+.public-site .statelens-page .atlas-tax .atlas-formula {
+  color: #30295b;
+  background: #efedfa;
+  border-left-color: #7760b4;
+  font-weight: 600;
+}
+.public-site .statelens-page .atlas-inputs > span {
+  background: #f6f8fc;
+  color: #2e465e;
+  border-color: #ced9e6;
+}
+.public-site .statelens-page .atlas-inputs small {
+  color: #385e8b;
+  font-size: 12px;
+  font-weight: 700;
+}
+.public-site .statelens-page .atlas-tax .atlas-small,
+.public-site .statelens-page .atlas-import {
+  color: #4c5d70;
+}
+.public-site .statelens-page .atlas-links a {
+  color: #165e8a;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  overflow-wrap: anywhere;
+}
+.public-site .statelens-page .atlas-state-grid > button {
+  border-color: #c9d6e4;
+  color: #1c3b57;
+  border-left: 4px solid #5783b2;
+}
+.public-site .statelens-page .atlas-state-grid > button:nth-child(3n + 2) {
+  border-left-color: #8a70b5;
+}
+.public-site .statelens-page .atlas-state-grid > button:nth-child(3n) {
+  border-left-color: #248575;
+}
+.public-site .statelens-page .atlas-state-grid > button[aria-pressed="true"] {
+  background: #e6f0fc;
+  border-color: #4178aa;
+}
+.public-site .statelens-page .atlas-state-grid span {
+  color: #4c5f76;
+}
+.public-site .statelens-page .atlas-state-grid small {
+  color: #205d50;
+}
+.public-site .statelens-page .lens-toolbar {
+  background: #203d54;
+  border-color: #203d54;
+  box-shadow: 0 5px 16px #142d4014;
+}
+.public-site .statelens-page .lens-search,
+.public-site .statelens-page .lens-category {
+  background: #fff;
+  color: #29465c;
+  border-color: #aac0d2;
+}
+.public-site .statelens-page .lens-search-button {
+  background: #a4e7d5;
+  color: #113d35;
+  font-weight: 750;
+}
+.public-site .statelens-page .lens-search-button:hover {
+  background: #c8f6e9;
+}
+.public-site .statelens-page .lens-states button[aria-pressed="true"] {
+  background: #e6edfc;
+  border-color: #a4b9df;
+  color: #294d80;
+  font-weight: 650;
+}
+.public-site .statelens-page .lens-library {
+  background: #f1f5fa;
+  border-color: #bdcfe0;
+}
+.public-site .statelens-page .lens-library-top {
+  background: #203d54;
+  color: #fff;
+  border-color: #203d54;
+}
+.public-site .statelens-page .lens-library-top > span {
+  color: #d3e2ef;
+  font-size: 13px;
+}
+.public-site .statelens-page .lens-bottle strong {
+  color: #193c57;
+  font-size: 14px;
+}
+.public-site .statelens-page .lens-bottle small {
+  color: #4d6174;
+  font-size: 13px;
+}
+.public-site .statelens-page .lens-bottle[aria-pressed="true"] {
+  background: #deebff;
+  border-color: #6f97c6;
+  box-shadow: none;
+}
+.public-site .statelens-page .lens-bottle:hover {
+  background: #e7eef9;
+}
+.public-site .statelens-page .lens-focus {
+  background: #fff;
+  border-color: #bbcede;
+  box-shadow: 0 12px 35px #19394c0d;
+}
+.public-site .statelens-page .lens-product-heading h2 {
+  color: #142e44 !important;
+}
+.public-site .statelens-page .lens-kicker {
+  font-size: 12px;
+}
+.public-site .statelens-page .lens-product-heading a {
+  color: #245e8c;
+  font-size: 14px;
+}
+.public-site .statelens-page .lens-size-line button[aria-pressed="true"] {
+  background: #234e7b;
+  border-color: #234e7b;
+  color: white;
+}
+.public-site .statelens-page .lens-insight {
+  background: #edf2ff;
+  border-color: #bdcbee;
+}
+.public-site .statelens-page .lens-insight strong {
+  color: #2c4576;
+}
+.public-site .statelens-page .lens-insight p {
+  color: #455b7b;
+  font-size: 14px;
+}
+.public-site .statelens-page .lens-board-heading h3 {
+  font-size: 18px;
+  color: #18364e;
+}
+.public-site .statelens-page .lens-board-heading > span {
+  font-size: 14px;
+  color: #46617a;
+}
+.public-site .statelens-page .lens-rate {
+  border-color: #b9cde1;
+  border-left: 5px solid var(--state-accent, #4676a0);
+  background: var(--state-tint, #f1f6fc);
+}
+.public-site .statelens-page .lens-rate.is-low {
+  background: #e6f6ed;
+  border-color: #9bcdb1;
+  border-left-color: #16824f;
+  --rate-colour: #16824f;
+}
+.public-site .statelens-page .lens-rate.is-high {
+  background: #fff0e5;
+  border-color: #dfb692;
+  border-left-color: #b76020;
+  --rate-colour: #b76020;
+}
+.public-site .statelens-page .lens-rate.is-missing {
+  background: #f2f4f7;
+  border-color: #ccd4de;
+  border-left-color: #8b9aab;
+}
+.public-site .statelens-page .lens-state-name h4 {
+  color: #1a3750;
+  font-size: 18px !important;
+}
+.public-site .statelens-page .lens-state-name > span {
+  font-size: 13px;
+  color: #425c75;
+}
+.public-site .statelens-page .is-low .lens-state-name > span {
+  color: #14653e;
+  font-weight: 650;
+}
+.public-site .statelens-page .is-high .lens-state-name > span {
+  color: #8e4016;
+  font-weight: 650;
+}
+.public-site .statelens-page .lens-state-number {
+  color: #4d657c;
+  font-weight: 650;
+}
+.public-site .statelens-page .lens-rate-value > strong {
+  font-size: 28px;
+  color: #122e46;
+  letter-spacing: -0.6px;
+}
+.public-site .statelens-page .lens-rate-value > small {
+  font-size: 13px;
+  color: #85431f;
+}
+.public-site .statelens-page .lens-provenance summary {
+  font-size: 14px;
+  color: #245b85;
+  min-height: 36px;
+}
+.public-site .statelens-page .lens-provenance p {
+  font-size: 14px;
+  color: #334c64;
+  background: #fff;
+}
+.public-site .statelens-page .lens-focus-foot,
+.public-site .statelens-page .lens-method {
+  font-size: 14px;
+  color: #455d73;
+}
+.public-site .statelens-page .price-buildup {
+  background: #fff;
+  border: 1px solid #cbd7e3;
+  border-radius: 10px;
+  padding: 12px;
+  margin-top: 15px;
+}
+.public-site .statelens-page .price-buildup > summary {
+  font-size: 14px;
+  font-weight: 650;
+  color: #224e79;
+  min-height: 28px;
+}
+.public-site .statelens-page .price-buildup p,
+.public-site .statelens-page .price-buildup dt {
+  color: #41586c;
+}
+.public-site .statelens-page .price-buildup dd {
+  color: #17344e;
+  font-weight: 600;
+}
+.public-site .statelens-page .price-buildup .price-missing {
+  color: #526578;
+  font-weight: 400;
+}
+.public-site .statelens-page .price-buildup .price-total {
+  background: #173d57;
+  border: 0;
+  border-radius: 7px;
+  padding: 12px;
+}
+.public-site .statelens-page .price-total dt,
+.public-site .statelens-page .price-total dd {
+  color: #fff;
+}
+.public-site .statelens-page .price-buildup .price-case {
+  background: #f0f4fb;
+}
+.public-site
+  .statelens-page
+  :is(button, a, input, select, summary):focus-visible {
+  outline: 3px solid #7254bd;
+  outline-offset: 3px;
+}
+@media (max-width: 640px) {
+  .public-site .statelens-page .lens-page-heading {
+    padding: 20px;
+    border-radius: 13px;
+  }
+  .public-site .statelens-page .lens-page-heading .public-eyebrow {
+    font-size: 11px !important;
+  }
+  .public-site .statelens-page .atlas-heading h2 {
+    font-family: inherit;
+    font-weight: 700;
+  }
+  .public-site .statelens-page .atlas-stat {
+    padding: 10px 12px;
+  }
+  .public-site .statelens-page .atlas-state-grid {
+    grid-template-columns: 1fr;
+  }
+  .public-site .statelens-page .lens-mobile-controls {
+    background: #edf3ff;
+    border-color: #b8cce4;
+    border-top: 4px solid #446eac;
+  }
+  .public-site .statelens-page .lens-mobile-controls label > span,
+  .public-site .statelens-page .lens-mobile-step small,
+  .public-site .statelens-page .lens-mobile-pages > span {
+    font-size: 13px;
+    color: #3d5773;
+  }
+  .public-site .statelens-page .lens-mobile-step strong {
+    color: #203e60;
+  }
+  .public-site .statelens-page .lens-mobile-states summary {
+    color: #214f7b;
+    background: white;
+    border-color: #9bb7d4;
+    font-size: 14px;
+  }
+  .public-site .statelens-page .lens-mobile-pages button {
+    font-size: 13px;
+    color: #244f79;
+  }
+  .public-site .statelens-page .lens-product-heading h2 {
+    font-family: inherit;
+    font-weight: 700;
+  }
+  .public-site .statelens-page .lens-rate-value > strong {
+    font-size: 25px;
+  }
+  .public-site .statelens-page .lens-rate-main {
+    gap: 8px;
+  }
+  .public-site .statelens-page .price-buildup dl > div {
+    flex-wrap: wrap;
+    gap: 5px 12px;
+  }
+  .public-site .statelens-page .price-buildup dt {
+    max-width: 100%;
+  }
+  .public-site .statelens-page .price-buildup dd {
+    margin-left: auto;
+  }
+}

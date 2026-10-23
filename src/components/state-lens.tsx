@@ -482,6 +482,26 @@ export default function StateLens({
                     <section
                       className={`lens-rate ${low ? "is-low" : high ? "is-high" : ""} ${entry.min === null ? "is-missing" : ""}`}
                       key={entry.state}
+                      style={
+                        {
+                          "--state-accent": [
+                            "#386bb0",
+                            "#8560a7",
+                            "#268273",
+                            "#b17633",
+                            "#ad557d",
+                            "#3c859c",
+                          ][index % 6],
+                          "--state-tint": [
+                            "#edf3fc",
+                            "#f3eef9",
+                            "#eaf5f1",
+                            "#faf3e9",
+                            "#faeff4",
+                            "#edf6fa",
+                          ][index % 6],
+                        } as CSSProperties
+                      }
                     >
                       <div className="lens-rate-main">
                         <span className="lens-state-number">

@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import StateLens from "@/components/state-lens";
 import IndiaPriceAtlas from "@/components/india-price-atlas";
+import "@/components/statelens-colour.css";
 export const metadata = {
   title: "2026 India liquor prices, state tax rules and bottle comparisons",
   description:
