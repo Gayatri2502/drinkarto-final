@@ -1,0 +1,357 @@
+/* Adapted from the supplied WorksWheel. Every surface stays transparent. */
+.public-site .works-wheel {
+  position: relative;
+  width: 100%;
+  height: 650px;
+  min-height: 450px;
+  overflow: hidden;
+  isolation: isolate;
+  background: transparent;
+  color: #243e49;
+  user-select: none;
+  border-top: 1px solid #dce6e5;
+  border-bottom: 1px solid #dce6e5;
+}
+.public-site .ww-stage {
+  position: absolute;
+  inset: 0 0 95px;
+  cursor: grab;
+  touch-action: pan-x;
+  outline-offset: -5px;
+  z-index: 1;
+}
+.public-site .ww-stage:active {
+  cursor: grabbing;
+}
+.public-site .ww-drum {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+}
+.public-site .ww-card {
+  position: absolute;
+  backface-visibility: hidden;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+.public-site .ww-face {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.public-site .ww-bottle-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: transparent;
+  filter: drop-shadow(0 12px 10px #263b421c);
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+.public-site .ww-card-action {
+  position: absolute;
+  bottom: -26px;
+  left: 50%;
+  transform: translate(-50%, 5px);
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  white-space: nowrap;
+  padding: 5px 9px;
+  border-radius: 99px;
+  background: #ffffffcc;
+  color: #284e59;
+  font-size: 11px;
+  opacity: 0;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+}
+.public-site .ww-card:hover .ww-card-action,
+.public-site .ww-card:focus-visible .ww-card-action {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.public-site .ww-ring-label {
+  pointer-events: none;
+  position: absolute;
+  inset: 0 0 95px;
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  letter-spacing: -1.2px;
+  font-family: inherit;
+  text-align: center;
+}
+.public-site .ww-front-title {
+  pointer-events: none;
+  position: absolute;
+  top: 38%;
+  left: 4%;
+  max-width: 230px;
+  transform: translateY(-50%);
+  opacity: 0;
+  line-height: 1.2;
+  letter-spacing: -0.7px;
+}
+.public-site .ww-front-title > span {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: #62837b;
+  margin-bottom: 13px;
+}
+.public-site .ww-front-title > strong {
+  display: block;
+  font-size: inherit;
+  color: #263f4b;
+  font-weight: 500;
+}
+.public-site .ww-index {
+  position: absolute;
+  top: 11%;
+  right: 3%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-align: right;
+  z-index: 3;
+  max-width: 230px;
+  line-height: 1.5;
+}
+.public-site .ww-index .ww-index-button {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 12px;
+  padding: 8px 4px;
+  background: transparent;
+  color: #6b7e86;
+  border: 0;
+  border-radius: 0;
+  font: inherit;
+  font-weight: 400;
+  text-align: left;
+  transition: color 0.2s;
+  min-height: 38px;
+}
+.public-site .ww-index-button > span {
+  font-size: 10px;
+  color: #90a19f;
+  min-width: 17px;
+}
+.public-site .ww-index .ww-index-button.is-active,
+.public-site .ww-index .ww-index-button:hover {
+  color: #236d64;
+  font-weight: 600;
+}
+.public-site .ww-controls {
+  position: absolute;
+  bottom: 68px;
+  left: 4%;
+  right: 4%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  z-index: 4;
+}
+.public-site .ww-controls > div {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.public-site .ww-controls button {
+  display: grid;
+  place-items: center;
+  padding: 9px;
+  min-width: 38px;
+  min-height: 38px;
+  border: 1px solid #d3e1dd;
+  border-radius: 50%;
+  background: transparent;
+  color: #31564f;
+}
+.public-site .ww-controls button:hover {
+  background: #eaf5ef;
+}
+.public-site .ww-controls button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.public-site .ww-controls > div > span {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: #687f83;
+  min-width: 38px;
+  text-align: center;
+}
+.public-site .ww-controls > a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #245f58;
+  font-size: 13px;
+  border-bottom: 1px solid #98b6aa;
+  padding-bottom: 6px;
+}
+.public-site .ww-instructions {
+  position: absolute;
+  bottom: 20px;
+  left: 4%;
+  margin: 0;
+  font-size: 11px !important;
+  line-height: 1.5;
+  color: #6e838a;
+}
+.public-site .ww-credits {
+  position: absolute;
+  bottom: 20px;
+  right: 4%;
+  z-index: 5;
+  font-size: 11px;
+  color: #657c82;
+  max-width: min(90%, 440px);
+}
+.public-site .ww-credits summary {
+  cursor: pointer;
+  min-height: 24px;
+  display: list-item;
+}
+.public-site .ww-credits[open] {
+  background: #fff;
+  padding: 16px;
+  border: 1px solid #d3e1dd;
+  border-radius: 12px;
+  box-shadow: 0 8px 35px #20344212;
+  user-select: text;
+}
+.public-site .ww-credits ul {
+  padding-left: 16px;
+  line-height: 1.8;
+  max-height: 180px;
+  overflow: auto;
+  margin: 10px 0;
+}
+.public-site .ww-credits a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.public-site .ww-credits p {
+  font-size: 11px !important;
+  margin: 8px 0 0;
+  line-height: 1.6;
+}
+.public-site .home-bottle-edit {
+  padding-top: 28px !important;
+}
+@media (max-width: 900px) {
+  .public-site .ww-front-title {
+    max-width: 160px;
+    left: 2%;
+  }
+  .public-site .ww-index {
+    max-width: 165px;
+    right: 1%;
+  }
+  .public-site .works-wheel {
+    height: 600px;
+  }
+  .public-site .ww-front-title > strong {
+    font-size: 23px;
+  }
+  .public-site .ww-index .ww-index-button {
+    font-size: 12px;
+  }
+}
+@media (max-width: 600px) {
+  .public-site .works-wheel {
+    height: 680px;
+  }
+  .public-site .ww-stage {
+    inset: 15px 0 190px;
+  }
+  .public-site .ww-ring-label {
+    inset: 15px 0 190px;
+    font-size: 25px !important;
+  }
+  .public-site .ww-front-title {
+    top: 32px;
+    left: 5%;
+    right: 5%;
+    max-width: none;
+    transform: none;
+    text-align: center;
+  }
+  .public-site .ww-front-title > span {
+    font-size: 10px;
+    margin-bottom: 6px;
+  }
+  .public-site .ww-front-title > strong {
+    font-size: 21px;
+  }
+  .public-site .ww-index {
+    top: auto;
+    bottom: 95px;
+    left: 3%;
+    right: 3%;
+    max-width: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4px 9px;
+  }
+  .public-site .ww-index .ww-index-button {
+    font-size: 11px;
+    gap: 4px;
+    padding: 5px 0;
+    line-height: 1.4;
+  }
+  .public-site .ww-index-button > span {
+    font-size: 9px;
+    min-width: 13px;
+  }
+  .public-site .ww-controls {
+    bottom: 51px;
+  }
+  .public-site .ww-controls > div {
+    gap: 6px;
+  }
+  .public-site .ww-controls button {
+    min-width: 33px;
+    min-height: 33px;
+    padding: 7px;
+  }
+  .public-site .ww-controls > a {
+    font-size: 12px;
+  }
+  .public-site .ww-instructions {
+    bottom: 14px;
+    max-width: 61%;
+    font-size: 10px !important;
+  }
+  .public-site .ww-credits {
+    bottom: 10px;
+    font-size: 10px;
+  }
+  .public-site .ww-credits[open] {
+    bottom: 40px;
+  }
+  .public-site .ww-card-action {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .public-site .works-wheel * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

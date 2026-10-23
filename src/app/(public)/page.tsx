@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ArrowUpRight, BookOpen, GitCompare, Layers, ShieldCheck } from 'lucide-react';
-import PriceBrowser from '@/components/price-browser';
+import { WorksWheel } from '@/components/ui/works-wheel';
+import { featuredBottles } from '@/content/featured-bottles';
 import { profiles } from '@/content/public';
 import {db} from '@/lib/db';
 import { KnowledgeImage } from '@/components/knowledge-image';
@@ -44,10 +45,10 @@ export default async function Home() {
         <Link href="/guides/price-sources">Read our sourcing methodology <ArrowUpRight size={15} /></Link>
       </aside>
     </section>
-    <section className="public-container public-section" id="prices">
-      <div className="public-section-heading"><div><p className="public-eyebrow">PRICE DIRECTORY</p><h2>State liquor price references</h2><p>Search by product, state and bottle size. Verify the exact variant against the published source.</p></div><Link href="/prices" className="public-text-link">Full directory <ArrowUpRight size={16} /></Link></div>
-      <PriceBrowser compact initialState="" initialSize="750" />
-      <p className="public-source-line">Coverage: {countries||'no state feeds yet'}. Published references do not establish availability.</p>
+    <section className="public-container public-section home-bottle-edit" id="prices">
+      <div className="public-section-heading"><div><p className="public-eyebrow">THE BOTTLE EDIT</p><h2>A different turn. A new discovery.</h2><p>Turn the collection to explore photographed bottles. Find their published references in StateLens.</p></div><Link href="/prices" className="public-text-link">Compare state prices <ArrowUpRight size={16}/></Link></div>
+      <WorksWheel items={featuredBottles} label="The bottle edit." action="Explore references"/>
+      <p className="public-source-line">Price coverage: {countries||'no state feeds yet'}. Featured photography does not confirm local listings or availability.</p>
     </section>
     <section className="professional-knowledge"><div className="public-container public-section">
       <div className="public-section-heading"><div><p className="public-eyebrow">KNOWLEDGE LIBRARY</p><h2>Understand what distinguishes a liquor.</h2></div><Link href="/guides" className="public-text-link">Browse guides <ArrowUpRight size={16} /></Link></div>
