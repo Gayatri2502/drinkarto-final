@@ -30,3 +30,11 @@ For optional photos, set `SUPABASE_URL` and server-only `SUPABASE_SERVICE_ROLE_K
 ## Migration
 
 `20261023090000_localpour_community` adds CommunityReview and CommunityPoint, with private RLS and no anon/authenticated access. Apply via Prisma migrate deploy using a migration-capable connection. Existing ERP data is untouched.
+
+## Compact venue-card release
+
+Filters now live in a native modal, with card columns and show-more pagination in the main view. The browser requests geolocation only after the location icon is pressed; Explore explicitly sends the selected destination to the server/provider.
+
+Without a Google key, the server uses the public OpenStreetMap Overpass API. It searches exact city-name nodes within India, rejects ambiguous names, or uses coordinates. Results are constrained to India's mapped boundary and the selected radius, capped at a source sample of 160 and a displayed maximum of 60. This is not exhaustive or guaranteed nearest coverage. The public service can be busy or time out; error states preserve the ability to adjust/retry. Free results do not contain Google photos or ratings.
+
+When a Google key is present, venue cards can load the first provider photo through a short-lived signed media route. Photo author attribution is shown. The key stays server-side. Only HTTPS Google image hosts can be the redirect destination. Missing images use an explicit venue-photo-unavailable placeholder.
