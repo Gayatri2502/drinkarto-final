@@ -75,7 +75,12 @@ if authority=='bevco-2026-09':
   if not m:continue
   serial,code,name,size,pack,numbers=m.groups();name=name.strip() or last;last=name;size=int(size);price=float(numbers.split()[-1])
   if not name or not 0<size<=2000 or price<=0:continue
-  rows.append({'id':'kl-'+code,'name':re.sub(r"'S\b","'s",name.title()),'category':section or category(name),'state':'Kerala','sizeMl':size,'price':price,'sourceId':authority,'sourceCode':code})
+  values=list(map(float,numbers.split()))
+  # Published source columns: case costs stay per-case; FL-1 retail values stay per-bottle.
+  adjustment=round(price-values[8]-values[9]-values[4],2)
+  if abs(adjustment)>10:raise ValueError('Kerala FL-1 components fail to reconcile; layout review required')
+  breakdown={'source':'bevco-published-columns','bottlesPerCase':int(pack),'landedCostPerCase':values[1],'exciseDutyPerCase':values[2],'importFeePerCase':values[3],'warehouseBeforeTaxPerCase':values[5],'warehouseTaxPerCase':values[6],'warehouseAfterTaxPerCase':values[7],'retailBeforeTax':values[8],'retailTax':values[9],'retailCess':values[4],'retailAdjustment':adjustment}
+  rows.append({'id':'kl-'+code,'name':re.sub(r"'S\b","'s",name.title()),'category':section or category(name),'state':'Kerala','sizeMl':size,'price':price,'sourceId':authority,'sourceCode':code,'breakdown':breakdown})
 elif authority=='tasmac-2026-10':
  url='https://tasmac.tn.gov.in/brands';data=json.loads(fetch('https://shopdashboard-api.tasmace2e.in/api/liquor/get-productList',b'{}'))
  for supplier in data['data']:

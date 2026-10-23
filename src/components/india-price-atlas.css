@@ -1,0 +1,482 @@
+.public-site .india-atlas {
+  margin: 0 0 32px;
+  border: 1px solid #dce5e0;
+  border-radius: 18px;
+  background: linear-gradient(130deg, #fafcf9, #fff);
+  padding: 25px;
+  color: #2b4238;
+}
+.public-site .atlas-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 28px;
+  align-items: center;
+}
+.public-site .atlas-eyebrow {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: #62806d;
+}
+.public-site .atlas-heading h2 {
+  font-size: 25px !important;
+  letter-spacing: -0.5px;
+  margin: 10px 0 !important;
+}
+.public-site .atlas-heading p {
+  font-size: 13px;
+  margin: 0;
+  max-width: 620px;
+}
+.public-site .atlas-stat {
+  min-width: 140px;
+  max-width: 180px;
+  border-left: 1px solid #d8e3d9;
+  padding-left: 22px;
+}
+.public-site .atlas-stat > strong {
+  font-size: 35px;
+  font-weight: 500;
+}
+.public-site .atlas-stat strong small {
+  font-size: 17px;
+  color: #93a398;
+}
+.public-site .atlas-stat > span {
+  display: block;
+  font-size: 11px;
+  line-height: 1.6;
+  color: #718178;
+}
+.public-site .atlas-update {
+  display: flex;
+  gap: 8px;
+  align-items: start;
+  padding: 12px 0 18px;
+  margin-top: 16px;
+  font-size: 11px;
+  color: #627b6a;
+  border-bottom: 1px solid #dce5dd;
+  line-height: 1.7;
+}
+.public-site .atlas-update svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.public-site .atlas-state-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+  font-size: 13px;
+}
+.public-site .atlas-state-label select {
+  margin-left: auto;
+  min-width: 270px;
+  max-width: 100%;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid #cfdbd1;
+  border-radius: 7px;
+}
+.public-site .atlas-profile {
+  padding: 20px;
+  border: 1px solid #dce5dd;
+  border-radius: 12px;
+  background: #ffffffd9;
+}
+.public-site .atlas-profile-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+.public-site .atlas-profile-title small {
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #819084;
+}
+.public-site .atlas-profile-title h3 {
+  font-size: 23px !important;
+  margin: 6px 0 12px;
+}
+.public-site .atlas-badge {
+  font-size: 10px;
+  line-height: 1.5;
+  color: #5a7061;
+  background: #eff4ed;
+  border: 1px solid #d8e3d4;
+  border-radius: 99px;
+  padding: 6px 10px;
+}
+.public-site .atlas-badge.prohibition,
+.public-site .atlas-badge.restricted {
+  background: #fbf0e7;
+  color: #8c6647;
+  border-color: #ead5bf;
+}
+.public-site .atlas-profile > p {
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 0 0 15px;
+}
+.public-site .atlas-availability {
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f1f6f0;
+  font-size: 12px;
+}
+.public-site .atlas-availability strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+}
+.public-site .atlas-availability span {
+  display: block;
+  font-size: 11px;
+  color: #758477;
+  line-height: 1.7;
+  margin-top: 4px;
+}
+.public-site .atlas-tax {
+  margin-top: 18px;
+  padding-top: 15px;
+  border-top: 1px solid #e3e9de;
+}
+.public-site .atlas-tax summary {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  min-height: 30px;
+}
+.public-site .atlas-tax-status {
+  display: block;
+  margin: 10px 0;
+  font-size: 10px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: #6f826f;
+}
+.public-site .atlas-tax p {
+  font-size: 12px;
+  line-height: 1.8;
+}
+.public-site .atlas-tax .atlas-formula {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #2f5d47;
+  padding: 13px 15px;
+  background: #f4f6f0;
+  border-left: 3px solid #799e80;
+  border-radius: 0 7px 7px 0;
+}
+.public-site .atlas-inputs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin: 15px 0;
+}
+.public-site .atlas-inputs > span {
+  font-size: 11px;
+  line-height: 1.5;
+  padding: 9px;
+  border: 1px solid #e5eadf;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.public-site .atlas-inputs small {
+  font-size: 9px;
+  color: #8a9b88;
+}
+.public-site .atlas-tax .atlas-small {
+  font-size: 11px;
+  color: #829080;
+  margin-bottom: 5px;
+}
+.public-site .atlas-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  margin-top: 18px;
+}
+.public-site .atlas-links a {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  font-size: 11px;
+  color: #477553;
+  line-height: 1.6;
+}
+.public-site .atlas-import {
+  margin-top: 18px;
+  font-size: 11px;
+  color: #72816d;
+}
+.public-site .atlas-import summary {
+  cursor: pointer;
+  min-height: 25px;
+}
+.public-site .atlas-import p {
+  font-size: 11px;
+  line-height: 1.8;
+}
+.public-site .atlas-directory {
+  margin-top: 22px;
+  border-top: 1px solid #dce5dd;
+  padding-top: 16px;
+}
+.public-site .atlas-directory > summary {
+  cursor: pointer;
+  font-size: 13px;
+  min-height: 30px;
+}
+.public-site .atlas-directory-filters {
+  display: flex;
+  gap: 10px;
+  margin: 16px 0;
+}
+.public-site .atlas-directory-filters label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #d6e1d5;
+  padding: 0 10px;
+  border-radius: 7px;
+  background: #fff;
+  margin: 0;
+  flex: 1;
+}
+.public-site .atlas-directory-filters input {
+  width: 100%;
+  border: 0 !important;
+  background: transparent !important;
+  outline-offset: 0;
+  min-height: 42px;
+}
+.public-site .atlas-directory-filters > select {
+  max-width: 300px;
+  padding: 9px;
+  border: 1px solid #d6e1d5;
+  border-radius: 7px;
+}
+.public-site .atlas-state-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.public-site .atlas-state-grid > button {
+  background: white;
+  border: 1px solid #dce5da;
+  border-radius: 8px;
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  gap: 5px;
+  color: #405c45;
+  text-align: left;
+  padding: 12px;
+  font-weight: 400;
+}
+.public-site .atlas-state-grid > button[aria-pressed="true"] {
+  border-color: #7c9e7f;
+  background: #f0f6eb;
+}
+.public-site .atlas-state-grid strong {
+  font-size: 12px;
+}
+.public-site .atlas-state-grid span {
+  font-size: 10px;
+  line-height: 1.6;
+  color: #7a8b77;
+}
+.public-site .atlas-state-grid small {
+  font-size: 10px;
+  color: #547254;
+}
+.public-site .price-buildup {
+  margin-top: 14px;
+  border-top: 1px solid #dce6dd;
+  padding-top: 11px;
+}
+.public-site .price-buildup > summary {
+  font-size: 12px;
+  cursor: pointer;
+  color: #39694b;
+  min-height: 28px;
+}
+.public-site .price-buildup p {
+  font-size: 11px;
+  line-height: 1.7;
+  color: #758376;
+}
+.public-site .price-buildup dl {
+  margin: 12px 0;
+}
+.public-site .price-buildup dl > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  border-bottom: 1px solid #e8ede5;
+  padding: 7px 0;
+  font-size: 12px;
+}
+.public-site .price-buildup dt {
+  color: #667b67;
+}
+.public-site .price-buildup dd {
+  margin: 0;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: #324c3a;
+}
+.public-site .price-buildup .price-total {
+  font-weight: 600;
+  border-top: 1px solid #becfbd;
+  margin-top: 8px;
+  padding-top: 12px;
+}
+.public-site .price-buildup .price-missing {
+  color: #99a396;
+  font-size: 11px;
+}
+.public-site .price-buildup .price-case {
+  padding: 10px;
+  background: #f6f8f2;
+  border-radius: 8px;
+  margin-top: 12px;
+}
+.public-site .price-buildup h5 {
+  font-size: 12px;
+  margin: 8px 0;
+}
+.public-site .lens-state-options {
+  position: relative;
+  margin-left: auto;
+  font-size: 12px;
+}
+.public-site .lens-state-options summary {
+  cursor: pointer;
+  padding: 8px;
+  border: 1px solid #d1ded4;
+  border-radius: 7px;
+}
+.public-site .lens-state-options > div {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  width: min(650px, 80vw);
+  max-height: 270px;
+  overflow: auto;
+  background: #fff;
+  padding: 15px;
+  border: 1px solid #cfddcf;
+  border-radius: 10px;
+  z-index: 8;
+  box-shadow: 0 15px 35px #304b3b18;
+}
+.public-site .lens-mobile-states > div {
+  max-height: 240px;
+  overflow: auto;
+}
+@media (max-width: 640px) {
+  .public-site .india-atlas {
+    padding: 17px 14px;
+    border-radius: 12px;
+    margin-bottom: 22px;
+  }
+  .public-site .atlas-heading {
+    display: block;
+  }
+  .public-site .atlas-heading h2 {
+    font-size: 24px !important;
+    font-family: Georgia, serif;
+    font-weight: 400;
+  }
+  .public-site .atlas-heading p {
+    font-size: 12px;
+  }
+  .public-site .atlas-stat {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 0;
+    border: 0;
+    margin-top: 12px;
+    max-width: none;
+  }
+  .public-site .atlas-stat > strong {
+    font-size: 27px;
+  }
+  .public-site .atlas-stat > span {
+    max-width: 170px;
+  }
+  .public-site .atlas-state-label {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 12px;
+    gap: 8px;
+    margin: 15px 0;
+  }
+  .public-site .atlas-state-label select {
+    width: 100%;
+    min-width: 0;
+    min-height: 46px;
+    font-size: 16px !important;
+  }
+  .public-site .atlas-profile {
+    padding: 13px;
+  }
+  .public-site .atlas-profile-title {
+    display: block;
+  }
+  .public-site .atlas-badge {
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  .public-site .atlas-inputs {
+    grid-template-columns: 1fr 1fr;
+  }
+  .public-site .atlas-inputs > span {
+    font-size: 10px;
+    padding: 7px;
+  }
+  .public-site .atlas-tax .atlas-formula {
+    font-size: 13px;
+    padding: 10px;
+  }
+  .public-site .atlas-directory-filters {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .public-site .atlas-directory-filters > select {
+    width: 100%;
+    max-width: none;
+    font-size: 14px !important;
+  }
+  .public-site .atlas-state-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .public-site .atlas-state-grid > button {
+    padding: 10px;
+  }
+  .public-site .atlas-state-grid strong {
+    font-size: 11px;
+  }
+  .public-site .atlas-update {
+    font-size: 10px;
+  }
+  .public-site .price-buildup dl > div {
+    font-size: 11px;
+    gap: 10px;
+  }
+  .public-site .price-buildup dt {
+    max-width: 65%;
+  }
+}

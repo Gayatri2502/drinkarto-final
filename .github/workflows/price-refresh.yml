@@ -2,7 +2,7 @@ name: refresh official liquor prices
 
 on:
   schedule:
-    - cron: "17 */3 * * *"
+    - cron: "0 0 * * *" # 05:30 IST every day; a successful check may leave prices unchanged.
   workflow_dispatch:
 
 permissions:

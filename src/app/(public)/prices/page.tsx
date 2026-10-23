@@ -1,6 +1,67 @@
-import {db} from '@/lib/db';
-import StateLens from '@/components/state-lens';
-import {stateSources} from '@/content/public';
-export const metadata={title:'State liquor price references by brand and size',description:'Compare dated published liquor price references by state, category, brand and bottle size. Check source links and effective dates; a listing does not confirm availability.'};
-export const dynamic = 'force-dynamic';
-export default async function Prices({searchParams}:{searchParams:Promise<Record<string,string|undefined>>}){const params=await searchParams;const current=await db.publicPriceSnapshot.findMany();const covered=current.map(s=>s.state).sort();return <div className="public-container public-page statelens-page"><header className="lens-page-heading"><div><p className="public-eyebrow">THE SAME BOTTLE. A DIFFERENT STATE.</p><h1>StateLens<span>.</span></h1><p>A clearer view of liquor prices. Pick a bottle, choose its size and see how published state rates stack up.</p></div><span className="lens-coverage-pill">{covered.length} official state sources</span></header><StateLens initialState={params.state??''} initialSize={params.size??''} initialQuery={params.q??''}/><details className="lens-directory"><summary>Explore official sources &amp; coverage</summary><section className="public-section"><p className="public-eyebrow">SOURCE DIRECTORY</p><h2>A nationwide directory. Clear source coverage.</h2><p className="public-intro">31 states and union territories are listed for licensed-market reference. {covered.length} jurisdictions currently have imported official price records. Local restrictions, dry days, permits and minimum ages still apply.</p><p>India has state-specific restrictions. This directory only includes currently legal general-market references that we could retrieve from the official source; it does not determine personal eligibility or product availability.</p><details className="jurisdiction-note"><summary>Prohibition and special-regime jurisdictions</summary><p>Bihar, Gujarat, Nagaland and Mizoram are excluded from the general selector. Permit and category-specific exceptions must be checked with the relevant authority. Lakshadweep is held outside the general selector pending verification of implementation and local notifications under its 2026 excise regulation.</p><a href="https://state.bihar.gov.in/excise/CitizenHome.html">Bihar Excise ↗</a> · <a href="https://www.indiacode.nic.in/bitstream/123456789/6165/1/prohibition1949.pdf">Gujarat Act ↗</a> · <a href="https://excise.nagaland.gov.in/">Nagaland Excise ↗</a> · <a href="https://excise.mizoram.gov.in/">Mizoram Excise ↗</a> · <a href="https://www.mha.gov.in/sites/default/files/TheLakshadweep2026_09062026.pdf">Lakshadweep regulation ↗</a></details><div className="source-grid">{stateSources.map(s=><a href={s.url} target="_blank" rel="noreferrer" key={s.name}><span className="public-chip">{covered.includes(s.name)?'Price records imported':'Directory only · no imported prices'}</span><h3>{s.name}</h3><p>{s.authority}</p><span>Open official source ↗</span></a>)}</div><div className="source-details">{current.map(s=><article key={s.authority}><strong>{s.state} · official retail reference</strong><p>{(s.rows as unknown[]).length.toLocaleString('en-IN')} bottle references<br/>Published: {s.published??'Not supplied by source'}<br/>Effective: {s.effective??'Not supplied by source'}<br/>Last successful check: {s.checkedAt.toLocaleString('en-IN',{timeZone:'Asia/Kolkata'})} IST</p><a href={s.sourceUrl} target="_blank" rel="noreferrer">View this source ↗</a></article>)}</div></section></details></div>}
+import { db } from "@/lib/db";
+import StateLens from "@/components/state-lens";
+import IndiaPriceAtlas from "@/components/india-price-atlas";
+export const metadata = {
+  title: "2026 India liquor prices, state tax rules and bottle comparisons",
+  description:
+    "Explore all 28 Indian states and 8 union territories, official 2026 bottle price references, published tax components and clear coverage and prohibition labels.",
+};
+export const dynamic = "force-dynamic";
+export default async function Prices({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | undefined>>;
+}) {
+  const params = await searchParams;
+  const [snapshots, runs] = await Promise.all([
+    db.publicPriceSnapshot.findMany(),
+    db.priceRefreshRun.findMany({
+      orderBy: { startedAt: "desc" },
+      take: 50,
+      select: { authority: true, status: true, startedAt: true },
+    }),
+  ]);
+  const coverage = snapshots.map((snapshot) => {
+    const attempt = runs.find((run) => run.authority === snapshot.authority);
+    return {
+      state: snapshot.state,
+      count: Array.isArray(snapshot.rows) ? snapshot.rows.length : 0,
+      checkedAt: snapshot.checkedAt.toISOString(),
+      attempt: attempt
+        ? { status: attempt.status, at: attempt.startedAt.toISOString() }
+        : null,
+    };
+  });
+  return (
+    <div className="public-container public-page statelens-page">
+      <header className="lens-page-heading">
+        <div>
+          <p className="public-eyebrow">
+            2026 INDIA · PRICE, TAX & MARKET REFERENCE
+          </p>
+          <h1>
+            StateLens<span>.</span>
+          </h1>
+          <p>
+            Understand the state’s rules, choose one bottle and size, then
+            compare its published final price across states.
+          </p>
+        </div>
+        <span className="lens-coverage-pill">
+          {snapshots.length} imported price sources
+        </span>
+      </header>
+      <IndiaPriceAtlas
+        coverage={coverage}
+        initialState={params.state ?? "Kerala"}
+      />
+      <div id="bottle-comparison">
+        <StateLens
+          initialState={params.state ?? ""}
+          initialSize={params.size ?? ""}
+          initialQuery={params.q ?? ""}
+        />
+      </div>
+    </div>
+  );
+}

@@ -21,6 +21,8 @@ import {
 import { categories, sources } from "@/content/public";
 import { compareStateRates, type LensProduct } from "@/lib/state-lens";
 import "./state-lens.css";
+import { indiaMarkets, generalPriceUnavailable } from "@/content/india-markets";
+import PriceBuildUp from "@/components/price-buildup";
 
 type Result = {
   rows: LensProduct[];
@@ -105,13 +107,16 @@ export default function StateLens({
           current === null
             ? [
                 ...new Set([
-                  ...(initialState && data.states.includes(initialState)
+                  ...(initialState &&
+                  indiaMarkets.some((item) => item.name === initialState)
                     ? [initialState]
                     : []),
                   ...data.states,
                 ]),
               ].slice(0, 6)
-            : current.filter((state) => data.states.includes(state)),
+            : current.filter((state) =>
+                indiaMarkets.some((item) => item.name === state),
+              ),
         );
       })
       .catch((cause) => {
@@ -149,7 +154,7 @@ export default function StateLens({
           ? [...(current ?? []), state]
           : current,
     );
-  const stateChoices = result?.states.map((state) => (
+  const stateChoices = indiaMarkets.map(({ name: state }) => (
     <button
       key={state}
       type="button"
@@ -211,8 +216,23 @@ export default function StateLens({
         <span>
           <Layers3 size={16} /> Compare states
         </span>
-        <div>{stateChoices}</div>
-        <small>{selectedStates.length} selected · up to 6</small>
+        <div>
+          {selectedStates.map((state) => (
+            <button
+              type="button"
+              key={state}
+              aria-pressed="true"
+              onClick={() => toggleState(state)}
+            >
+              <Check size={13} />
+              {state}
+            </button>
+          ))}
+        </div>
+        <details className="lens-state-options">
+          <summary>Add / change states · {selectedStates.length}/6</summary>
+          <div>{stateChoices}</div>
+        </details>
       </div>
       <div className="lens-mobile-controls">
         <div className="lens-mobile-step">
@@ -267,7 +287,9 @@ export default function StateLens({
               <SlidersHorizontal size={15} />
             </summary>
             <div>{stateChoices}</div>
-            <small>Only imported official sources · up to 6</small>
+            <small>
+              All 36 jurisdictions · up to 6 · missing rates stay unavailable
+            </small>
           </details>
         </div>
         {result && result.pages > 1 && (
@@ -477,7 +499,9 @@ export default function StateLens({
                               : high
                                 ? "Highest listed"
                                 : entry.min === null
-                                  ? "No published match"
+                                  ? generalPriceUnavailable(entry.state)
+                                    ? "General prices unavailable"
+                                    : "No published match"
                                   : "Published reference"}
                           </span>
                         </div>
@@ -504,6 +528,12 @@ export default function StateLens({
                           <div className="lens-price-track" aria-hidden="true">
                             <span style={{ width: `${width}%` }} />
                           </div>
+                          {entry.rows.map((row, rowIndex) => (
+                            <PriceBuildUp
+                              key={`${row.id}-tax-${rowIndex}`}
+                              row={row}
+                            />
+                          ))}
                           <details className="lens-provenance">
                             <summary>
                               View{" "}
@@ -587,7 +617,8 @@ export default function StateLens({
         </div>
       )}
       <p className="lens-method">
-        Published snapshots, not live shop quotations.{" "}
+        2026 published snapshots, not live shop quotations. Final MRP already
+        includes applicable published taxes; do not add tax again.{" "}
         {result?.checked && <>Last source check: {date(result.checked)}. </>}
         Missing rates mean a coverage gap.{" "}
         <Link href="/guides/price-sources">

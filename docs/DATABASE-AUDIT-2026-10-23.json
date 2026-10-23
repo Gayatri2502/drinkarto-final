@@ -1,5 +1,5 @@
 {
-  "auditedAt": "2026-10-23T17:22:50.362Z",
+  "auditedAt": "2026-10-23T18:16:57.076Z",
   "catalogue": {
     "stored": 1738,
     "baseline": 1738,
@@ -26,22 +26,22 @@
     {
       "state": "Kerala",
       "authority": "bevco-2026-09",
-      "rows": 4395,
+      "rows": 4401,
       "baselineRows": 4395,
-      "missingBaselineRows": 0,
+      "missingBaselineRows": 1,
       "priceDifferencesFromBaseline": 0,
       "duplicateIds": 0,
       "invalidRows": 0,
       "sourceStateMismatches": 0,
       "missingSourceCodes": 0,
-      "checkedAt": "2026-10-05T00:00:00.000Z",
-      "stale": true,
+      "checkedAt": "2026-10-23T18:16:12.042Z",
+      "stale": false,
       "hasSourceUrl": true
     },
     {
       "state": "Tamil Nadu",
       "authority": "tasmac-2026-10",
-      "rows": 2129,
+      "rows": 2139,
       "baselineRows": 2129,
       "missingBaselineRows": 0,
       "priceDifferencesFromBaseline": 0,
@@ -49,8 +49,68 @@
       "invalidRows": 0,
       "sourceStateMismatches": 0,
       "missingSourceCodes": 0,
-      "checkedAt": "2026-10-05T00:00:00.000Z",
-      "stale": true,
+      "checkedAt": "2026-10-23T18:16:27.914Z",
+      "stale": false,
+      "hasSourceUrl": true
+    },
+    {
+      "state": "Odisha",
+      "authority": "osbc-2026-27",
+      "rows": 876,
+      "baselineRows": 0,
+      "missingBaselineRows": 0,
+      "priceDifferencesFromBaseline": 0,
+      "duplicateIds": 0,
+      "invalidRows": 0,
+      "sourceStateMismatches": 0,
+      "missingSourceCodes": 0,
+      "checkedAt": "2026-10-23T18:16:29.465Z",
+      "stale": false,
+      "hasSourceUrl": true
+    },
+    {
+      "state": "Chhattisgarh",
+      "authority": "csmcl-public",
+      "rows": 1124,
+      "baselineRows": 0,
+      "missingBaselineRows": 0,
+      "priceDifferencesFromBaseline": 0,
+      "duplicateIds": 0,
+      "invalidRows": 0,
+      "sourceStateMismatches": 0,
+      "missingSourceCodes": 0,
+      "checkedAt": "2026-10-23T18:16:31.160Z",
+      "stale": false,
+      "hasSourceUrl": true
+    },
+    {
+      "state": "Assam",
+      "authority": "assam-2026-27",
+      "rows": 1002,
+      "baselineRows": 0,
+      "missingBaselineRows": 0,
+      "priceDifferencesFromBaseline": 0,
+      "duplicateIds": 0,
+      "invalidRows": 0,
+      "sourceStateMismatches": 0,
+      "missingSourceCodes": 0,
+      "checkedAt": "2026-10-23T18:16:32.921Z",
+      "stale": false,
+      "hasSourceUrl": true
+    },
+    {
+      "state": "Karnataka",
+      "authority": "ksbcl-2026-08",
+      "rows": 34395,
+      "baselineRows": 0,
+      "missingBaselineRows": 0,
+      "priceDifferencesFromBaseline": 0,
+      "duplicateIds": 0,
+      "invalidRows": 0,
+      "sourceStateMismatches": 0,
+      "missingSourceCodes": 0,
+      "checkedAt": "2026-10-23T18:16:36.526Z",
+      "stale": false,
       "hasSourceUrl": true
     }
   ],
@@ -209,5 +269,48 @@
     }
   ],
   "unvalidatedConstraints": 0,
-  "refreshRuns": []
+  "refreshRuns": [
+    {
+      "_count": {
+        "_all": 1
+      },
+      "authority": "csmcl-public",
+      "status": "SUCCEEDED"
+    },
+    {
+      "_count": {
+        "_all": 1
+      },
+      "authority": "tasmac-2026-10",
+      "status": "SUCCEEDED"
+    },
+    {
+      "_count": {
+        "_all": 1
+      },
+      "authority": "ksbcl-2026-08",
+      "status": "SUCCEEDED"
+    },
+    {
+      "_count": {
+        "_all": 1
+      },
+      "authority": "osbc-2026-27",
+      "status": "SUCCEEDED"
+    },
+    {
+      "_count": {
+        "_all": 1
+      },
+      "authority": "bevco-2026-09",
+      "status": "SUCCEEDED"
+    },
+    {
+      "_count": {
+        "_all": 1
+      },
+      "authority": "assam-2026-27",
+      "status": "SUCCEEDED"
+    }
+  ]
 }

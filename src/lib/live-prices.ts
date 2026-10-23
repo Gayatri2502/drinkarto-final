@@ -2,7 +2,7 @@ import {db} from './db';
 import {filterPrices} from './public-prices';
 import type {PriceRow} from '@/content/public';
 export type PriceComparisonProduct={key:string;name:string;category:string;sizes:Record<string,Record<string,PriceRow[]>>};
-function canonicalLiquorName(value:string){return value.replace(/[`’‘]/g,"'").replace(/\b\d{2,4}\s*ml\b(?:\s*[x×]\s*\d+\s*(?:btls?|bottles?|packs?)?)?/gi,' ').replace(/\s*\(\s*\d{1,6}\s*\)/g,' ').replace(/\s+/g,' ').trim().replace(/[\s,;:-]+$/,'');}
+import {canonicalLiquorName} from './liquor-name';
 export async function livePriceComparisons(input:{q?:string;category?:string;page?:number;limit?:number}){
  const snapshots=await db.publicPriceSnapshot.findMany();
  if(!snapshots.length) throw new Error('Official catalogue has not been initialized');
@@ -31,5 +31,5 @@ export async function livePrices(input:Parameters<typeof filterPrices>[0]){
  if(!snapshots.length) throw new Error('Official catalogue has not been initialized');
  const records=snapshots.flatMap(s=>(s.rows as unknown as PriceRow[]).map(p=>({...p,sourceUrl:s.sourceUrl,checkedAt:s.checkedAt.toISOString(),published:s.published,effective:p.effective??s.effective})));
  const result=filterPrices(input,records);
- return {...result,checked:snapshots.map(s=>s.checkedAt.toISOString()).sort().at(-1),coverage:snapshots.map(s=>s.state),sources:snapshots.map(s=>({state:s.state,checkedAt:s.checkedAt,sourceUrl:s.sourceUrl,published:s.published,effective:s.effective})),refreshIntervalHours:Number(process.env.PRICE_REFRESH_HOURS??3)};
+ return {...result,checked:snapshots.map(s=>s.checkedAt.toISOString()).sort().at(-1),coverage:snapshots.map(s=>s.state),sources:snapshots.map(s=>({state:s.state,checkedAt:s.checkedAt,sourceUrl:s.sourceUrl,published:s.published,effective:s.effective})),refreshIntervalHours:Number(process.env.PRICE_REFRESH_HOURS??24)};
 }
