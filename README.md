@@ -154,7 +154,7 @@ The public knowledge hub at `/guides` groups source-linked field notes by styles
 
 Public pages use attributed, descriptive photography for product categories, taste, heritage, recipes and distribution context. Bottle photographs are clearly labelled category examples, not SKU-verified product packshots. See [image sources and attribution](docs/IMAGE-ATTRIBUTION.md).
 
-Run migrations, then `npm run catalogue:import` to initialize public database records without overwriting subsequent official price snapshots. The scheduled GitHub Actions worker runs `npm run prices:refresh` every three hours after its `DATABASE_URL` secret has been configured; a dedicated worker service remains an alternative. See [job operation and deployment](docs/PRICE-JOB.md) and [production operations](docs/PRODUCTION.md). Public rates now come from PostgreSQL; `prices.json` is the initial bootstrap/test fixture. Admin Reports use complete tenant-scoped data rather than the first 100 management rows. They distinguish order value, operational invoiced amounts, payments, refunds, return credits and current stock. Full accounting and statutory tax-invoice configuration are not implemented.
+Run migrations, then `npm run catalogue:import` to initialize public database records without overwriting subsequent official price snapshots. The scheduled GitHub Actions worker runs `npm run prices:refresh` daily at 00:00 UTC (05:30 IST), using the configured `DATABASE_URL` Actions secret; a dedicated worker service remains an alternative. See [job operation and deployment](docs/PRICE-JOB.md) and [production operations](docs/PRODUCTION.md). Public rates now come from PostgreSQL; `prices.json` is the initial bootstrap/test fixture. Admin Reports use complete tenant-scoped data rather than the first 100 management rows. They distinguish order value, operational invoiced amounts, payments, refunds, return credits and current stock. Full accounting and statutory tax-invoice configuration are not implemented.
 
 ## Operations milestone
 
@@ -163,3 +163,12 @@ Orders can now be fulfilled once, creating an internal invoice and converting re
 Price health shows refresh runs, overdue checks and persistent alerts. Shared source publishing requires `PRICE_REVIEWER_USER_IDS`; business ownership alone does not grant it. New imports, changed identities, large price shifts and record losses are quarantined. Successful publication resolves source alerts.
 
 Additional validation: `TEST_BASE_URL=http://localhost:3003 node --import tsx tests/fulfilment.integration.ts` and `node --import tsx tests/price-review.integration.ts`.
+
+
+## India price directory (23 October 2026)
+
+StateLens lists all 28 states and 8 union territories, with verified-source coverage kept separate from geography and market classifications. Six official snapshots hold 43,937 source records; this is not a promise of every SKU in every state. Kerala records include the source's case and bottle tax columns. Undisclosed manufacturer prices and margins are labelled not published.
+
+[Open the Supabase Table Editor](https://supabase.com/dashboard/project/xjhmwzivqsvxcsaqgbhw/editor) using an authorised project account. `PublicProduct` contains the reference catalogue; `PublicPriceSnapshot` stores each official source's rows as JSON, with URL and check/publication dates. `PriceRefreshRun`, `PriceReview` and `PriceAlert` record operation and review status. Credentials are never included in this link.
+
+See the [33-page LiKAR reference review](docs/INDIA-PRICING-REFERENCE-2026-10-23.md) and [database audit](docs/DATABASE-AUDIT-2026-10-23.md). Third-party effective-tax percentages and broad retail/import labels are not treated as verified government rules. Some government endpoints time out from the GitHub runner even when reachable from India; failed checks preserve the last successful snapshot and remain visible as failures.

@@ -1,6 +1,6 @@
 # Official price job
 
-The backend worker checks Kerala BEVCO, Tamil Nadu TASMAC, Odisha OSBC, Karnataka KSBCL, Chhattisgarh CSMCL and Assam AERMS immediately, then every three hours. `PRICE_REFRESH_HOURS` accepts 1–24 (use 24 for daily). The interval begins after the previous run finishes, avoiding overlap. A PostgreSQL advisory lock also prevents duplicate workers. Checking frequently does not imply government rates change frequently.
+The backend worker checks Kerala BEVCO, Tamil Nadu TASMAC, Odisha OSBC, Karnataka KSBCL, Chhattisgarh CSMCL and Assam AERMS immediately, then every 24 hours by default. `PRICE_REFRESH_HOURS` accepts 1–24; the hosted daily schedule is independent of this daemon setting. The interval begins after the previous run finishes, avoiding overlap. A PostgreSQL advisory lock also prevents duplicate workers. Checking frequently does not imply government rates change frequently.
 
 ## Local run
 
@@ -35,6 +35,9 @@ First imports, disappearance of more than 20% of rows, any reused identity with 
 
 Configure `PRICE_REVIEWER_USER_IDS` with trusted platform operator user IDs to enable review in Workspace → Price health. No tenant owner is automatically a platform reviewer. For CLI review, use `PRICE_REVIEWER_ACTOR_ID=<allowlisted ID> node --import tsx scripts/review-price-import.ts <review ID> approve|reject`. Source refreshes and approvals share an advisory lock, and stale candidates cannot overwrite a newer snapshot.
 
-The initial Odisha development snapshot was verified and imported with a recorded development review. The three-hour worker is a separate process; a service manager and durable host are still required for unattended production operation. Successful refreshes resolve alerts; acknowledgement alone does not.
+Six production source snapshots were explicitly reviewed and published on 23 October 2026. The GitHub Actions job runs `prices:refresh` daily at 00:00 UTC (05:30 IST), using the configured Actions database secret. The continuous worker remains an alternative and requires a durable host. Successful refreshes resolve alerts; acknowledgement alone does not.
 
 Large identity turnover (over 10% newly introduced source codes, minimum four rows) is also staged for matching review. One-shot refresh exits nonzero when a source fails, so an external job runner can detect failure without parsing logs. The periodic worker continues retries on the next scheduled cycle.
+
+
+The BEVCO server omits an intermediate certificate needed by the Linux runner. CI fetches the public issuer certificate from GlobalSign over verified HTTPS, verifies it against the standard Ubuntu root store, and supplies the completed bundle only to BEVCO requests. Hostname, expiry and signature checks remain enabled. Transient requests use bounded retries. Reachability failures from other government sites are reported, not disguised as successful checks or replaced with third-party estimates.

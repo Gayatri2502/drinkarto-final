@@ -35,7 +35,7 @@ every five minutes and alert the operator after two consecutive failures. This e
 
 ## Official price refresh
 
-`.github/workflows/price-refresh.yml` is scheduled at minute 17 every three hours and may be run manually from **Actions → refresh official liquor prices**. It performs the same validation, quarantine and database locking as `npm run prices:refresh`.
+`.github/workflows/price-refresh.yml` is scheduled daily at 00:00 UTC (05:30 IST) and may be run manually from **Actions → refresh official liquor prices**. It performs the same validation, quarantine and database locking as `npm run prices:refresh`.
 
 Before enabling it, add the repository-level GitHub Actions secret `DATABASE_URL` using the restricted Supabase application connection. Do not use a browser-exposed key. A missing secret fails the run intentionally instead of silently reporting stale prices as fresh. Configure GitHub notifications for workflow failures to the platform operator.
 
