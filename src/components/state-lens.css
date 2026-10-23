@@ -68,3 +68,17 @@
 .public-site .lens .lens-focus-foot{margin-top:15px;padding-top:13px;gap:8px}
 .public-site .lens .lens-method{font-size:11px}
 }
+@media(max-width:640px){
+.public-site .lens .lens-toolbar>label,.public-site .lens .lens-mobile-controls label{margin:0}
+.public-site .lens .lens-toolbar .lens-search{height:46px;min-height:46px}
+.public-site .lens .lens-toolbar .lens-search input{min-height:44px;height:44px;padding:6px 0!important}
+.public-site .lens .lens-toolbar .lens-category{height:44px;min-height:44px}
+.public-site .lens .lens-toolbar .lens-category select{height:42px;min-height:42px;padding-block:6px}
+.public-site .lens .lens-toolbar .lens-search-button{height:44px;min-height:44px}
+.public-site .lens .lens-mobile-controls{padding:14px}
+.public-site .lens .lens-mobile-tools{margin-top:12px}
+.public-site .lens .lens-product-heading>.lens-product-icon{display:none}
+.public-site .statelens-page .lens-page-heading h1{font-family:Georgia,serif!important;font-weight:400!important}
+.public-site .statelens-page .lens-page-heading>div>p:not(.public-eyebrow){display:none}
+.public-site .statelens-page .lens-page-heading{margin-bottom:14px}
+}
