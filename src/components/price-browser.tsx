@@ -11,7 +11,7 @@ import { BottleReferenceImage, hasBottleReferenceImage } from '@/components/bott
 
 type Product = { key: string; name: string; category: string; sizes: Record<string, Record<string, PriceRow[]>> };
 type Result = { rows: Product[]; total: number; page: number; pages: number; states: string[]; checked: string };
-const MAX_STATES = 4;
+const MAX_STATES = 6;
 const preferredStates = ['Karnataka', 'Kerala', 'Tamil Nadu', 'Assam', 'Odisha', 'Chhattisgarh'];
 const categoryIcons: Record<string, typeof Beer> = {
   Whisky: BottleWine, Rum: GlassWater, Vodka: Droplets, Gin: Martini,
@@ -26,6 +26,8 @@ const defaultSize = (sizes: string[]) => sizes.includes('750') ? '750' : sizes[0
 
 export default function PriceBrowser({ compact = false, initialState = '', initialSize = '', initialQuery = '' }: { compact?: boolean; initialState?: string; initialSize?: string; initialQuery?: string }) {
   const [query, setQuery] = useState(initialQuery);
+  const [search, setSearch] = useState(initialQuery);
+  const [stateLimit, setStateLimit] = useState(MAX_STATES);
   const [category, setCategory] = useState('');
   const [page, setPage] = useState(1);
   const [result, setResult] = useState<Result | null>(null);
@@ -39,7 +41,7 @@ export default function PriceBrowser({ compact = false, initialState = '', initi
     setLoading(true);
     const timer = window.setTimeout(async () => {
       try {
-        const params = new URLSearchParams({ q: query, category, page: String(page), limit: compact ? '6' : '12' });
+        const params = new URLSearchParams({ q: search, category, page: String(page), limit: compact ? '6' : '12' });
         const response = await fetch('/api/public/price-comparison?' + params, { signal: controller.signal });
         const data = await response.json();
         if (!response.ok) throw new Error(data.error);
@@ -52,7 +54,7 @@ export default function PriceBrowser({ compact = false, initialState = '', initi
       }
     }, 180);
     return () => { window.clearTimeout(timer); controller.abort(); };
-  }, [query, category, page, compact]);
+  }, [search, category, page, compact]);
 
   useEffect(() => {
     if (!result?.states.length) return;
@@ -67,10 +69,10 @@ export default function PriceBrowser({ compact = false, initialState = '', initi
 
   const states = useMemo(() => result?.states ?? [], [result?.states]);
   const shownStates = selectedStates.filter((state) => states.includes(state));
-  const clear = () => { setQuery(''); setCategory(''); setSelectedSizes({}); setPage(1); };
+  const clear = () => { setQuery(''); setSearch(''); setCategory(''); setSelectedSizes({}); setPage(1); };
   const toggleState = (state: string) => setSelectedStates((current) => current.includes(state)
     ? current.filter((item) => item !== state)
-    : current.length < MAX_STATES ? [...current, state] : current);
+    : current.length < stateLimit ? [...current, state] : current);
 
   return <div className={`price-browser price-explorer ${compact ? 'is-compact' : ''}`}>
     {!compact && <div className="category-rail" aria-label="Filter by liquor category">
@@ -81,13 +83,15 @@ export default function PriceBrowser({ compact = false, initialState = '', initi
       })}
     </div>}
 
-    <div className="price-filters comparison-filters">
+    <form className="price-filters comparison-filters" onSubmit={event=>{event.preventDefault();setSearch(query);setPage(1);}}>
       <label className="price-search"><span>Find a liquor</span><div><Search size={16}/><input value={query} maxLength={120} placeholder="Search name or brand" onChange={(event) => { setQuery(event.target.value); setPage(1); }}/></div></label>
-      {compact && <label><span>Category</span><select value={category} onChange={(event) => { setCategory(event.target.value); setPage(1); }}><option value="">All categories</option>{categories.map((item) => <option key={item}>{item}</option>)}</select></label>}
+      {<label><span>Category</span><select value={category} onChange={(event) => { setCategory(event.target.value); setPage(1); }}><option value="">All categories</option>{categories.map((item) => <option key={item}>{item}</option>)}</select></label>}
+      {!compact && <label><span>States to compare</span><select value={stateLimit} onChange={event=>{const limit=Number(event.target.value);setStateLimit(limit);setSelectedStates(current=>current.slice(0,limit));}}>{Array.from({length:MAX_STATES},(_,i)=>i+1).map(n=><option key={n} value={n}>{n} {n===1?'state':'states'}</option>)}</select></label>}
+      <button type="submit" className="public-button"><Search size={16}/>Search</button>
       {!compact && (query || category) && <button type="button" className="price-clear-filters" onClick={clear}>Reset filters</button>}
-    </div>
+    </form>
 
-    {!compact && <section className="state-picker" aria-labelledby="state-picker-title"><div className="state-picker-heading"><div><span className="public-eyebrow">BUILD YOUR COMPARISON</span><h2 id="state-picker-title">Pick up to {MAX_STATES} states</h2></div><span className="state-count" aria-live="polite">{shownStates.length} of {MAX_STATES} selected</span></div><div className="state-chips">{states.map((state) => <button type="button" key={state} className="state-chip" aria-pressed={shownStates.includes(state)} disabled={!shownStates.includes(state) && shownStates.length >= MAX_STATES} onClick={() => toggleState(state)}>{shownStates.includes(state) && <Check size={13}/>}<span>{state}</span></button>)}</div><p>Only states with imported official price references are selectable. Choose the same bottle size to compare like for like.</p></section>}
+    {!compact && <section className="state-picker" aria-labelledby="state-picker-title"><div className="state-picker-heading"><div><span className="public-eyebrow">BUILD YOUR COMPARISON</span><h2 id="state-picker-title">Pick up to {stateLimit} states</h2></div><span className="state-count" aria-live="polite">{shownStates.length} of {stateLimit} selected</span></div><div className="state-chips">{states.map((state) => <button type="button" key={state} className="state-chip" aria-pressed={shownStates.includes(state)} disabled={!shownStates.includes(state) && shownStates.length >= stateLimit} onClick={() => toggleState(state)}>{shownStates.includes(state) && <Check size={13}/>}<span>{state}</span></button>)}</div><p>Only states with imported official price references are selectable. Choose the same bottle size to compare like for like.</p></section>}
 
     <div className="price-caption" aria-live="polite"><span><SlidersHorizontal size={14}/>{loading ? 'Loading comparisons…' : `${result?.total.toLocaleString('en-IN') ?? 0} liquors · ${states.length} official state sources`}</span><span>Source check {result?.checked ? new Date(result.checked).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' }) : '—'} IST</span></div>
     {error ? <p role="alert" className="public-notice">{error}</p> : !loading && result?.rows.length === 0 ? <div className="public-empty"><h3>No matching official rates.</h3><p>Try a broader name or another category. A missing result does not establish product availability.</p><button className="public-text-button" onClick={clear}>Reset filters</button></div> : <div className="liquor-results" aria-busy={loading}>
@@ -97,12 +101,16 @@ export default function PriceBrowser({ compact = false, initialState = '', initi
         const statePrices = shownStates.map((state) => ({ state, rows: product.sizes[activeSize]?.[state] ?? [] }));
         const availablePrices = statePrices.flatMap(({ rows }) => rows.map((row) => row.price));
         const lowest = availablePrices.length ? Math.min(...availablePrices) : null;
+        const highest = availablePrices.length ? Math.max(...availablePrices) : null;
+        const comparableStates = statePrices.filter(s=>s.rows.length).length;
         const Icon = categoryIcons[product.category] ?? CircleHelp;
-        return <article className="liquor-price-card" key={product.key}>
-          <div className="liquor-card-heading">{hasBottleReferenceImage(product.category)?<BottleReferenceImage category={product.category} className="liquor-card-bottle-photo"/>:<span className="liquor-card-category-fallback" aria-hidden="true"><Icon size={24}/></span>}<div className="liquor-card-name"><span className="category-label" style={{ '--category-colour': categoryColours[product.category] } as React.CSSProperties}><Icon size={13}/>{product.category}</span><h2>{product.name}</h2><span className="price-size-coverage">Published rates shown only where a matching listing exists</span></div><label className="bottle-size-select"><span>Bottle size</span><select aria-label={`Bottle size for ${product.name}`} value={activeSize} onChange={(event) => setSelectedSizes((current) => ({ ...current, [product.key]: event.target.value }))}>{sizes.map((size) => <option key={size} value={size}>{Number(size).toLocaleString('en-IN')} ml</option>)}</select></label></div>
+        return <article className="liquor-price-card statelens-card" style={{'--liquor-accent':categoryColours[product.category]??'#547e92'} as React.CSSProperties} key={product.key}>
+          <div className="liquor-card-heading">{hasBottleReferenceImage(product.category)?<BottleReferenceImage category={product.category} className="liquor-card-bottle-photo"/>:<span className="liquor-card-category-fallback" aria-hidden="true"><Icon size={24}/></span>}<div className="liquor-card-name"><span className="category-label" style={{ '--category-colour': categoryColours[product.category] } as React.CSSProperties}><Icon size={13}/>{product.category}</span><h2>{product.name}</h2><span className="price-size-coverage">Exact normalized name & category match · verify variant and source before purchase</span></div><label className="bottle-size-select"><span>Bottle size</span><select aria-label={`Bottle size for ${product.name}`} value={activeSize} onChange={(event) => setSelectedSizes((current) => ({ ...current, [product.key]: event.target.value }))}>{sizes.map((size) => <option key={size} value={size}>{Number(size).toLocaleString('en-IN')} ml</option>)}</select></label></div>
+          {comparableStates>=2 && <div className="statelens-summary"><span><small>Lowest listed · selected states</small><strong>₹{lowest!.toLocaleString('en-IN')}</strong><em>{statePrices.filter(s=>s.rows.some(r=>r.price===lowest)).map(s=>s.state).join(', ')}</em></span><span><small>{highest===lowest?'Same listed price':'Highest listed · selected states'}</small><strong>₹{highest!.toLocaleString('en-IN')}</strong><em>{statePrices.filter(s=>s.rows.some(r=>r.price===highest)).map(s=>s.state).join(', ')}</em></span><span><small>Listed price spread</small><strong>₹{(highest!-lowest!).toLocaleString('en-IN')}</strong><em>Same product grouping · {activeSize} ml</em></span></div>}
+          {comparableStates<2 && <p className="statelens-coverage">At least two selected states need a matching rate to identify a lowest and highest state.</p>}
           {shownStates.length ? <div className="state-price-grid">{statePrices.map(({ state, rows }) => {
             const distinct = [...new Map(rows.map((row) => [`${row.price}|${row.sourceId}|${row.market ?? ''}`, row])).values()];
-            return <section className={`state-price-tile ${distinct.some((row) => row.price === lowest) ? 'lowest' : ''} ${distinct.length ? '' : 'missing'}`} key={state} aria-label={`${state} price reference`}><div className="state-price-title"><span>{state}</span>{distinct.some((row) => row.price === lowest) && <span className="lowest-tag">Lowest listed</span>}</div>{distinct.length ? distinct.map((row) => <div className="state-price-entry" key={`${row.id}-${row.price}`}><strong>₹{row.price.toLocaleString('en-IN')}</strong>{availablePrices.length > 1 && row.price > lowest! && <span className="price-delta"><ArrowDownUp size={11}/> ₹{(row.price - lowest!).toLocaleString('en-IN')} above lowest</span>}<small>{row.sizeMl.toLocaleString('en-IN')} ml{row.market ? ` · ${row.market}` : ''}</small>{row.effective && <small>Valid from {new Date(row.effective).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata', day: '2-digit', month: 'short', year: 'numeric' })}{row.effectiveTo ? ` to ${new Date(row.effectiveTo).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata', day: '2-digit', month: 'short', year: 'numeric' })}` : ''}</small>}<a href={row.sourceUrl ?? sources[row.sourceId]?.document ?? '#'} target="_blank" rel="noreferrer">{sources[row.sourceId]?.name.split(' · ')[0] ?? 'Official source'} <ArrowUpRight size={11}/></a></div>) : <p>No matching rate listed</p>}</section>;
+            return <section className={`state-price-tile ${comparableStates>=2 && distinct.some((row) => row.price === lowest) ? 'lowest' : comparableStates>=2 && distinct.some(row=>row.price===highest) ? 'highest' : ''} ${distinct.length ? '' : 'missing'}`} key={state} aria-label={`${state} price reference`}><div className="state-price-title"><span>{state}</span>{comparableStates>=2 && distinct.some((row) => row.price === lowest) && <span className="lowest-tag">{lowest===highest?'Same price':'Lowest listed'}</span>}{comparableStates>=2 && highest!==lowest && distinct.some(r=>r.price===highest) && <span className="highest-tag">Highest listed</span>}</div>{distinct.length ? distinct.map((row) => <div className="state-price-entry" key={`${row.id}-${row.price}`}><strong>₹{row.price.toLocaleString('en-IN')}</strong>{availablePrices.length > 1 && row.price > lowest! && <span className="price-delta"><ArrowDownUp size={11}/> ₹{(row.price - lowest!).toLocaleString('en-IN')} above lowest</span>}{row.checkedAt && <small>Checked {new Date(row.checkedAt).toLocaleDateString('en-IN', {timeZone:'Asia/Kolkata'})}</small>}<small>{row.sizeMl.toLocaleString('en-IN')} ml{row.market ? ` · ${row.market}` : ''}</small>{row.effective && <small>Valid from {new Date(row.effective).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata', day: '2-digit', month: 'short', year: 'numeric' })}{row.effectiveTo ? ` to ${new Date(row.effectiveTo).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata', day: '2-digit', month: 'short', year: 'numeric' })}` : ''}</small>}<a href={row.sourceUrl ?? sources[row.sourceId]?.document ?? '#'} target="_blank" rel="noreferrer">{sources[row.sourceId]?.name.split(' · ')[0] ?? 'Official source'} <ArrowUpRight size={11}/></a></div>) : <p>No matching rate listed</p>}</section>;
           })}</div> : <p className="no-states-hint">Choose at least one state to see its published rate.</p>}
           <div className="liquor-card-foot"><span>{shownStates.filter((state) => product.sizes[activeSize]?.[state]?.length).length} of {shownStates.length} selected states have a matching listing</span><Link href={`/prices?q=${encodeURIComponent(product.name)}&size=${activeSize}`}>Open this comparison ↗</Link></div>
         </article>;

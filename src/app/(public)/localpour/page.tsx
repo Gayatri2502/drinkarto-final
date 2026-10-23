@@ -1,0 +1,3 @@
+import LocalPour from '@/components/local-pour';
+export const metadata={title:'LocalPour — your Drinkarto city explorer',description:'Explore liquor shops, bars and restaurants by city, learn about styles, and check available official state bottle price references.'};
+export default function Page(){return <div className="public-container public-page"><p className="public-eyebrow">DRINKARTO · DISCOVER YOUR DESTINATION</p><h1>LocalPour<span className="localpour-dot">.</span></h1><p className="public-intro">Your first stop in an unfamiliar city. Discover places, find your flavour and understand published bottle prices before you go.</p><LocalPour/></div>}

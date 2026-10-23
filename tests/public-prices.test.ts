@@ -2,6 +2,8 @@ import {describe,it,expect} from 'vitest';
 import {filterPrices,priceRecords} from '../src/lib/public-prices';
 import {sources} from '../src/content/public';
 describe('public price references',()=>{
+ it('ranks all matching bottle references before taking a budget page',()=>{const input={state:'Kerala',category:'Whisky',size:'750'};const expected=priceRecords.filter(p=>p.state===input.state&&p.category===input.category&&p.sizeMl===750).sort((a,b)=>a.price-b.price).slice(0,5).map(p=>p.price);const result=filterPrices({...input,sort:'price-asc',limit:5});expect(result.rows.map(p=>p.price)).toEqual(expected);expect(result.rows.every(p=>p.state==='Kerala'&&p.sizeMl===750)).toBe(true)});
+
  it('classifies explicitly named beer as Beer despite a mismatched source category',()=>{const rows=filterPrices({q:'10000 Volts',state:'Tamil Nadu',category:'Beer'}).rows;expect(rows.length).toBeGreaterThan(0);expect(rows.every(r=>r.category==='Beer')).toBe(true)});
  it('uses the verified Kerala retail column for Old Monk',()=>{const result=filterPrices({q:'Old Monk Matured Xxx Premium Rum',state:'Kerala',size:'750'});expect(result.rows.some(p=>p.price===1140&&p.sourceCode==='13074101X')).toBe(true)});
  it('uses TASMAC MRP per bottle, independently of warehouse prices',()=>{const result=filterPrices({q:'ACCORD NO.1 BLENDED WHISKY',state:'Tamil Nadu',size:'750'});expect(result.rows.some(p=>p.price===680)).toBe(true)});
