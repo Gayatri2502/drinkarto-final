@@ -13,7 +13,7 @@
   align-items: center;
 }
 .public-site .atlas-eyebrow {
-  font-size: 10px;
+  font-size: 14px;
   letter-spacing: 1.5px;
   color: #62806d;
 }
@@ -23,7 +23,7 @@
   margin: 10px 0 !important;
 }
 .public-site .atlas-heading p {
-  font-size: 13px;
+  font-size: 14px;
   margin: 0;
   max-width: 620px;
 }
@@ -39,11 +39,11 @@
 }
 .public-site .atlas-stat strong small {
   font-size: 17px;
-  color: #93a398;
+  color: #637568;
 }
 .public-site .atlas-stat > span {
   display: block;
-  font-size: 11px;
+  font-size: 14px;
   line-height: 1.6;
   color: #718178;
 }
@@ -53,7 +53,7 @@
   align-items: start;
   padding: 12px 0 18px;
   margin-top: 16px;
-  font-size: 11px;
+  font-size: 14px;
   color: #627b6a;
   border-bottom: 1px solid #dce5dd;
   line-height: 1.7;
@@ -67,7 +67,7 @@
   align-items: center;
   gap: 10px;
   margin: 20px 0;
-  font-size: 13px;
+  font-size: 14px;
 }
 .public-site .atlas-state-label select {
   margin-left: auto;
@@ -91,7 +91,7 @@
   gap: 15px;
 }
 .public-site .atlas-profile-title small {
-  font-size: 10px;
+  font-size: 14px;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: #819084;
@@ -101,7 +101,7 @@
   margin: 6px 0 12px;
 }
 .public-site .atlas-badge {
-  font-size: 10px;
+  font-size: 14px;
   line-height: 1.5;
   color: #5a7061;
   background: #eff4ed;
@@ -116,7 +116,7 @@
   border-color: #ead5bf;
 }
 .public-site .atlas-profile > p {
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.7;
   margin: 0 0 15px;
 }
@@ -126,16 +126,16 @@
   padding: 12px;
   border-radius: 8px;
   background: #f1f6f0;
-  font-size: 12px;
+  font-size: 14px;
 }
 .public-site .atlas-availability strong {
   display: block;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
 }
 .public-site .atlas-availability span {
   display: block;
-  font-size: 11px;
+  font-size: 14px;
   color: #758477;
   line-height: 1.7;
   margin-top: 4px;
@@ -154,13 +154,13 @@
 .public-site .atlas-tax-status {
   display: block;
   margin: 10px 0;
-  font-size: 10px;
+  font-size: 14px;
   letter-spacing: 0.4px;
   text-transform: uppercase;
   color: #6f826f;
 }
 .public-site .atlas-tax p {
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.8;
 }
 .public-site .atlas-tax .atlas-formula {
@@ -179,7 +179,7 @@
   margin: 15px 0;
 }
 .public-site .atlas-inputs > span {
-  font-size: 11px;
+  font-size: 14px;
   line-height: 1.5;
   padding: 9px;
   border: 1px solid #e5eadf;
@@ -193,7 +193,7 @@
   color: #8a9b88;
 }
 .public-site .atlas-tax .atlas-small {
-  font-size: 11px;
+  font-size: 14px;
   color: #829080;
   margin-bottom: 5px;
 }
@@ -207,13 +207,13 @@
   display: flex;
   gap: 4px;
   align-items: center;
-  font-size: 11px;
+  font-size: 14px;
   color: #477553;
   line-height: 1.6;
 }
 .public-site .atlas-import {
   margin-top: 18px;
-  font-size: 11px;
+  font-size: 14px;
   color: #72816d;
 }
 .public-site .atlas-import summary {
@@ -221,7 +221,7 @@
   min-height: 25px;
 }
 .public-site .atlas-import p {
-  font-size: 11px;
+  font-size: 14px;
   line-height: 1.8;
 }
 .public-site .atlas-directory {
@@ -231,7 +231,7 @@
 }
 .public-site .atlas-directory > summary {
   cursor: pointer;
-  font-size: 13px;
+  font-size: 14px;
   min-height: 30px;
 }
 .public-site .atlas-directory-filters {
@@ -286,15 +286,15 @@
   background: #f0f6eb;
 }
 .public-site .atlas-state-grid strong {
-  font-size: 12px;
+  font-size: 14px;
 }
 .public-site .atlas-state-grid span {
-  font-size: 10px;
+  font-size: 14px;
   line-height: 1.6;
   color: #7a8b77;
 }
 .public-site .atlas-state-grid small {
-  font-size: 10px;
+  font-size: 14px;
   color: #547254;
 }
 .public-site .price-buildup {
@@ -303,13 +303,13 @@
   padding-top: 11px;
 }
 .public-site .price-buildup > summary {
-  font-size: 12px;
+  font-size: 14px;
   cursor: pointer;
   color: #39694b;
   min-height: 28px;
 }
 .public-site .price-buildup p {
-  font-size: 11px;
+  font-size: 14px;
   line-height: 1.7;
   color: #758376;
 }
@@ -322,7 +322,7 @@
   gap: 18px;
   border-bottom: 1px solid #e8ede5;
   padding: 7px 0;
-  font-size: 12px;
+  font-size: 14px;
 }
 .public-site .price-buildup dt {
   color: #667b67;
@@ -340,8 +340,8 @@
   padding-top: 12px;
 }
 .public-site .price-buildup .price-missing {
-  color: #99a396;
-  font-size: 11px;
+  color: #63715f;
+  font-size: 14px;
 }
 .public-site .price-buildup .price-case {
   padding: 10px;
@@ -350,13 +350,13 @@
   margin-top: 12px;
 }
 .public-site .price-buildup h5 {
-  font-size: 12px;
+  font-size: 14px;
   margin: 8px 0;
 }
 .public-site .lens-state-options {
   position: relative;
   margin-left: auto;
-  font-size: 12px;
+  font-size: 14px;
 }
 .public-site .lens-state-options summary {
   cursor: pointer;
@@ -400,7 +400,7 @@
     font-weight: 400;
   }
   .public-site .atlas-heading p {
-    font-size: 12px;
+    font-size: 14px;
   }
   .public-site .atlas-stat {
     display: flex;
@@ -420,7 +420,7 @@
   .public-site .atlas-state-label {
     display: flex;
     flex-wrap: wrap;
-    font-size: 12px;
+    font-size: 14px;
     gap: 8px;
     margin: 15px 0;
   }
@@ -444,11 +444,11 @@
     grid-template-columns: 1fr 1fr;
   }
   .public-site .atlas-inputs > span {
-    font-size: 10px;
+    font-size: 14px;
     padding: 7px;
   }
   .public-site .atlas-tax .atlas-formula {
-    font-size: 13px;
+    font-size: 14px;
     padding: 10px;
   }
   .public-site .atlas-directory-filters {
@@ -467,13 +467,13 @@
     padding: 10px;
   }
   .public-site .atlas-state-grid strong {
-    font-size: 11px;
+    font-size: 14px;
   }
   .public-site .atlas-update {
-    font-size: 10px;
+    font-size: 14px;
   }
   .public-site .price-buildup dl > div {
-    font-size: 11px;
+    font-size: 14px;
     gap: 10px;
   }
   .public-site .price-buildup dt {

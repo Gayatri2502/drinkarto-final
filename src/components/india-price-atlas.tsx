@@ -128,7 +128,7 @@ export default function IndiaPriceAtlas({
             </span>
           </div>
         </div>
-        <details className="atlas-tax" open key={selected}>
+        <details className="atlas-tax" key={selected}>
           <summary>How {market.name} prices are formed</summary>
           <span className="atlas-tax-status">{guide.status}</span>
           <p className="atlas-formula">{guide.formula}</p>
