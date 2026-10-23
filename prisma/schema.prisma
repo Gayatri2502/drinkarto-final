@@ -25,6 +25,8 @@ model User {
  name String
  members Member[]
  sessions Session[]
+ communityReviews CommunityReview[]
+ communityPoints CommunityPoint[]
 }
 model Member {
  id String @id @default(uuid())
@@ -249,4 +251,29 @@ model AiMessage {
  createdAt DateTime @default(now())
  conversation AiConversation @relation(fields:[organizationId,conversationId],references:[organizationId,id],onDelete:Cascade)
  @@index([organizationId,conversationId,createdAt])
+}
+
+model CommunityReview {
+ id String @id
+ userId String
+ placeId String
+ placeName String
+ rating Int
+ body String
+ photoPath String?
+ status String @default("PENDING")
+ createdAt DateTime @default(now()) @db.Timestamptz(6)
+ reviewedBy String?
+ user User @relation(fields:[userId],references:[id])
+ point CommunityPoint?
+ @@unique([userId,placeId])
+ @@index([placeId,status],map:"CommunityReview_place_status")
+}
+model CommunityPoint {
+ reviewId String @id
+ userId String
+ points Int
+ createdAt DateTime @default(now()) @db.Timestamptz(6)
+ user User @relation(fields:[userId],references:[id])
+ review CommunityReview @relation(fields:[reviewId],references:[id])
 }

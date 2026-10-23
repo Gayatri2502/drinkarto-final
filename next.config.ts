@@ -14,7 +14,7 @@ const config: NextConfig = {
           { key: "X-Permitted-Cross-Domain-Policies", value: "none" },
           {
             key: "Permissions-Policy",
-            value: "geolocation=(), camera=(), microphone=()",
+            value: "geolocation=(self), camera=(), microphone=()",
           },
           ...(process.env.NODE_ENV === "production"
             ? [

@@ -3,6 +3,7 @@
 import { useState, type DragEvent } from 'react';
 import { Check, Citrus, GlassWater, Martini, RotateCcw, Search, Sparkles, X } from 'lucide-react';
 import { knowledgePhotos } from '@/content/knowledge-media';
+import FoodPairings from './food-pairings';
 import { KnowledgeImage } from '@/components/knowledge-image';
 
 type Ingredient = { id: string; name: string; amount: string; note: string };
@@ -135,7 +136,7 @@ export default function RecipeGame() {
       <section className="recipe-glass-zone" aria-labelledby="glass-zone-title"><div className="recipe-section-heading"><span className="recipe-step-number">02</span><div><h3 id="glass-zone-title">The glass</h3><p>{done ? 'Recipe complete' : `Step ${stepIndex + 1} of ${recipe.steps.length}`}</p></div><button type="button" className="recipe-reset" onClick={() => chooseRecipe(recipe.id)} aria-label="Restart this recipe"><RotateCcw size={15}/> Restart</button></div><div className="recipe-progress" role="progressbar" aria-label="Recipe progress" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress}><span style={{ width: `${progress}%` }}/></div>
         <div className={`glass-drop-zone ${dragging ? 'drag-over-ready' : ''} ${done ? 'is-complete' : ''}`} onDragOver={(event) => event.preventDefault()} onDrop={dropIngredient} aria-label="Drop the ingredient here"><div className="mixing-glass"><span className="glass-glint"/><span className="glass-liquid" style={{ height: `${Math.max(0, Math.min(85, stepIndex * 19))}%`, background: recipe.colour }}/>{done ? <Check size={28}/> : <Icon size={30}/>}</div><strong>{done ? 'Nicely mixed' : dragging ? 'Release to add' : 'Glass ready'}</strong><span>{done ? 'Every step complete' : 'Drop an ingredient here'}</span></div>
         <div className="revealed-instruction" aria-live="polite" aria-atomic="true"><span className="instruction-label">{done ? 'FINISHED' : 'CURRENT INSTRUCTION'}</span><p>{done ? recipe.finish : activeStep.instruction}</p><span className="instruction-feedback">{message}</span></div>
-        {done && <RecipePreview recipe={recipe}/>}
+        {done && <><RecipePreview recipe={recipe}/><FoodPairings category={recipe.kind==='Zero-proof'?'Zero-proof':recipe.id==='citrus-gin'?'Gin':'Whisky'}/></>}
       </section>
     </div>
     <div className="recipe-game-footer"><span><Check size={14}/> Each next instruction stays hidden until this one is completed.</span><span>Example measures only · Follow product labels and local law.</span></div>
