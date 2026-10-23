@@ -36,5 +36,12 @@ jobs:
           fi
       - run: npm ci
       - run: python -m pip install --disable-pip-version-check -r scripts/requirements-price-job.txt
+      - name: Complete verified BEVCO certificate chain
+        run: |
+          curl --fail --silent --show-error --location --max-time 30 https://secure.globalsign.com/cacert/gsrsaovsslca2018.crt --output "$RUNNER_TEMP/bevco-issuer.der"
+          openssl x509 -inform DER -in "$RUNNER_TEMP/bevco-issuer.der" -out "$RUNNER_TEMP/bevco-issuer.pem"
+          openssl verify -CAfile /etc/ssl/certs/ca-certificates.crt "$RUNNER_TEMP/bevco-issuer.pem"
+          cat /etc/ssl/certs/ca-certificates.crt "$RUNNER_TEMP/bevco-issuer.pem" > "$RUNNER_TEMP/price-source-ca.pem"
+          echo "PRICE_CA_BUNDLE=$RUNNER_TEMP/price-source-ca.pem" >> "$GITHUB_ENV"
       - run: npm run db:generate
       - run: npm run prices:refresh

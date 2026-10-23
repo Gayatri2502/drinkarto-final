@@ -1,13 +1,17 @@
 """Read-only official source adapters. Output JSON; prices are never inferred."""
-import sys,json,re,urllib.request,urllib.parse,io,datetime,subprocess,tempfile
+import sys,json,re,urllib.request,urllib.parse,io,datetime,subprocess,tempfile,os
 from html.parser import HTMLParser
 from state_price_parsers import parse_karnataka,parse_chhattisgarh
 
 def fetch(url,body=None):
  # curl uses the host's verified TLS trust store. Never bypass certificate checks.
- command=['curl','--fail','--silent','--show-error','--location','--max-time','60','--max-filesize','30000000','--user-agent','DrinkartoReference/1.0']
+ command=['curl','--fail','--silent','--show-error','--location','--connect-timeout','15','--retry','2','--retry-max-time','180','--max-time','60','--max-filesize','30000000','--user-agent','DrinkartoReference/1.0']
+ if os.environ.get('PRICE_CA_BUNDLE') and urllib.parse.urlparse(url).hostname=='bevco.in':command+=['--cacert',os.environ['PRICE_CA_BUNDLE']]
  if body is not None:command+=['--header','Content-Type: application/json','--data-binary',body.decode()]
- result=subprocess.run(command+[url],capture_output=True,timeout=65,check=True)
+ result=subprocess.run(command+[url],capture_output=True,timeout=200)
+ if result.returncode:
+  kind='TLS verification failed' if result.returncode==60 else 'timed out' if result.returncode==28 else 'request failed'
+  raise RuntimeError(f'Official source {kind} (curl {result.returncode}); published prices retained')
  if len(result.stdout)>30_000_000:raise ValueError('Source exceeds size limit')
  return result.stdout
 
@@ -24,9 +28,9 @@ class HiddenFields(HTMLParser):
 def form_fields(markup):
  parser=HiddenFields();parser.feed(markup);return parser.fields
 def form_fetch(url,cookies,fields=None):
- command=['curl','--fail','--silent','--show-error','--location','--max-time','60','--max-filesize','30000000','--cookie',cookies,'--cookie-jar',cookies]
+ command=['curl','--fail','--silent','--show-error','--location','--connect-timeout','15','--retry','2','--retry-max-time','180','--max-time','60','--max-filesize','30000000','--cookie',cookies,'--cookie-jar',cookies]
  if fields is not None:command+=['--header','Content-Type: application/x-www-form-urlencoded','--data-binary','@-']
- result=subprocess.run(command+[url],input=urllib.parse.urlencode(fields).encode() if fields is not None else None,capture_output=True,timeout=65,check=True)
+ result=subprocess.run(command+[url],input=urllib.parse.urlencode(fields).encode() if fields is not None else None,capture_output=True,timeout=200,check=True)
  return result.stdout.decode('utf-8',errors='strict')
 
 class AssamRows(HTMLParser):
