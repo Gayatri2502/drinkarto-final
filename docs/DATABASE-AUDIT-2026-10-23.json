@@ -1,0 +1,213 @@
+{
+  "auditedAt": "2026-10-23T17:22:50.362Z",
+  "catalogue": {
+    "stored": 1738,
+    "baseline": 1738,
+    "missingBaselineIds": 0,
+    "additionalIds": 0,
+    "emptyNames": 0,
+    "invalidCategories": 0,
+    "categoryCounts": {
+      "Tequila": 51,
+      "Wine": 826,
+      "Whisky": 220,
+      "Vodka": 51,
+      "Other": 236,
+      "Rum": 78,
+      "Gin": 125,
+      "Beer": 45,
+      "Non-alcoholic": 84,
+      "Brandy": 22
+    },
+    "referenceMismatches": 0,
+    "baselineIdentityMismatches": 0
+  },
+  "sources": [
+    {
+      "state": "Kerala",
+      "authority": "bevco-2026-09",
+      "rows": 4395,
+      "baselineRows": 4395,
+      "missingBaselineRows": 0,
+      "priceDifferencesFromBaseline": 0,
+      "duplicateIds": 0,
+      "invalidRows": 0,
+      "sourceStateMismatches": 0,
+      "missingSourceCodes": 0,
+      "checkedAt": "2026-10-05T00:00:00.000Z",
+      "stale": true,
+      "hasSourceUrl": true
+    },
+    {
+      "state": "Tamil Nadu",
+      "authority": "tasmac-2026-10",
+      "rows": 2129,
+      "baselineRows": 2129,
+      "missingBaselineRows": 0,
+      "priceDifferencesFromBaseline": 0,
+      "duplicateIds": 0,
+      "invalidRows": 0,
+      "sourceStateMismatches": 0,
+      "missingSourceCodes": 0,
+      "checkedAt": "2026-10-05T00:00:00.000Z",
+      "stale": true,
+      "hasSourceUrl": true
+    }
+  ],
+  "operationalChecks": [
+    {
+      "check": "invalid_inventory",
+      "count": 0
+    },
+    {
+      "check": "invalid_order_items",
+      "count": 0
+    },
+    {
+      "check": "order_total_mismatch",
+      "count": 0
+    },
+    {
+      "check": "invalid_invoice_balances",
+      "count": 0
+    },
+    {
+      "check": "invalid_review_ratings",
+      "count": 0
+    },
+    {
+      "check": "points_without_approved_review",
+      "count": 0
+    },
+    {
+      "check": "sessions_without_membership",
+      "count": 0
+    }
+  ],
+  "tableCounts": [
+    {
+      "table": "organizations",
+      "rows": 2
+    },
+    {
+      "table": "users",
+      "rows": 2
+    },
+    {
+      "table": "erp_products",
+      "rows": 10
+    },
+    {
+      "table": "orders",
+      "rows": 9
+    },
+    {
+      "table": "retailers",
+      "rows": 8
+    },
+    {
+      "table": "invoices",
+      "rows": 6
+    },
+    {
+      "table": "reviews",
+      "rows": 0
+    }
+  ],
+  "rowLevelSecurity": [
+    {
+      "table": "AiConversation",
+      "rls": true
+    },
+    {
+      "table": "AiMessage",
+      "rls": true
+    },
+    {
+      "table": "AuditLog",
+      "rls": true
+    },
+    {
+      "table": "CommunityPoint",
+      "rls": true
+    },
+    {
+      "table": "CommunityReview",
+      "rls": true
+    },
+    {
+      "table": "FinanceEntry",
+      "rls": true
+    },
+    {
+      "table": "InventoryMovement",
+      "rls": true
+    },
+    {
+      "table": "Invoice",
+      "rls": true
+    },
+    {
+      "table": "LoginAttempt",
+      "rls": true
+    },
+    {
+      "table": "Member",
+      "rls": true
+    },
+    {
+      "table": "Order",
+      "rls": true
+    },
+    {
+      "table": "OrderItem",
+      "rls": true
+    },
+    {
+      "table": "Organization",
+      "rls": true
+    },
+    {
+      "table": "PriceAlert",
+      "rls": true
+    },
+    {
+      "table": "PriceRefreshRun",
+      "rls": true
+    },
+    {
+      "table": "PriceReview",
+      "rls": true
+    },
+    {
+      "table": "Product",
+      "rls": true
+    },
+    {
+      "table": "PublicPriceChange",
+      "rls": true
+    },
+    {
+      "table": "PublicPriceSnapshot",
+      "rls": true
+    },
+    {
+      "table": "PublicProduct",
+      "rls": true
+    },
+    {
+      "table": "Retailer",
+      "rls": true
+    },
+    {
+      "table": "Session",
+      "rls": true
+    },
+    {
+      "table": "User",
+      "rls": true
+    }
+  ],
+  "unvalidatedConstraints": 0,
+  "refreshRuns": []
+}

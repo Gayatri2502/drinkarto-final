@@ -355,3 +355,17 @@
     animation: none !important;
   }
 }
+/* Upright spatial presentation: the centre bottle is more than twice as tall. */
+.public-site .works-wheel{height:640px}
+.public-site .ww-stage{inset:15px 20% 105px;perspective:1200px;touch-action:pan-y;overflow:visible}
+.public-site .ww-drum{width:0;height:0;transform-style:preserve-3d}
+.public-site .ww-stage .ww-card{position:absolute;width:260px;height:400px;margin:-200px 0 0 -130px;padding:0;border:0;border-radius:0;background:transparent;color:inherit;transform-origin:center;backface-visibility:hidden;cursor:pointer;will-change:transform}
+.public-site .ww-card .ww-face{transform-style:preserve-3d}
+.public-site .ww-bottle-image{filter:drop-shadow(9px 20px 13px #263b422b);height:100%;width:100%;object-fit:contain}
+.public-site .ww-face:after{content:'';position:absolute;bottom:-8px;left:25%;width:50%;height:10px;border-radius:50%;background:#263b4218;filter:blur(8px);z-index:-1}
+.public-site .ww-front-title{z-index:2;top:36%;max-width:220px;opacity:1;font-size:30px}
+.public-site .ww-front-title>p{font-size:12px;letter-spacing:0;line-height:1.7;margin-top:15px;color:#71858a}
+.public-site .ww-index{z-index:3;top:20%;max-width:210px;background:linear-gradient(90deg,transparent,#fff 18%);padding-left:16px}
+@media(min-width:1400px){.public-site .ww-stage .ww-card{width:290px;height:440px;margin:-220px 0 0 -145px}}
+@media(max-width:900px){.public-site .ww-front-title{max-width:150px;font-size:23px}.public-site .ww-index{max-width:150px}.public-site .ww-stage{inset-inline:18%}.public-site .ww-stage .ww-card{height:370px;width:230px;margin:-185px 0 0 -115px}}
+@media(max-width:600px){.public-site .works-wheel{height:590px}.public-site .ww-stage{inset:75px 0 125px;perspective:1000px}.public-site .ww-stage .ww-card{width:230px;height:340px;margin:-170px 0 0 -115px}.public-site .ww-front-title{top:12px;left:0;right:0;max-width:none;text-align:center;transform:none}.public-site .ww-front-title>strong{font-family:Georgia,serif;font-size:24px;font-weight:400}.public-site .ww-front-title>p{display:none}.public-site .ww-index{top:auto;bottom:85px;background:none;left:3%;right:3%;display:flex;gap:6px;overflow-x:auto;padding:0;scrollbar-width:none;max-width:none}.public-site .ww-index li{flex-shrink:0}.public-site .ww-index .ww-index-button{font-size:11px;border:1px solid #dce4e2;border-radius:99px;padding:7px 10px;min-height:34px;white-space:nowrap}.public-site .ww-index .ww-index-button.is-active{border-color:#7fae9f;background:#edf5ef}.public-site .ww-index-button>span{display:none}.public-site .ww-controls{bottom:39px}.public-site .ww-instructions{display:none}.public-site .ww-credits{bottom:4px}.public-site .ww-controls button{min-width:40px;min-height:40px}}
