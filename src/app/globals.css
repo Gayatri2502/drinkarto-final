@@ -649,3 +649,8 @@ dialog::backdrop {
 @media (prefers-reduced-motion: reduce) {
   .action-toast { animation: none; }
 }
+
+/* One locally bundled type family across public pages and ERP. */
+:root{--font-drinkarto:'Inter Variable',Inter,Arial,sans-serif}
+body,button,input,select,textarea{font-family:var(--font-drinkarto)}
+body :is(h1,h2,h3,h4,h5,h6){font-family:var(--font-drinkarto);font-weight:750}

@@ -1,0 +1,504 @@
+/* User-selected direction: uniform bold Inter + translucent product surfaces. */
+.public-site {
+  --paper: #f2f6f8;
+  --ink: #172e3b;
+  --muted: #4c6371;
+  --line: #cad9e0;
+  --sage: #e5eff0;
+  --reference-green: #156b68;
+  --reference-dark: #163442;
+  --reference-serif: var(--font-drinkarto);
+  --reference-on-dark: #f8fcff;
+  --glass-surface: rgba(255, 255, 255, 0.82);
+  --glass-edge: rgba(255, 255, 255, 0.96);
+  --glass-shadow: 0 12px 36px #183f5010, inset 0 1px 0 #fff;
+  background:
+    radial-gradient(ellipse at 90% 8%, #cde9e8 0, transparent 38%),
+    radial-gradient(ellipse at 0 36%, #dbe4f7 0, transparent 42%), var(--paper) !important;
+  font-family: var(--font-drinkarto) !important;
+}
+.public-site
+  :is(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .public-logo,
+    .dictionary-letter,
+    .guide-number,
+    .knowledge-pick-title,
+    .still-life-caption > strong,
+    .recipe-library-title > strong,
+    .lens-rate-value > strong
+  ) {
+  font-family: var(--font-drinkarto) !important;
+  font-weight: 750 !important;
+  font-style: normal !important;
+  letter-spacing: -0.035em !important;
+}
+.public-site
+  :is(button, input, select, textarea, summary, p, a, small, dt, dd) {
+  font-family: var(--font-drinkarto) !important;
+}
+.public-site :is(h1 em, h2 em, h3 em) {
+  font-family: var(--font-drinkarto) !important;
+  font-style: normal !important;
+  font-weight: 750 !important;
+}
+.public-site .editorial-hero h1 {
+  font-size: clamp(48px, 5.3vw, 76px) !important;
+  line-height: 1.07 !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.055em !important;
+}
+.public-site .editorial-hero h1 em {
+  color: var(--reference-green);
+}
+.public-site .editorial-hero h1 em::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 5px;
+  background: var(--reference-green);
+  border-radius: 9px;
+  margin-top: 26px;
+}
+.public-site .public-eyebrow {
+  font-weight: 700 !important;
+}
+.public-site .editorial-deck {
+  font-size: 16px;
+  line-height: 1.8;
+}
+.public-site .public-header {
+  position: sticky;
+  top: 0;
+  height: 88px;
+  background: rgba(247, 251, 253, 0.89) !important;
+  border-bottom: 1px solid var(--glass-edge);
+  backdrop-filter: blur(22px) saturate(135%);
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
+  box-shadow: 0 4px 24px #16344208;
+}
+.public-site .reference-nav {
+  padding: 5px 7px;
+  border: 1px solid var(--glass-edge);
+  border-radius: 40px;
+  background: rgba(224, 235, 239, 0.6);
+  box-shadow: inset 0 1px 0 #fff;
+}
+.public-site .reference-nav > a {
+  font-size: 12px !important;
+  font-weight: 650;
+  padding-inline: 12px;
+}
+.public-site .nav-active-indicator {
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 3px 10px #16344212;
+}
+.public-site .public-logo > span {
+  border-radius: 10px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-drinkarto);
+  font-style: normal;
+  font-size: 22px;
+  font-weight: 800;
+}
+.public-site .public-logo small {
+  font-size: 8px !important;
+  font-weight: 600;
+}
+.public-site .public-business {
+  border-radius: 24px;
+  background: var(--glass-surface) !important;
+  font-weight: 650;
+}
+.public-site .public-button {
+  border-radius: 11px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 5px 14px #16344212 !important;
+}
+.public-site .editorial-still-life {
+  border-radius: 28px;
+  background: linear-gradient(145deg, #ffffffc9, #d9eae6a6);
+  border: 1px solid var(--glass-edge);
+  backdrop-filter: blur(20px);
+  box-shadow: var(--glass-shadow);
+  overflow: hidden;
+}
+.public-site .still-life-word {
+  font-family: var(--font-drinkarto);
+  font-style: normal;
+  font-weight: 800;
+  font-size: 110px;
+  letter-spacing: -0.06em;
+  color: #bacfcd;
+}
+.public-site .still-life-caption > strong {
+  font-size: 25px;
+}
+.public-site .reference-ledger {
+  border: 1px solid var(--glass-edge);
+  background: var(--glass-surface);
+  border-radius: 16px;
+  padding: 24px;
+  backdrop-filter: blur(18px);
+  box-shadow: var(--glass-shadow);
+}
+.public-site .reference-ledger strong {
+  font-weight: 650;
+}
+.public-site .professional-knowledge {
+  background: transparent;
+}
+.public-site .professional-resource-grid {
+  border: 0;
+  gap: 18px;
+}
+.public-site
+  :is(
+    .professional-resource,
+    .professional-wines > a,
+    .catalogue-card,
+    .pricing-card,
+    .knowledge-topic-tile,
+    .knowledge-pick-card,
+    .knowledge-note-card,
+    .business-capabilities article,
+    .business-route-card,
+    .comparison-desk,
+    .recipe-library,
+    .recipe-ingredients,
+    .recipe-glass-zone,
+    .profile-card,
+    .public-feature
+  ) {
+  background: var(--glass-surface) !important;
+  border: 1px solid var(--glass-edge) !important;
+  border-radius: 18px !important;
+  box-shadow: var(--glass-shadow) !important;
+  backdrop-filter: blur(16px) saturate(125%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(125%) !important;
+}
+.public-site .professional-resource {
+  padding: 28px !important;
+  transition:
+    transform 260ms var(--reference-ease),
+    box-shadow 260ms;
+}
+.public-site .professional-resource h3 {
+  font-size: 22px !important;
+  line-height: 1.3 !important;
+}
+.public-site .professional-resource:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 36px #16344218 !important;
+}
+.public-site .professional-wines h3 {
+  font-size: 23px !important;
+}
+.public-site
+  :is(
+    .knowledge-dashboard-hero,
+    .knowledge-atlas-card,
+    .revealed-instruction,
+    .compact-discovery
+  ) {
+  background: var(--glass-surface) !important;
+  border: 1px solid var(--glass-edge) !important;
+  border-radius: 22px !important;
+  box-shadow: var(--glass-shadow) !important;
+  backdrop-filter: blur(18px);
+}
+.public-site .knowledge-dashboard-hero h1 {
+  font-size: clamp(34px, 4vw, 56px) !important;
+  font-weight: 800 !important;
+}
+.public-site .knowledge-pick-title {
+  font-size: 22px;
+  line-height: 1.35;
+}
+.public-site .knowledge-sidebar {
+  border-radius: 18px;
+  background: var(--reference-dark);
+}
+.public-site .knowledge-sidebar .knowledge-side-link {
+  border-radius: 9px;
+}
+.public-site .knowledge-pick-card {
+  transition:
+    transform 250ms var(--reference-ease),
+    box-shadow 250ms;
+}
+.public-site .knowledge-pick-card:hover {
+  transform: translateY(-4px);
+}
+.public-site .recipe-choice,
+.public-site .ingredient-token {
+  border-radius: 11px;
+  background: var(--glass-surface);
+}
+.public-site .public-section-heading h2 {
+  font-size: 34px !important;
+  line-height: 1.22 !important;
+}
+/* Keep the comparison data opaque enough to read through the glass. */
+.public-site .statelens-page .lens-page-heading h1 {
+  font-size: clamp(42px, 4.5vw, 60px) !important;
+  font-weight: 800 !important;
+}
+.public-site
+  .statelens-page
+  :is(.lens-focus, .lens-library, .lens-toolbar, .lens-mobile-controls) {
+  border-radius: 18px;
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-edge);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(16px);
+}
+.public-site .statelens-page .lens-toolbar {
+  border-color: var(--line);
+}
+.public-site .statelens-page .lens-product-heading {
+  background: linear-gradient(115deg, #163442, #225e67);
+  padding: 28px;
+}
+.public-site .statelens-page .lens-product-heading h2 {
+  font-size: 28px !important;
+  line-height: 1.25 !important;
+  font-weight: 750 !important;
+}
+.public-site .statelens-page .lens-product-icon {
+  border-radius: 14px;
+  background: #ffffff12;
+}
+.public-site .statelens-page .lens-rate {
+  border-radius: 10px;
+  margin-block: 8px;
+  border: 1px solid var(--line);
+  background: #ffffffad;
+  padding: 18px 14px;
+}
+.public-site .statelens-page .lens-rate.is-low {
+  background: #e9f6ef;
+  border-left: 3px solid var(--reference-green);
+}
+.public-site .statelens-page .lens-rate.is-high {
+  background: #fbf3e8;
+  border-left: 3px solid var(--reference-gold);
+}
+.public-site .statelens-page .lens-rate.is-missing {
+  background: #edf2f5;
+  border-style: dashed;
+}
+.public-site .statelens-page .lens-rate-value > strong {
+  font-size: 27px !important;
+  letter-spacing: -0.04em !important;
+  font-weight: 750 !important;
+  font-variant-numeric: tabular-nums;
+}
+.public-site .statelens-page .lens-board-heading h3 {
+  font-size: 20px !important;
+}
+.public-site .statelens-page .lens-size-line button,
+.public-site .statelens-page .lens-states button {
+  border-radius: 8px;
+}
+.public-site .statelens-page .lens-search-button {
+  border-radius: 10px;
+  font-weight: 700;
+}
+.public-site .market-directory > summary strong {
+  font-size: 22px !important;
+}
+/* Saved gallery patterns: manually controlled scrolling, no scroll hijacking. */
+.public-site .glass-gallery {
+  min-width: 0;
+}
+.public-site .glass-gallery-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--muted);
+}
+.public-site .glass-gallery-controls > div {
+  display: flex;
+  gap: 8px;
+}
+.public-site .glass-gallery-controls button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--glass-surface);
+  color: var(--ink);
+  cursor: pointer;
+}
+.public-site .glass-card-rail {
+  display: flex;
+  gap: 22px;
+  overflow-x: auto;
+  padding: 8px 4px 24px;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #9cb4bc transparent;
+}
+.public-site .glass-card-rail > .editorial-gallery-item {
+  flex: 0 0 42%;
+  min-width: 0;
+  scroll-snap-align: start;
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-edge);
+  border-radius: 20px;
+  box-shadow: var(--glass-shadow);
+  overflow: hidden;
+  transition: transform 260ms var(--reference-ease);
+}
+.public-site .glass-card-rail > .editorial-gallery-item:hover {
+  transform: translateY(-5px);
+}
+.public-site .glass-card-rail > .editorial-gallery-item > div {
+  padding: 20px;
+}
+.public-site .glass-card-rail .editorial-gallery-photo {
+  margin: 0;
+  border-radius: 0;
+}
+.public-site .glass-card-rail .editorial-gallery-item h3 {
+  font-size: 22px !important;
+  line-height: 1.35 !important;
+}
+.public-site .glass-card-rail .editorial-gallery-photo .knowledge-photo-image {
+  height: 260px;
+}
+.public-site .public-business-strip {
+  border-radius: 22px !important;
+  background: linear-gradient(115deg, #163442, #225e67) !important;
+}
+.public-site .public-business-strip h3 {
+  font-size: 30px !important;
+}
+.public-site .reference-footer {
+  background: #e3edf1 !important;
+  border-color: #d1dee4 !important;
+}
+.public-site .age-dialog {
+  background: #f5f9fc !important;
+  border-radius: 20px !important;
+}
+@media (max-width: 1100px) and (min-width: 901px) {
+  .public-site .reference-nav > a {
+    padding-inline: 8px;
+    font-size: 11px !important;
+  }
+}
+@media (max-width: 900px) {
+  .public-site .public-header {
+    height: 82px;
+  }
+  .public-site .reference-nav {
+    border-radius: 0;
+    margin: 0;
+    box-shadow: 0 15px 25px #16344215;
+    background: #f3f8fb;
+  }
+  .public-site .reference-nav.is-open {
+    background: #f3f8fb;
+  }
+  .public-site .reference-nav > a {
+    font-size: 14px !important;
+  }
+  .public-site .editorial-hero h1 {
+    font-size: 48px !important;
+  }
+  .public-site .glass-card-rail > .editorial-gallery-item {
+    flex-basis: 62%;
+  }
+}
+@media (max-width: 640px) {
+  .public-site .public-header {
+    height: 76px;
+  }
+  .public-site .editorial-hero h1 {
+    font-size: clamp(40px, 10.5vw, 58px) !important;
+  }
+  .public-site .editorial-still-life {
+    height: 385px;
+    border-radius: 22px;
+  }
+  .public-site .still-life-word {
+    font-size: 95px;
+  }
+  .public-site .reference-ledger {
+    padding: 20px;
+  }
+  .public-site .professional-resource-grid {
+    gap: 14px;
+  }
+  .public-site .professional-resource {
+    padding: 24px !important;
+    border: 1px solid var(--glass-edge) !important;
+  }
+  .public-site .public-section-heading h2 {
+    font-size: 28px !important;
+  }
+  .public-site .glass-card-rail {
+    gap: 14px;
+  }
+  .public-site .glass-card-rail > .editorial-gallery-item {
+    flex-basis: 88%;
+  }
+  .public-site .glass-card-rail .editorial-gallery-item h3 {
+    font-size: 20px !important;
+  }
+  .public-site .statelens-page .lens-product-heading {
+    padding: 20px;
+  }
+  .public-site .statelens-page .lens-product-heading h2 {
+    font-size: 23px !important;
+  }
+  .public-site .statelens-page .lens-rate-value > strong {
+    font-size: 24px !important;
+  }
+  .public-site .statelens-page .lens-rate {
+    padding: 15px 10px;
+  }
+  .public-site .reference-nav > a {
+    border-radius: 10px;
+  }
+  .public-site .public-business {
+    font-size: 10px !important;
+  }
+  .public-site .public-logo small {
+    font-size: 7px !important;
+  }
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .public-site {
+    --glass-surface: #fff;
+  }
+  .public-site .public-header {
+    background: #f5f9fc !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .public-site .professional-resource:hover,
+  .public-site .knowledge-pick-card:hover,
+  .public-site .glass-card-rail > .editorial-gallery-item:hover {
+    transform: none;
+  }
+  .public-site .glass-card-rail {
+    scroll-behavior: auto;
+  }
+}

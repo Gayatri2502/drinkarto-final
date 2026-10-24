@@ -4,6 +4,7 @@ import "./professional.css";
 import "./knowledge.css";
 import "./mobile.css";
 import "./editorial.css";
+import "./glass.css";
 export const metadata = {
   title: {
     default: "Drinkarto | Liquor price references and knowledge",

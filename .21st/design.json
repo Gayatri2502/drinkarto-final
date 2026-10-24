@@ -10,7 +10,8 @@
   },
   "sources": {
     "tokens": [
-      "src/app/(public)/editorial.css"
+      "src/app/(public)/glass.css",
+      "src/app/globals.css"
     ],
     "components": [
       "src/components/ui"
@@ -27,59 +28,49 @@
     "colorMode": "light",
     "colors": {
       "--paper": {
-        "value": "#f7f5ee",
-        "source": "src/app/(public)/editorial.css"
+        "value": "#f2f6f8",
+        "source": "src/app/(public)/glass.css"
       },
       "--ink": {
-        "value": "#23392e",
-        "source": "src/app/(public)/editorial.css"
+        "value": "#172e3b",
+        "source": "src/app/(public)/glass.css"
       },
       "--muted": {
-        "value": "#62685e",
-        "source": "src/app/(public)/editorial.css"
-      },
-      "--line": {
-        "value": "#d8dacd",
-        "source": "src/app/(public)/editorial.css"
-      },
-      "--sage": {
-        "value": "#e8ebdc",
-        "source": "src/app/(public)/editorial.css"
+        "value": "#4c6371",
+        "source": "src/app/(public)/glass.css"
       },
       "--reference-green": {
-        "value": "#34684b",
-        "source": "src/app/(public)/editorial.css"
-      },
-      "--reference-gold": {
-        "value": "#805c22",
-        "source": "src/app/(public)/editorial.css"
+        "value": "#156b68",
+        "source": "src/app/(public)/glass.css"
       }
     },
     "typography": {
-      "display": "Georgia serif, regular; italic emphasis",
-      "body": "Arial/Helvetica sans serif; 14\u201317px reading text"
+      "display": "Self-hosted Inter Variable, 750\u2013800, normal style",
+      "body": "Self-hosted Inter Variable, 400\u2013650",
+      "scope": "Public pages and ERP"
     },
     "spacing": {
       "section": "65px desktop / 38px mobile"
     },
     "radius": {
-      "surface": "3\u20134px; hero arch is an intentional exception"
+      "surface": "18px glass surfaces; 10px controls"
     },
     "shadows": {
-      "surface": "none"
+      "surface": "Subtle outer depth plus inset glass highlight"
     },
     "motion": {
       "navigation": "260ms sliding indicator",
       "reveal": "550ms once on entry; native Web Animations",
       "reducedMotion": "No entry animations, smooth scrolling or hover transforms"
     },
-    "density": "Editorial public pages; compact price comparison"
+    "density": "Compact data explorer with glass surfaces; responsive manually controlled gallery"
   },
   "components": {
     "installed": [
       "works-wheel",
       "reference-nav",
-      "reveal"
+      "reveal",
+      "scrolling-cards"
     ],
     "preferredPrimitives": [
       "Next Link and Image",
@@ -88,7 +79,10 @@
     ],
     "patterns": [
       "21st educalvolpz Animated Tabs \u2014 sliding nav indicator adapted with document-link semantics",
-      "21st asanshay Reveal \u2014 viewport entry adapted to progressive enhancement"
+      "21st asanshay Reveal \u2014 viewport entry adapted to progressive enhancement",
+      "Saved Glass Cards \u2014 locally adapted translucent surface/hover treatment",
+      "Saved GSAP Card Flip and Flip Gallery \u2014 local native horizontal gallery adaptation",
+      "Saved Adaptive Notch Navigation \u2014 floating pill navigation treatment"
     ]
   },
   "constraints": {
@@ -117,6 +111,10 @@
     {
       "decision": "No hosted AI generation or public theme publishing",
       "source": "21st AI access disabled; public publishing unnecessary to implementation"
+    },
+    {
+      "decision": "Supersedes editorial serif direction: uniform bold self-hosted Inter, glass surfaces, card scrolling and floating navigation",
+      "source": "Explicit user correction, 2026-10-24"
     }
   ],
   "evidence": [

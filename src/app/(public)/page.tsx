@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import ScrollingCards from "@/components/ui/scrolling-cards";
 import Reveal from "@/components/ui/reveal";
 import {
   ArrowUpRight,
@@ -213,7 +214,7 @@ export default async function Home() {
             Explore the knowledge library <ArrowUpRight size={16} />
           </Link>
         </div>
-        <div className="editorial-gallery">
+        <ScrollingCards label="places and production">
           <article className="editorial-gallery-item">
             <KnowledgeImage
               photo={knowledgePhotos.wineGrapes}
@@ -253,7 +254,7 @@ export default async function Home() {
               </Link>
             </div>
           </article>
-        </div>
+        </ScrollingCards>
       </section>
       <section className="public-container public-section">
         <div className="public-section-heading">
