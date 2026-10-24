@@ -447,3 +447,15 @@
     margin-left: auto;
   }
 }
+
+/* Review fixes: preserve readable labels on the navy header and small captions. */
+.public-site .statelens-page .lens-page-heading p.public-eyebrow {
+  color: #8ee7d5 !important;
+}
+.public-site .statelens-page .lens-kicker {
+  color: color-mix(in srgb, var(--lens-accent) 65%, #102534);
+}
+.public-site .statelens-page .lens-mobile-states small {
+  color: #435b70;
+  font-size: 13px;
+}

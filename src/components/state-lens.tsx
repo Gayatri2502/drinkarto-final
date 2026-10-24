@@ -271,7 +271,7 @@ export default function StateLens({
               aria-label="Bottle size on mobile"
               value={selectedSize}
               onChange={(event) => setSize(event.target.value)}
-              disabled={!sizes.length}
+              disabled={loading || !sizes.length}
             >
               {sizes.map((item) => (
                 <option key={item} value={item}>
@@ -370,7 +370,6 @@ export default function StateLens({
               {!loading && !result?.rows.length && (
                 <div className="lens-empty">
                   <p>No bottles match this search.</p>
-                  <button onClick={reset}>Clear filters</button>
                 </div>
               )}
             </div>
@@ -626,12 +625,14 @@ export default function StateLens({
               <h2>
                 {loading
                   ? "Setting up your comparison…"
-                  : "Find your next comparison."}
+                  : "No bottles match your search."}
               </h2>
               <p>
-                Search a bottle, choose its size, and explore the published
-                state rates.
+                {loading
+                  ? "Search a bottle, choose its size, and explore the published state rates."
+                  : "Try another name or clear your search and category filters."}
               </p>
+              {!loading && <button onClick={reset}>Clear filters</button>}
             </div>
           )}
         </div>
