@@ -1,0 +1,22 @@
+[
+  {
+    "background": "rgb(255, 255, 255)",
+    "headerLabel": "rgb(142, 231, 213)",
+    "kicker": "color(srgb 0.442549 0.32098 0.175882)",
+    "publicScheme": "light",
+    "scroll": 826,
+    "text": "rgb(67, 91, 112)",
+    "theme": "light",
+    "width": 825
+  },
+  {
+    "background": "rgb(255, 255, 255)",
+    "headerLabel": "rgb(142, 231, 213)",
+    "kicker": "color(srgb 0.442549 0.32098 0.175882)",
+    "publicScheme": "light",
+    "scroll": 826,
+    "text": "rgb(67, 91, 112)",
+    "theme": "dark",
+    "width": 825
+  }
+]
