@@ -9,7 +9,7 @@ const credit = (author: string, file: string, version = "4.0") => ({
   licenseUrl: `https://creativecommons.org/licenses/by-sa/${version}/`,
 });
 // Exact photographed identities; links search the catalogue without asserting local availability.
-export const featuredBottles: WorksWheelItem[] = [
+export const featuredBottles = [
   {
     title: "Hendrick’s Gin",
     category: "Gin",
@@ -68,4 +68,4 @@ export const featuredBottles: WorksWheelItem[] = [
     href: "/guides/spirit-families",
     credit: credit("SiegfriedRheinland", "Siegfried Gin.png"),
   },
-];
+] satisfies WorksWheelItem[];

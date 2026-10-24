@@ -74,7 +74,7 @@ export default function KnowledgeHub({ legacyGuides }: { legacyGuides: Knowledge
 
   const chooseCategory = (category: string) => {
     setActiveCategory(category);
-    document.getElementById('knowledge-library')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('knowledge-library')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
   };
 
   return (

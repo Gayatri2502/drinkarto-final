@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "project": {
+    "name": "drinkarto",
+    "productType": "Adult liquor reference and business operations",
+    "stack": [
+      "nextjs",
+      "react"
+    ]
+  },
+  "sources": {
+    "tokens": [
+      "src/app/(public)/editorial.css"
+    ],
+    "components": [
+      "src/components/ui"
+    ],
+    "assets": [
+      "public/images"
+    ],
+    "instructions": [
+      "AGENTS.md",
+      "CLAUDE.md"
+    ]
+  },
+  "design": {
+    "colorMode": "light",
+    "colors": {
+      "--paper": {
+        "value": "#f7f5ee",
+        "source": "src/app/(public)/editorial.css"
+      },
+      "--ink": {
+        "value": "#23392e",
+        "source": "src/app/(public)/editorial.css"
+      },
+      "--muted": {
+        "value": "#62685e",
+        "source": "src/app/(public)/editorial.css"
+      },
+      "--line": {
+        "value": "#d8dacd",
+        "source": "src/app/(public)/editorial.css"
+      },
+      "--sage": {
+        "value": "#e8ebdc",
+        "source": "src/app/(public)/editorial.css"
+      },
+      "--reference-green": {
+        "value": "#34684b",
+        "source": "src/app/(public)/editorial.css"
+      },
+      "--reference-gold": {
+        "value": "#805c22",
+        "source": "src/app/(public)/editorial.css"
+      }
+    },
+    "typography": {
+      "display": "Georgia serif, regular; italic emphasis",
+      "body": "Arial/Helvetica sans serif; 14\u201317px reading text"
+    },
+    "spacing": {
+      "section": "65px desktop / 38px mobile"
+    },
+    "radius": {
+      "surface": "3\u20134px; hero arch is an intentional exception"
+    },
+    "shadows": {
+      "surface": "none"
+    },
+    "motion": {
+      "navigation": "260ms sliding indicator",
+      "reveal": "550ms once on entry; native Web Animations",
+      "reducedMotion": "No entry animations, smooth scrolling or hover transforms"
+    },
+    "density": "Editorial public pages; compact price comparison"
+  },
+  "components": {
+    "installed": [
+      "works-wheel",
+      "reference-nav",
+      "reveal"
+    ],
+    "preferredPrimitives": [
+      "Next Link and Image",
+      "native details/summary",
+      "native select"
+    ],
+    "patterns": [
+      "21st educalvolpz Animated Tabs \u2014 sliding nav indicator adapted with document-link semantics",
+      "21st asanshay Reveal \u2014 viewport entry adapted to progressive enhancement"
+    ]
+  },
+  "constraints": {
+    "must": [
+      "Preserve source dates, image credits, missing-price states and adult access",
+      "Keep ERP styles isolated",
+      "Keep content visible without animation JavaScript",
+      "Respect reduced motion and keyboard focus"
+    ],
+    "avoid": [
+      "Invented state prices or availability",
+      "Rainbow comparison cards",
+      "Continuous decorative animation",
+      "Publishing design context without confirmation"
+    ]
+  },
+  "decisions": [
+    {
+      "decision": "Warm paper, ink/olive, serif editorial headings and compact squared surfaces",
+      "source": "Agent design direction under user-authorized visual redesign, 2026-10-24"
+    },
+    {
+      "decision": "Bottle comparison precedes national tax directory; tax directory is an optional disclosure",
+      "source": "Repeated user requests for simpler comparisons and less scrolling"
+    },
+    {
+      "decision": "No hosted AI generation or public theme publishing",
+      "source": "21st AI access disabled; public publishing unnecessary to implementation"
+    }
+  ],
+  "evidence": [
+    {
+      "fact": "components.installed",
+      "source": "src/components/ui"
+    },
+    {
+      "fact": "design.colorMode:light",
+      "source": "src/app/globals.css"
+    },
+    {
+      "fact": "design.tokens",
+      "source": "src/app/globals.css"
+    },
+    {
+      "fact": "project.instructions",
+      "source": "AGENTS.md"
+    },
+    {
+      "fact": "project.instructions",
+      "source": "CLAUDE.md"
+    },
+    {
+      "fact": "project.stack:nextjs",
+      "source": "package.json"
+    },
+    {
+      "fact": "project.stack:react",
+      "source": "package.json"
+    }
+  ],
+  "generatedAt": "2026-10-24T05:59:14.463Z"
+}

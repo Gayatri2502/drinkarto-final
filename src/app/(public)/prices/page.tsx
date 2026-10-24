@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 import StateLens from "@/components/state-lens";
 import IndiaPriceAtlas from "@/components/india-price-atlas";
-import "@/components/statelens-colour.css";
+
 export const metadata = {
   title: "2026 India liquor prices, state tax rules and bottle comparisons",
   description:
@@ -37,25 +37,19 @@ export default async function Prices({
     <div className="public-container public-page statelens-page">
       <header className="lens-page-heading">
         <div>
-          <p className="public-eyebrow">
-            2026 INDIA · PRICE, TAX & MARKET REFERENCE
-          </p>
+          <p className="public-eyebrow">THE PRICE DESK / INDIA 2026</p>
           <h1>
             StateLens<span>.</span>
           </h1>
           <p>
-            Understand the state’s rules, choose one bottle and size, then
-            compare its published final price across states.
+            One bottle. One size. A clear view of its published price across
+            states.
           </p>
         </div>
         <span className="lens-coverage-pill">
           {snapshots.length} imported price sources
         </span>
       </header>
-      <IndiaPriceAtlas
-        coverage={coverage}
-        initialState={params.state ?? "Kerala"}
-      />
       <div id="bottle-comparison">
         <StateLens
           initialState={params.state ?? ""}
@@ -63,6 +57,25 @@ export default async function Prices({
           initialQuery={params.q ?? ""}
         />
       </div>
+      <details className="market-directory">
+        <summary>
+          <span>
+            <span className="public-eyebrow">THE BIGGER PICTURE</span>
+            <strong>State rules, taxes & source coverage</strong>
+          </span>
+          <span className="directory-summary-note">
+            28 states · 8 union territories <span aria-hidden="true">＋</span>
+          </span>
+        </summary>
+        <p className="directory-intro">
+          Explore market rules separately from the bottle comparison. A listed
+          jurisdiction does not mean a verified price is available.
+        </p>
+        <IndiaPriceAtlas
+          coverage={coverage}
+          initialState={params.state ?? "Kerala"}
+        />
+      </details>
     </div>
   );
 }
