@@ -3,7 +3,7 @@ import {filterPrices} from './public-prices';
 import type {PriceRow} from '@/content/public';
 export type PriceComparisonProduct={key:string;name:string;category:string;sizes:Record<string,Record<string,PriceRow[]>>};
 import {canonicalLiquorName} from './liquor-name';
-export async function livePriceComparisons(input:{q?:string;category?:string;page?:number;limit?:number}){
+export async function livePriceComparisons(input:{q?:string;category?:string;page?:number;limit?:number;size?:number;occasion?:string;min?:number;max?:number}){
  const snapshots=await db.publicPriceSnapshot.findMany();
  if(!snapshots.length) throw new Error('Official catalogue has not been initialized');
  const all=snapshots.flatMap(s=>(s.rows as unknown as PriceRow[]).map(p=>({...p,sourceUrl:s.sourceUrl,checkedAt:s.checkedAt.toISOString(),published:s.published,effective:p.effective??s.effective})));
@@ -15,12 +15,14 @@ export async function livePriceComparisons(input:{q?:string;category?:string;pag
   const key=`${row.category.toLocaleLowerCase()}|${name.toLocaleLowerCase()}`;
   if(q&&!originalName.toLocaleLowerCase().includes(q)&&!name.toLocaleLowerCase().includes(q))continue;
   if(input.category&&row.category!==input.category)continue;
+  const occasionCategories: Record<string,string[]> = {"Dinner gathering":["Wine","Beer"],"Cocktail evening":["Gin","Rum","Vodka","Tequila"],"Casual get-together":["Beer","Wine"]};
+  if(input.occasion && !occasionCategories[input.occasion]?.includes(row.category)) continue;
   let group=groups.get(key);
   if(!group){group={key,name,category:row.category,sizes:{}};groups.set(key,group);}
   else if(name.length<group.name.length)group.name=name;
   const size=String(row.sizeMl);group.sizes[size]??={};group.sizes[size][row.state]??=[];group.sizes[size][row.state].push(row);
  }
- const sorted=[...groups.values()].sort((a,b)=>a.name.localeCompare(b.name)||a.category.localeCompare(b.category));
+ const sorted=[...groups.values()].filter(product => Object.entries(product.sizes).some(([size, states]) => (!input.size || Number(size) === input.size) && Object.values(states).flat().some(row => (input.min === undefined || row.price >= input.min) && (input.max === undefined || row.price <= input.max)))).sort((a,b)=>a.name.localeCompare(b.name)||a.category.localeCompare(b.category));
  const limit=Math.max(1,Math.min(50,Math.floor(input.limit??20)));
  const pages=Math.max(1,Math.ceil(sorted.length/limit));
  const page=Math.min(pages,Math.max(1,Math.floor(input.page??1)));

@@ -139,7 +139,7 @@ const report = await db.$transaction(
   { timeout: 60000 },
 );
 await writeFile(
-  "docs/DATABASE-AUDIT-2026-10-23.json",
+  `docs/DATABASE-AUDIT-${new Date().toISOString().slice(0,10)}.json`,
   JSON.stringify(report, null, 2) + "\n",
 );
 console.log(JSON.stringify(report, null, 2));

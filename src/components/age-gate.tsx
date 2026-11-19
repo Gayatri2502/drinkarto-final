@@ -7,22 +7,21 @@ import Link from 'next/link';
 const KEY = 'drinkarto-adult-confirmation-v1';
 const EXEMPT_PATHS = ['/privacy', '/terms', '/responsible-use', '/pricing'];
 
-export default function AgeGate({ children }: { children: React.ReactNode }) {
+export default function AgeGate({ children, initiallyAccepted = false }: { children: React.ReactNode; initiallyAccepted?: boolean }) {
   const path = usePathname();
   const exempt = EXEMPT_PATHS.includes(path);
-  const [accepted, setAccepted] = useState(false);
+  const [accepted, setAccepted] = useState(initiallyAccepted);
   const [blocked, setBlocked] = useState(false);
-  const [confirm, setConfirm] = useState(false);
   const ref = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
     try {
       const expiry = Number(localStorage.getItem(KEY));
-      setAccepted(expiry > Date.now());
+      setAccepted(initiallyAccepted || expiry > Date.now());
     } catch {
-      setAccepted(false);
+      setAccepted(initiallyAccepted);
     }
-  }, []);
+  }, [initiallyAccepted]);
 
   useEffect(() => {
     const dialog = ref.current;
@@ -31,16 +30,6 @@ export default function AgeGate({ children }: { children: React.ReactNode }) {
     dialog.showModal();
   }, [accepted, exempt]);
 
-  function accept() {
-    try {
-      localStorage.setItem(KEY, String(Date.now() + 7 * 86400000));
-    } catch {
-      // The confirmation still applies for this page view when storage is unavailable.
-    }
-    ref.current?.close();
-    setAccepted(true);
-  }
-
   function reset() {
     try {
       localStorage.removeItem(KEY);
@@ -48,7 +37,6 @@ export default function AgeGate({ children }: { children: React.ReactNode }) {
       // Reset the in-memory state even when browser storage is unavailable.
     }
     setAccepted(false);
-    setConfirm(false);
     setBlocked(false);
   }
 
@@ -67,8 +55,11 @@ export default function AgeGate({ children }: { children: React.ReactNode }) {
           <button className="public-button secondary" onClick={() => setBlocked(false)}>Return to age check</button>
         </> : <>
           <p>Confirm you are at least 18 to explore this educational library. Drinking and purchase laws vary by state; this check does not grant permission to buy or consume alcohol.</p>
-          <label className="age-confirm"><input type="checkbox" checked={confirm} onChange={(event) => setConfirm(event.target.checked)} /> I am 18 or older.</label>
-          <button className="public-button" disabled={!confirm} onClick={accept}>Enter the library ↗</button>
+          <form action="/access-confirmation" method="post">
+            <input type="hidden" name="destination" value={path}/>
+            <label className="age-confirm"><input name="adultConfirmation" type="checkbox" required /> I am 18 or older.</label>
+            <button type="submit" className="public-button">Enter the library ↗</button>
+          </form>
           <button className="public-text-button" onClick={() => setBlocked(true)}>I am under 18</button>
         </>}
         <p className="public-small-note">Self-declaration, not identity verification. No date of birth or ID is collected. Your choice stays in this browser for 7 days.</p>

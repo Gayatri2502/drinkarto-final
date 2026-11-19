@@ -1,14 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
-import ScrollingCards from "@/components/ui/scrolling-cards";
-import Reveal from "@/components/ui/reveal";
 import {
   ArrowUpRight,
   ArrowRight,
   BookOpen,
   GitCompare,
   Layers,
-  ShieldCheck,
 } from "lucide-react";
 import { WorksWheel } from "@/components/ui/works-wheel";
 import { featuredBottles } from "@/content/featured-bottles";
@@ -35,18 +32,17 @@ export default async function Home() {
   return (
     <>
       <section className="editorial-hero public-container">
-        <Reveal className="editorial-hero-copy">
+        <div className="editorial-hero-copy">
           <p className="public-eyebrow">
             THE INDEPENDENT INDIAN DRINKS REFERENCE
           </p>
           <h1>
-            Good taste.
+            Indian drinks,
             <br />
-            <em>Better informed.</em>
+            <em>on record.</em>
           </h1>
           <p className="editorial-deck">
-            A bottle is more than its label. Explore its story, understand its
-            style, and see how its published price changes across India.
+            Look up published bottle prices across India, compare styles, and read the stories behind the labels.
           </p>
           <div className="public-hero-actions">
             <Link href="/prices" className="public-button">
@@ -56,46 +52,49 @@ export default async function Home() {
               Find your next read <ArrowRight size={17} />
             </Link>
           </div>
-          <div className="editorial-source">
-            <ShieldCheck size={17} />
-            <span>
-              Independent information. Linked sources. No online sales.
-            </span>
-          </div>
-        </Reveal>
-        <Reveal className="editorial-still-life" index={1}>
-          <span className="still-life-number" aria-hidden="true">
-            01 / THE BOTTLE EDIT
-          </span>
-          <span className="still-life-word" aria-hidden="true">
-            spirit.
-          </span>
-          <Image
-            src={featuredBottles[0].image}
-            alt={featuredBottles[0].alt}
-            width={440}
-            height={620}
-            priority
-            className="still-life-bottle"
-          />
-          <div className="still-life-caption">
-            <span>BOTANICAL / SCOTLAND</span>
-            <strong>Hendrick’s Gin</strong>
-            <Link href={featuredBottles[0].href}>
-              Explore the reference <ArrowUpRight size={15} />
-            </Link>
-          </div>
-          <details className="still-life-credit">
-            <summary>Photo credit</summary>
-            <p>
-              {featuredBottles[0].credit.author} ·{" "}
-              <a href={featuredBottles[0].credit.source}>Source</a> ·{" "}
-              <a href={featuredBottles[0].credit.licenseUrl}>
-                {featuredBottles[0].credit.license}
-              </a>
-            </p>
-          </details>
-        </Reveal>
+
+        </div>
+        <div className="editorial-still-life discovery-art">
+          <svg viewBox="0 0 520 580" role="img" aria-labelledby="reference-art-title reference-art-desc">
+            <title id="reference-art-title">A world of references, brought together</title>
+            <desc id="reference-art-desc">An original illustration of floating source records, a flavour compass and a recipe notebook connected by fine lines. Decorative documents contain no price data.</desc>
+            <defs><linearGradient id="paper-light" x2="1" y2="1"><stop stopColor="#fff"/><stop offset="1" stopColor="#d9e7f4"/></linearGradient><pattern id="reference-grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#ffffff" strokeOpacity=".07"/></pattern></defs>
+            <rect width="520" height="580" fill="url(#reference-grid)"/>
+            <circle cx="260" cy="284" r="166" fill="none" stroke="#93b9ed" strokeOpacity=".2"/>
+            <circle cx="260" cy="284" r="116" fill="none" stroke="#93b9ed" strokeOpacity=".3" strokeDasharray="3 9"/>
+            <path d="M110 180Q330 110 406 357M125 414Q147 224 379 188" fill="none" stroke="#b2cced" strokeWidth="1.5" strokeDasharray="5 7"/>
+            <g transform="translate(61 109) rotate(-10 90 95)">
+              <rect x="8" y="9" width="174" height="190" rx="18" fill="#071a35" opacity=".25"/>
+              <rect width="174" height="190" rx="18" fill="url(#paper-light)"/>
+              <text x="20" y="33" fill="#375675" fontSize="10" letterSpacing="2">THE PRICE RECORD</text>
+              <path d="M20 52H154" stroke="#a3b5c9"/>
+              <rect x="20" y="75" width="56" height="7" rx="3" fill="#264e7d"/>
+              <path d="M20 103H144M20 128H144M20 153H110" stroke="#96abc3" strokeWidth="5" strokeLinecap="round"/>
+              <circle cx="139" cy="153" r="12" fill="#b7342c"/>
+              <path d="m134 153 4 4 7-9" fill="none" stroke="white" strokeWidth="2"/>
+            </g>
+            <g transform="translate(294 286) rotate(12 80 90)">
+              <rect x="7" y="8" width="161" height="186" rx="17" fill="#071a35" opacity=".25"/>
+              <rect width="161" height="186" rx="17" fill="#b6cdef"/>
+              <path d="M21 0V186" stroke="#7c9dcb"/>
+              <text x="38" y="32" fill="#18365e" fontSize="10" letterSpacing="2">FIELD NOTES</text>
+              <circle cx="91" cy="90" r="33" fill="none" stroke="#456b99"/>
+              <path d="M91 57V123M58 90H124M68 67 114 113M68 113 114 67" stroke="#456b99"/>
+              <circle cx="91" cy="90" r="9" fill="#b7342c"/>
+              <path d="M39 145H132M39 157H110" stroke="#7899c4" strokeWidth="4" strokeLinecap="round"/>
+            </g>
+            <g transform="translate(193 234)">
+              <circle cx="67" cy="67" r="70" fill="#091c37" opacity=".25"/>
+              <circle cx="67" cy="60" r="62" fill="#f4f6f8"/>
+              <circle cx="67" cy="60" r="48" fill="none" stroke="#c4cfdb"/>
+              <path d="m67 21 13 39-13 39-13-39Z" fill="#183d69"/>
+              <path d="m67 21 13 39H67Z" fill="#bc3930"/>
+              <circle cx="67" cy="60" r="5" fill="#fff"/>
+            </g>
+            <circle cx="393" cy="159" r="7" fill="#bf3b32"/><circle cx="124" cy="407" r="6" fill="#accbf3"/>
+            <text x="260" y="529" textAnchor="middle" fill="#c5d7f0" fontSize="11" letterSpacing="3">CURIOSITY. WITH A SOURCE.</text>
+          </svg>
+        </div>
       </section>
       <div
         className="reference-ledger public-container"
@@ -125,7 +124,7 @@ export default async function Home() {
         <div className="public-section-heading">
           <div>
             <p className="public-eyebrow">THE BOTTLE EDIT</p>
-            <h2>A different turn. A new discovery.</h2>
+            <h2>The bottle collection</h2>
             <p>
               Turn the collection to explore photographed bottles. Find their
               published references in StateLens.
@@ -140,61 +139,8 @@ export default async function Home() {
           label="The bottle edit."
           action="Explore references"
         />
-        <p className="public-source-line">
-          Price coverage: {countries || "no state feeds yet"}. Featured
-          photography does not confirm local listings or availability.
-        </p>
+
       </section>
-      <Reveal>
-        <section className="professional-knowledge">
-          <div className="public-container public-section">
-            <div className="public-section-heading">
-              <div>
-                <p className="public-eyebrow">KNOWLEDGE LIBRARY</p>
-                <h2>Understand what distinguishes a liquor.</h2>
-              </div>
-              <Link href="/guides" className="public-text-link">
-                Browse guides <ArrowUpRight size={16} />
-              </Link>
-            </div>
-            <div className="professional-resource-grid">
-              {[
-                {
-                  Icon: BookOpen,
-                  title: "Terminology & categories",
-                  text: "A concise alphabetical reference to production, ingredients and the terms found on a bottle label.",
-                  href: "/dictionary",
-                  cta: "Open the dictionary",
-                },
-                {
-                  Icon: Layers,
-                  title: "Style & taste profiles",
-                  text: "Understand body, sweetness, acidity and common flavour descriptions across wine and spirit styles.",
-                  href: "/taste",
-                  cta: "Explore taste profiles",
-                },
-                {
-                  Icon: GitCompare,
-                  title: "Side-by-side comparisons",
-                  text: "Compare characteristics across two styles, with clear descriptions and educational source references.",
-                  href: "/compare",
-                  cta: "Compare styles",
-                },
-              ].map(({ Icon, title, text, href, cta }) => (
-                <Link key={href} href={href} className="professional-resource">
-                  <Icon size={22} />
-                  <h3>{title}</h3>
-                  <p>{text}</p>
-                  <span>
-                    {cta}
-                    <ArrowUpRight size={15} />
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      </Reveal>
       <section
         className="public-container editorial-gallery-section"
         aria-labelledby="editorial-gallery-heading"
@@ -214,7 +160,7 @@ export default async function Home() {
             Explore the knowledge library <ArrowUpRight size={16} />
           </Link>
         </div>
-        <ScrollingCards label="places and production">
+        <div className="press-feature-grid">
           <article className="editorial-gallery-item">
             <KnowledgeImage
               photo={knowledgePhotos.wineGrapes}
@@ -254,36 +200,6 @@ export default async function Home() {
               </Link>
             </div>
           </article>
-        </ScrollingCards>
-      </section>
-      <section className="public-container public-section">
-        <div className="public-section-heading">
-          <div>
-            <p className="public-eyebrow">WINE REFERENCE</p>
-            <h2>Wine styles at a glance</h2>
-            <p>
-              Descriptive style references. Individual bottles vary by producer,
-              region and vintage.
-            </p>
-          </div>
-          <Link href="/wines" className="public-text-link">
-            Wine library <ArrowUpRight size={16} />
-          </Link>
-        </div>
-        <div className="professional-wines">
-          {profiles
-            .filter((p) => ["cabernet", "sauvignon", "rose"].includes(p.id))
-            .map((p) => (
-              <Link key={p.id} href={"/wines#" + p.id}>
-                <span className="wine-category">{p.family}</span>
-                <h3>{p.name}</h3>
-                <p>{p.notes.slice(0, 2).join(" · ")}</p>
-                <div>
-                  <span>Body: {p.body}</span>
-                  <ArrowUpRight size={17} />
-                </div>
-              </Link>
-            ))}
         </div>
       </section>
       <section className="public-business-strip public-container">

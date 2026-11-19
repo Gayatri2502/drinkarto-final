@@ -7,8 +7,10 @@ import ReferenceNav from "./ui/reference-nav";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 export default function PublicFrame({
   children,
+  adultConfirmed = false,
 }: {
   children: React.ReactNode;
+  adultConfirmed?: boolean;
 }) {
   const path = usePathname();
   const [open, setOpen] = useState(false);
@@ -35,7 +37,7 @@ export default function PublicFrame({
       </div>
       <header className="public-header">
         <Link href="/" className="public-logo" aria-label="Drinkarto home">
-          <span>D</span>drinkarto<small>A LITTLE MORE KNOWING</small>
+          <span aria-hidden="true">D</span>Drinkarto
         </Link>
         <button
           ref={menuRef}
@@ -62,12 +64,12 @@ export default function PublicFrame({
         </Link>
       </header>
       <main id="public-main">
-        <AgeGate>{children}</AgeGate>
+        <AgeGate initiallyAccepted={adultConfirmed}>{children}</AgeGate>
       </main>
       <footer className="public-footer reference-footer">
         <div className="footer-identity">
           <Link href="/" className="public-logo">
-            <span>D</span>drinkarto
+            <span aria-hidden="true">D</span>Drinkarto
           </Link>
           <p>
             For the curious.
@@ -83,16 +85,13 @@ export default function PublicFrame({
           <Link href="/prices">State price directory</Link>
           <Link href="/recipes">Cocktail & zero-proof recipes</Link>
           <Link href="/catalogue">Product library</Link>
-          <Link href="/dictionary">A–Z dictionary</Link>
-          <Link href="/wines">Wine styles</Link>
-          <Link href="/taste">Taste guide</Link>
-          <Link href="/compare">Compare styles</Link>
+          <Link href="/dictionary">Drinks A–Z</Link>
+          <Link href="/guides">Knowledge</Link>
           <Link href="/guides/price-sources">Sources & methodology</Link>
         </div>
         <div>
           <strong>For businesses</strong>
-          <Link href="/business">Business overview</Link>
-          <Link href="/pricing">ERP plans & pricing</Link>
+          <Link href="/business">Business & ERP plans</Link>
           <Link href="/workspace">Open workspace ↗</Link>
         </div>
         <div>

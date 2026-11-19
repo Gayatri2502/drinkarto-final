@@ -4,11 +4,9 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 const links = [
-  ["StateLens", "/prices"],
-  ["LocalPour", "/localpour"],
+  ["Bottle Index", "/prices"],
   ["Library", "/catalogue"],
   ["Knowledge", "/guides"],
-  ["Compare", "/compare"],
   ["Recipes", "/recipes"],
 ];
 

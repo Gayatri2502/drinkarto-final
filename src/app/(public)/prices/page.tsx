@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import StateLens from "@/components/state-lens";
+import BottleIndex from "@/components/bottle-index";
 import IndiaPriceAtlas from "@/components/india-price-atlas";
 
 export const metadata = {
@@ -33,49 +33,6 @@ export default async function Prices({
         : null,
     };
   });
-  return (
-    <div className="public-container public-page statelens-page">
-      <header className="lens-page-heading">
-        <div>
-          <p className="public-eyebrow">THE PRICE DESK / INDIA 2026</p>
-          <h1>
-            StateLens<span>.</span>
-          </h1>
-          <p>
-            One bottle. One size. A clear view of its published price across
-            states.
-          </p>
-        </div>
-        <span className="lens-coverage-pill">
-          {snapshots.length} imported price sources
-        </span>
-      </header>
-      <div id="bottle-comparison">
-        <StateLens
-          initialState={params.state ?? ""}
-          initialSize={params.size ?? ""}
-          initialQuery={params.q ?? ""}
-        />
-      </div>
-      <details className="market-directory">
-        <summary>
-          <span>
-            <span className="public-eyebrow">THE BIGGER PICTURE</span>
-            <strong>State rules, taxes & source coverage</strong>
-          </span>
-          <span className="directory-summary-note">
-            28 states · 8 union territories <span aria-hidden="true">＋</span>
-          </span>
-        </summary>
-        <p className="directory-intro">
-          Explore market rules separately from the bottle comparison. A listed
-          jurisdiction does not mean a verified price is available.
-        </p>
-        <IndiaPriceAtlas
-          coverage={coverage}
-          initialState={params.state ?? "Kerala"}
-        />
-      </details>
-    </div>
-  );
+  return <><BottleIndex query={params.q} initialSize={params.size} initialState={params.state}/>
+    <details className="public-container market-directory"><summary>State rules, taxes & source coverage</summary><IndiaPriceAtlas coverage={coverage} initialState={params.state ?? "Kerala"}/></details></>;
 }

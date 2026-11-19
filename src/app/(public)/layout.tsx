@@ -1,10 +1,11 @@
+import { cookies } from "next/headers";
 import PublicFrame from "@/components/public-frame";
 import "./public.css";
 import "./professional.css";
 import "./knowledge.css";
 import "./mobile.css";
 import "./editorial.css";
-import "./glass.css";
+import "./modular.css";
 export const metadata = {
   title: {
     default: "Drinkarto | Liquor price references and knowledge",
@@ -13,6 +14,7 @@ export const metadata = {
   description:
     "Browse dated liquor price references from linked state sources, compare wine and spirit styles, and read source-linked guides for adults.",
 };
-export default function Layout({ children }: { children: React.ReactNode }) {
-  return <PublicFrame>{children}</PublicFrame>;
+export default async function Layout({ children }: { children: React.ReactNode }) {
+  const confirmed = (await cookies()).get("drinkarto-adult-access")?.value === "confirmed";
+  return <PublicFrame adultConfirmed={confirmed}>{children}</PublicFrame>;
 }

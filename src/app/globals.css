@@ -363,8 +363,8 @@ tr:last-child td {
 }
 .story {
   padding: 60px;
-  background: #123e33;
-  color: #f6faf8;
+  background: #17395d;
+  color: #f5f8fd;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -374,11 +374,11 @@ tr:last-child td {
   top: 45px;
 }
 .story .mark {
-  background: #a6d5bd;
-  color: #123e33;
+  background: #b6cff1;
+  color: #17395d;
 }
 .story .eyebrow {
-  color: #a6d5bd;
+  color: #b6cff1;
 }
 .story h1 {
   font-size: 48px;
@@ -387,12 +387,12 @@ tr:last-child td {
 }
 .story > p {
   max-width: 450px;
-  color: #c1d2cb;
+  color: #cfdded;
 }
 .story-note {
   margin-top: 80px;
   font-size: 12px;
-  color: #a6d5bd;
+  color: #b6cff1;
 }
 .auth {
   display: grid;
@@ -654,3 +654,43 @@ dialog::backdrop {
 :root{--font-drinkarto:'Inter Variable',Inter,Arial,sans-serif}
 body,button,input,select,textarea{font-family:var(--font-drinkarto)}
 body :is(h1,h2,h3,h4,h5,h6){font-family:var(--font-drinkarto);font-weight:750}
+
+/* Workspace uses neutral modules with blue accents, with its own light/dark tokens. */
+:root {
+  --bg: #f3f4f6;
+  --surface: #ffffff;
+  --text: #22252b;
+  --muted: #555e6b;
+  --line: #dde1e8;
+  --accent: #245ea8;
+  --tint: #e6effc;
+}
+.shell, [data-theme="dark"] .shell { background: var(--bg); }
+.shell :is(aside,header,.stats article,.report-chart,.ceo-kpi,.ceo-watch-row) {
+  background: var(--surface);
+  border-color: var(--line);
+  border-radius: 16px;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+.shell :is(button,input,select) { border-radius: 10px; }
+.shell .report-bar-track > div { background: var(--accent); }
+.shell .stats article:first-child { background: var(--tint); border-color: var(--accent); }
+.shell :is(.queue-card,.workspace-ai) { border-radius: 16px; }
+@media (prefers-reduced-motion: no-preference) {
+  .shell .stats { animation: workspace-arrive 340ms ease-out both; }
+}
+@keyframes workspace-arrive {
+  from { opacity: .65; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* Workspace responsive boundaries and blue interaction accents. */
+.shell{--accent:#245ea8;--tint:#e6effc;min-width:0}
+.shell main,.shell .content,.shell section,.shell article{min-width:0}
+.shell .table-scroll{max-width:100%;overflow:auto}
+.shell :is(input,select,textarea){max-width:100%;box-sizing:border-box}
+.shell :is(.report-toolbar,.page-heading,.workspace-public-links){flex-wrap:wrap}
+[data-theme=dark] .shell{--accent:#8ab9ff;--tint:#203b60}
+@media(max-width:680px){.shell .stats,.shell .overview-queues,.shell .report-grid{grid-template-columns:1fr}.shell main{padding:16px}.shell .report-chart{padding:16px}.shell :is(input,select,textarea){font-size:16px}.shell .ceo-donut-layout{flex-wrap:wrap}}
+
+.login{--accent:#245ea8;--tint:#e6effc}.login :is(button,a,input,select):focus-visible{outline-color:#518bdd}

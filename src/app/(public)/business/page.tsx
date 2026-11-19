@@ -1,26 +1,5 @@
-import Link from 'next/link';
-import {ArrowRight, ArrowUpRight, BarChart3, Boxes, ClipboardList, Users} from 'lucide-react';
-import { KnowledgeImage } from '@/components/knowledge-image';
-import { knowledgePhotos } from '@/content/knowledge-media';
-
-export const metadata={title:'Drinkarto ERP for beverage distribution businesses',description:'Explore inventory, order, retailer, invoice and reporting tools for beverage distribution teams, plus clearly labelled proposed monthly plans.'};
-
-const capabilities=[
-  {Icon:Boxes,title:'Inventory control',text:'Track products, stock movements and availability from one workspace.'},
-  {Icon:ClipboardList,title:'Orders and invoices',text:'Keep order fulfilment, internal invoices and collections connected.'},
-  {Icon:Users,title:'Retailer records',text:'Maintain business accounts and review credit activity with role-based access.'},
-  {Icon:BarChart3,title:'Operational reporting',text:'See sales and inventory trends in dashboards designed for daily decisions.'},
-];
-
-export default function BusinessPage(){return <section className="public-container public-page business-page">
-  <div className="business-breadcrumb"><Link href="/">← Drinkarto home</Link><span>Business workspace</span></div>
-  <div className="business-hero">
-    <div><p className="public-eyebrow">DRINKARTO FOR BUSINESS</p><h1>Run distribution<br/><em>with a clearer view.</em></h1><p className="public-intro">A practical ERP workspace for beverage distributors managing products, stock, retailers, orders and business reports.</p>
-      <div className="public-hero-actions"><Link href="/workspace" className="public-button">Enter business workspace <ArrowRight size={16}/></Link><Link href="/pricing" className="public-button secondary">View proposed plans</Link></div>
-    </div>
-    <aside className="business-route-card"><span className="business-route-kicker">YOUR OPERATIONS, CONNECTED</span><strong>Products <i>→</i> Inventory <i>→</i> Orders <i>→</i> Reports</strong><p>Sign in to open your workspace, or review the proposed monthly plans before you begin.</p><Link href="/pricing">See features and pricing <ArrowUpRight size={15}/></Link></aside>
-  </div>
-  <section className="business-photo-feature" aria-label="Beverage production photograph"><KnowledgeImage photo={knowledgePhotos.wineBottling} className="business-context-photo" sizes="(max-width: 700px) 100vw, 38vw"/><div><p className="public-eyebrow">BUILT FOR THE OPERATIONS BEHIND THE SHELF</p><h2>Keep stock and fulfilment in view.</h2><p>A winery bottling line is shown as production context. The workspace helps teams coordinate their own stock, orders and reports.</p></div></section>
-  <div className="business-capabilities">{capabilities.map(({Icon,title,text})=><article key={title}><Icon size={21}/><h2>{title}</h2><p>{text}</p></article>)}</div>
-  <p className="public-notice">Drinkarto ERP is business software. It does not sell, deliver or process payments for liquor. Any regulated activity remains subject to the business’s licences and local laws.</p>
-</section>}
+import Link from "next/link";
+import {Boxes,Users,ClipboardList,Truck,ChartNoAxesCombined,ArrowRight,Check} from "lucide-react";
+const steps=[{Icon:Users,title:"Set up",text:"Products & retailer accounts"},{Icon:Boxes,title:"Receive",text:"Stock movements & availability"},{Icon:ClipboardList,title:"Reserve",text:"Orders & stock allocation"},{Icon:Truck,title:"Fulfil",text:"Dispatch & collections"},{Icon:ChartNoAxesCombined,title:"Review",text:"Inventory & sales reports"}];
+const plans=[{name:"Starter",price:"₹1,499",intro:"Core daily operations",features:["Product and retailer records","Stock ledger and availability","Order reservations and cancellation","Internal invoices and collections"]},{name:"Growth",price:"₹3,999",intro:"Team controls and visibility",features:["Starter capabilities","Role-based operations","Credit exception approvals","Audit history and reporting"]},{name:"Enterprise",price:"Custom",intro:"An agreed implementation scope",features:["Migration planning","Integration assessment","Multi-location needs review","Support arrangements by agreement"]}];
+export default function Business(){return <section className="public-container public-page business-desk"><div className="desk-feature"><span className="desk-label">DRINKARTO / BUSINESS OPERATIONS</span><h1>Every movement.<br/>One connected workflow.</h1><p>Keep products, stock, orders and collections connected from receipt to reporting.</p><Link className="public-button" href="/workspace">Open workspace <ArrowRight size={17}/></Link></div><section aria-labelledby="workflow-title"><h2 id="workflow-title">How your work moves</h2><ol className="workflow-diagram">{steps.map(({Icon,title,text},i)=><li key={title}><span className="workflow-node"><Icon size={25}/></span><small>0{i+1}</small><h3>{title}</h3><p>{text}</p>{i<steps.length-1&&<ArrowRight className="workflow-arrow" aria-hidden="true"/>}</li>)}</ol></section><div id="plans" className="desk-plan-heading"><h2>Plans for your operation</h2><span>PROPOSED MONTHLY PRICING</span></div><div className="desk-plans">{plans.map(p=><article key={p.name}><span className="desk-label">{p.intro}</span><h3>{p.name}</h3><p className="desk-price">{p.price}<small>{p.price==="Custom"?"":" / month"}</small></p><ul>{p.features.map(f=><li key={f}><Check size={16}/>{f}</li>)}</ul><Link href="/workspace">Explore workspace <ArrowRight size={16}/></Link></article>)}</div><p className="public-small-note">Proposed packaging. Final scope, taxes, onboarding and support require agreement. Subscription checkout is not available.</p></section>}
