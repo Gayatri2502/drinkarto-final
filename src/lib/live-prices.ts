@@ -8,7 +8,7 @@ const priceSnapshots = unstable_cache(() => db.publicPriceSnapshot.findMany(), [
 export async function livePriceComparisons(input:{q?:string;category?:string;page?:number;limit?:number;size?:number;occasion?:string;min?:number;max?:number}){
  const snapshots=await priceSnapshots();
  if(!snapshots.length) throw new Error('Official catalogue has not been initialized');
- const all=snapshots.flatMap(s=>(s.rows as unknown as PriceRow[]).map(p=>({...p,sourceUrl:s.sourceUrl,checkedAt:s.checkedAt.toISOString(),published:s.published,effective:p.effective??s.effective})));
+ const all=snapshots.flatMap(s=>(s.rows as unknown as PriceRow[]).map(p=>({...p,sourceUrl:s.sourceUrl,checkedAt:new Date(s.checkedAt).toISOString(),published:s.published,effective:p.effective??s.effective})));
  const q=(input.q??'').trim().toLocaleLowerCase();
  const groups=new Map<string,PriceComparisonProduct>();
  for(const row of all){
@@ -28,12 +28,12 @@ export async function livePriceComparisons(input:{q?:string;category?:string;pag
  const limit=Math.max(1,Math.min(50,Math.floor(input.limit??20)));
  const pages=Math.max(1,Math.ceil(sorted.length/limit));
  const page=Math.min(pages,Math.max(1,Math.floor(input.page??1)));
- return {rows:sorted.slice((page-1)*limit,page*limit),total:sorted.length,page,pages,states:snapshots.map(s=>s.state).sort(),checked:snapshots.map(s=>s.checkedAt.toISOString()).sort().at(-1)};
+ return {rows:sorted.slice((page-1)*limit,page*limit),total:sorted.length,page,pages,states:snapshots.map(s=>s.state).sort(),checked:snapshots.map(s=>new Date(s.checkedAt).toISOString()).sort().at(-1)};
 }
 export async function livePrices(input:Parameters<typeof filterPrices>[0]){
  const snapshots=await priceSnapshots();
  if(!snapshots.length) throw new Error('Official catalogue has not been initialized');
- const records=snapshots.flatMap(s=>(s.rows as unknown as PriceRow[]).map(p=>({...p,sourceUrl:s.sourceUrl,checkedAt:s.checkedAt.toISOString(),published:s.published,effective:p.effective??s.effective})));
+ const records=snapshots.flatMap(s=>(s.rows as unknown as PriceRow[]).map(p=>({...p,sourceUrl:s.sourceUrl,checkedAt:new Date(s.checkedAt).toISOString(),published:s.published,effective:p.effective??s.effective})));
  const result=filterPrices(input,records);
- return {...result,checked:snapshots.map(s=>s.checkedAt.toISOString()).sort().at(-1),coverage:snapshots.map(s=>s.state),sources:snapshots.map(s=>({state:s.state,checkedAt:s.checkedAt,sourceUrl:s.sourceUrl,published:s.published,effective:s.effective})),refreshIntervalHours:Number(process.env.PRICE_REFRESH_HOURS??24)};
+ return {...result,checked:snapshots.map(s=>new Date(s.checkedAt).toISOString()).sort().at(-1),coverage:snapshots.map(s=>s.state),sources:snapshots.map(s=>({state:s.state,checkedAt:s.checkedAt,sourceUrl:s.sourceUrl,published:s.published,effective:s.effective})),refreshIntervalHours:Number(process.env.PRICE_REFRESH_HOURS??24)};
 }
