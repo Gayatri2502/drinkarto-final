@@ -1,10 +1,12 @@
+import {unstable_cache} from "next/cache";
 import {db} from './db';
 import {filterPrices} from './public-prices';
 import type {PriceRow} from '@/content/public';
 export type PriceComparisonProduct={key:string;name:string;category:string;sizes:Record<string,Record<string,PriceRow[]>>};
 import {canonicalLiquorName} from './liquor-name';
+const priceSnapshots = unstable_cache(() => db.publicPriceSnapshot.findMany(), ["public-price-snapshots-v1"], {revalidate:60});
 export async function livePriceComparisons(input:{q?:string;category?:string;page?:number;limit?:number;size?:number;occasion?:string;min?:number;max?:number}){
- const snapshots=await db.publicPriceSnapshot.findMany();
+ const snapshots=await priceSnapshots();
  if(!snapshots.length) throw new Error('Official catalogue has not been initialized');
  const all=snapshots.flatMap(s=>(s.rows as unknown as PriceRow[]).map(p=>({...p,sourceUrl:s.sourceUrl,checkedAt:s.checkedAt.toISOString(),published:s.published,effective:p.effective??s.effective})));
  const q=(input.q??'').trim().toLocaleLowerCase();
@@ -29,7 +31,7 @@ export async function livePriceComparisons(input:{q?:string;category?:string;pag
  return {rows:sorted.slice((page-1)*limit,page*limit),total:sorted.length,page,pages,states:snapshots.map(s=>s.state).sort(),checked:snapshots.map(s=>s.checkedAt.toISOString()).sort().at(-1)};
 }
 export async function livePrices(input:Parameters<typeof filterPrices>[0]){
- const snapshots=await db.publicPriceSnapshot.findMany();
+ const snapshots=await priceSnapshots();
  if(!snapshots.length) throw new Error('Official catalogue has not been initialized');
  const records=snapshots.flatMap(s=>(s.rows as unknown as PriceRow[]).map(p=>({...p,sourceUrl:s.sourceUrl,checkedAt:s.checkedAt.toISOString(),published:s.published,effective:p.effective??s.effective})));
  const result=filterPrices(input,records);

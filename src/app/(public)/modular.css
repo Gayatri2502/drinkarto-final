@@ -214,3 +214,19 @@
 .public-site .public-button{background:#17395d;color:white}.public-site .public-button.secondary{background:#e6effc;color:#17395d}
 @media(max-width:950px){.public-site .compact-dictionary .dictionary-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.public-site .compact-dictionary .dictionary-list{grid-template-columns:1fr}.public-site .dictionary-tools{display:grid;grid-template-columns:1fr;gap:10px}.public-site .guide-compact>section{padding:18px}}
+/* Navigation stays within header flow at every breakpoint. */
+.public-site .public-header{display:grid;grid-template-columns:auto minmax(0,1fr) auto;height:auto;min-height:94px;gap:20px;align-items:center;position:relative;padding:18px clamp(16px,3vw,44px)}
+.public-site .public-header .public-menu{display:none!important}
+.public-site .public-header #reference-navigation{position:relative!important;inset:auto!important;transform:none!important;display:flex!important;order:initial;flex-basis:auto;margin:0 auto;width:fit-content;max-width:100%;box-sizing:border-box}
+.public-site .editorial-hero{padding-top:24px;gap:16px}
+.public-site .editorial-hero-copy{padding:clamp(24px,4vw,48px)}
+.public-site .editorial-hero-copy h1{font-size:clamp(34px,4.6vw,66px);line-height:1.08}
+.public-site .editorial-hero-copy .public-eyebrow{color:#a9c6ed}
+.public-site .recipe-game-intro{background:#e7effb;border-color:#ccd9ea}
+.public-site .recipe-game{color:#151c26}
+.public-site .recipe-game :is(h2,h3,strong,.ingredient-amount,.ingredient-name small){color:#151c26}
+.public-site .ingredient-order{color:#286ba5;background:#e6effc}
+.public-site .ingredient-token:nth-child(2) .ingredient-order{color:#976526;background:#faf0db}
+.public-site .ingredient-token:nth-child(4) .ingredient-order{color:#658330;background:#eef4df}
+@media(max-width:1000px){.public-site .public-header{grid-template-columns:1fr auto;gap:14px}.public-site .public-header #reference-navigation{grid-column:1/-1;grid-row:2;justify-content:center;width:100%;overflow:auto}.public-site .public-header .public-business{grid-column:2;grid-row:1}}
+@media(max-width:600px){.public-site .public-header{padding:14px}.public-site .public-header #reference-navigation a{font-size:13px!important;padding:10px 12px}.public-site .editorial-hero{grid-template-columns:1fr}.public-site .recipe-play-area{grid-template-columns:1fr}.public-site .recipe-game-intro{display:block;padding:20px}.public-site .recipe-responsibility{margin-top:16px}}

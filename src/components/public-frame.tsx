@@ -31,10 +31,6 @@ export default function PublicFrame({
       <a className="public-skip" href="#public-main">
         Skip to content
       </a>
-      <div className="public-topline">
-        THE DRINKARTO REFERENCE{" "}
-        <span>INDIA · INDEPENDENT INFORMATION · NO ONLINE SALES</span>
-      </div>
       <header className="public-header">
         <Link href="/" className="public-logo" aria-label="Drinkarto home">
           <span aria-hidden="true">D</span>Drinkarto

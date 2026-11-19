@@ -23,7 +23,7 @@ export const metadata = {
 
 export default async function Home() {
   const [snapshots, productCount] = await Promise.all([
-    db.publicPriceSnapshot.findMany(),
+    db.publicPriceSnapshot.findMany({select:{state:true}}),
     db.publicProduct.count(),
   ]);
   const coverage = [...new Set(snapshots.map((s) => s.state))].sort();
@@ -37,16 +37,16 @@ export default async function Home() {
             THE INDEPENDENT INDIAN DRINKS REFERENCE
           </p>
           <h1>
-            Indian drinks,
+            Know the bottle.
             <br />
-            <em>on record.</em>
+            <em>Understand the price.</em>
           </h1>
           <p className="editorial-deck">
             Look up published bottle prices across India, compare styles, and read the stories behind the labels.
           </p>
           <div className="public-hero-actions">
             <Link href="/prices" className="public-button">
-              Explore StateLens <ArrowUpRight size={18} />
+              Check bottle prices <ArrowUpRight size={18} />
             </Link>
             <Link href="/guides" className="editorial-link">
               Find your next read <ArrowRight size={17} />
